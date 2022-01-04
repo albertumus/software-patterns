@@ -1,6 +1,6 @@
-package Administracion;
+package com.mycompany.Administracion;
 
-import Reservas.Reserva;
+import com.mycompany.Reservas.Reserva;
 
 /**
  * @author admin

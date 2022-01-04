@@ -1,4 +1,4 @@
-package Paquetes;
+package com.mycompany.Paquetes;
 
 
 /**
@@ -11,8 +11,10 @@ public class FabricaPaqueteDeLujo implements FabricaPaquetesPreHechos {
 	public FabricaPaqueteDeLujo(){
 
 	}
+        
+        public void setHotel
+        
+        
 
-	public void finalize() throws Throwable {
 
-	}
-}//end FabricaPaqueteDeLujo
+}

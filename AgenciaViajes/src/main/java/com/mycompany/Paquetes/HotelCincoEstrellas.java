@@ -1,4 +1,4 @@
-package Paquetes;
+package com.mycompany.Paquetes;
 
 
 /**
@@ -12,7 +12,4 @@ public class HotelCincoEstrellas extends Hotel {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-}//end HotelCincoEstrellas
+}

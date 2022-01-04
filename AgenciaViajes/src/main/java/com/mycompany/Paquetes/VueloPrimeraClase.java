@@ -1,4 +1,4 @@
-package Paquetes;
+package com.mycompany.Paquetes;
 
 
 /**
@@ -12,7 +12,4 @@ public class VueloPrimeraClase extends Vuelo {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-}//end VueloPrimeraClase
+}

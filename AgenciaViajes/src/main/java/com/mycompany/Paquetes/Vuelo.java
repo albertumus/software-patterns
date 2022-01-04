@@ -1,4 +1,4 @@
-package Paquetes;
+package com.mycompany.Paquetes;
 
 
 /**
@@ -8,13 +8,8 @@ package Paquetes;
  */
 public class Vuelo {
 
-	public PaqueteVacacional m_PaqueteVacacional;
-
 	public Vuelo(){
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-}//end Vuelo
+}

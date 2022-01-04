@@ -1,4 +1,4 @@
-package Paquetes;
+package com.mycompany.Paquetes;
 
 
 /**
@@ -8,13 +8,8 @@ package Paquetes;
  */
 public class CreadorPaquetes {
 
-	public PaqueteBuilder m_PaqueteBuilder;
-
 	public CreadorPaquetes(){
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-}//end CreadorPaquetes
+}

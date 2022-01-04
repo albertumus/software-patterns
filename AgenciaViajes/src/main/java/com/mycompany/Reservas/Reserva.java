@@ -1,6 +1,6 @@
-package Reservas;
+package com.mycompany.Reservas;
 
-import Paquetes.PaqueteVacacional;
+import com.mycompany.Paquetes.PaqueteVacacional;
 
 /**
  * @author admin

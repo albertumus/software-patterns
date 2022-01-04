@@ -1,4 +1,4 @@
-package Paquetes;
+package com.mycompany.Paquetes;
 
 
 /**
@@ -7,7 +7,8 @@ package Paquetes;
  * @created 04-ene.-2022 18:37:08
  */
 public interface FabricaPaquetesPreHechos {
-
-	public PaqueteVacacional m_PaqueteVacacional;
-
+    
+    public void setHotel( Hotel hotel );
+    public void setVuelo( Vuelo vuelo ); 
+    
 }

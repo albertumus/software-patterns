@@ -1,6 +1,6 @@
-package Facturas;
+package com.mycompany.Facturas;
 
-import Paquetes.PaqueteVacacional;
+import com.mycompany.Paquetes.PaqueteVacacional;
 
 /**
  * @author admin

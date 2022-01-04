@@ -1,4 +1,4 @@
-package Administracion;
+package com.mycompany.Administracion;
 
 
 /**
@@ -12,22 +12,5 @@ public class Cliente extends Persona {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-	/**
-	 * 
-	 * @param Parameter A
-	 */
-	public void Operation A(int Parameter A){
 
-	}
-
-	/**
-	 * 
-	 * @param Parameter
-	 */
-	public void Operation B(int Parameter){
-
-	}
-}//end Cliente
+}
