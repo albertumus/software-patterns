@@ -15,4 +15,14 @@ public class FabricaPaqueteAhorro implements FabricaPaquetesPreHechos {
 	public void finalize() throws Throwable {
 
 	}
+
+    @Override
+    public void setHotel(Hotel hotel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setVuelo(Vuelo vuelo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }//end FabricaPaqueteAhorro

@@ -1,4 +1,4 @@
-package Reservas;
+package com.mycompany.Reservas;
 
 
 /**

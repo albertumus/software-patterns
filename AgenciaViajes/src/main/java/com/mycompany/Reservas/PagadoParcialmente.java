@@ -1,5 +1,7 @@
 package Reservas;
 
+import com.mycompany.Reservas.EstadoReserva;
+
 
 /**
  * @author admin
