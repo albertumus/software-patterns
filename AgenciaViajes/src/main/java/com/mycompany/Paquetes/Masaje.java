@@ -12,7 +12,19 @@ package com.mycompany.Paquetes;
 public class Masaje extends Extra {
     
     public final Integer precio = 75;
+    private static Masaje instancia;
     
-    public Masaje() {}
+    @Override
+    public Integer getPrecio() {
+        return this.precio;
+    }
+
+
+    public static Masaje getInstancia() {
+        if (instancia == null) {// Si la instancia es null, se crea.
+            instancia = new Masaje();
+        }
+        return instancia;
+    }
     
 }

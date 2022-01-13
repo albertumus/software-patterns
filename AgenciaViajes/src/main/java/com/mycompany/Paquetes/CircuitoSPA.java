@@ -12,8 +12,20 @@ package com.mycompany.Paquetes;
 public class CircuitoSPA extends Extra {
     
     public final Integer precio = 50;
+    private static CircuitoSPA instancia;
     
-    public CircuitoSPA() {}
+    @Override
+    public Integer getPrecio() {
+        return this.precio;
+    }
+
+
+    public static CircuitoSPA getInstancia() {
+        if (instancia == null) {// Si la instancia es null, se crea.
+            instancia = new CircuitoSPA();
+        }
+        return instancia;
+    }
     
     
     

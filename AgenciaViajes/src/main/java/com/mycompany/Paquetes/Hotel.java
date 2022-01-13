@@ -9,9 +9,14 @@ package com.mycompany.Paquetes;
 public abstract class Hotel {
     
     Integer precio;
+    Integer precio_desayuno;
         
     public Integer getPrecio() {
         return precio;
+    }
+    
+    public Integer getPrecioDesayuno() {
+        return precio_desayuno;
     }
         
         

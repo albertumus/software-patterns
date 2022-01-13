@@ -9,9 +9,19 @@ package com.mycompany.Paquetes;
 public class VueloPrimeraClase extends Vuelo {
     
     public final Integer precio = 350;
+    private static VueloPrimeraClase instancia;
+    
+    @Override
+    public Integer getPrecio() {
+        return this.precio;
+    }
 
-    public VueloPrimeraClase(){
 
+    public static VueloPrimeraClase getInstancia() {
+        if (instancia == null) {// Si la instancia es null, se crea.
+            instancia = new VueloPrimeraClase();
+        }
+        return instancia;
     }
 
 }

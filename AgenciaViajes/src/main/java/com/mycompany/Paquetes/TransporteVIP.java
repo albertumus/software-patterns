@@ -12,7 +12,18 @@ package com.mycompany.Paquetes;
 public class TransporteVIP extends Extra {
     
     public final Integer precio = 25;
+    private static TransporteVIP instancia;
     
-    public TransporteVIP() {}
+    @Override
+    public Integer getPrecio() {
+        return this.precio;
+    }
+
+    public static TransporteVIP getInstancia() {
+        if (instancia == null) {// Si la instancia es null, se crea.
+            instancia = new TransporteVIP();
+        }
+        return instancia;
+    }
     
 }

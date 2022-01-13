@@ -6,11 +6,11 @@ package com.mycompany.Paquetes;
  * @version 1.0
  * @created 04-ene.-2022 18:37:08
  */
-public class HotelCincoEstrellas extends Hotel {
+public class HotelCuatroEstrellas extends Hotel {
     
-    public final Integer precio             = 250;
-    public final Integer precio_desayuno    = 20;
-    private static HotelCincoEstrellas instancia;
+    public final Integer precio             = 100;
+    public final Integer precio_desayuno    = 10;
+    private static HotelCuatroEstrellas instancia;
     
     @Override
     public Integer getPrecio() {
@@ -22,9 +22,11 @@ public class HotelCincoEstrellas extends Hotel {
         return this.precio_desayuno;
     }
 
-    public static HotelCincoEstrellas getInstancia() {
+
+
+    public static HotelCuatroEstrellas getInstancia() {
         if (instancia == null) {// Si la instancia es null, se crea.
-            instancia = new HotelCincoEstrellas();
+            instancia = new HotelCuatroEstrellas();
         }
         return instancia;
     }
