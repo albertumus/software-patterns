@@ -1,7 +1,13 @@
 package com.mycompany;
 
+import com.mycompany.Paquetes.CreadorPaquetes;
+import com.mycompany.Paquetes.Extra;
 import com.mycompany.Paquetes.FabricaPaquetePreHecho;
+import com.mycompany.Paquetes.HotelCuatroEstrellas;
+import com.mycompany.Paquetes.PaqueteNormalBuilder;
 import com.mycompany.Paquetes.PaqueteVacacional;
+import com.mycompany.Paquetes.VueloClaseTurista;
+import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -30,6 +36,32 @@ public class ClasePrueba {
         PaqueteVacacional paquete = new FabricaPaquetePreHecho()
                 .getPaquete(0).createPaquete5Estrellas( new Date(2022, 1, 1), new Date(2022,1,2) );
         */
+        
+        /* Ejemplo de Patron Builder para construir un paquete paso a paso
+        
+        CreadorPaquetes creador = new CreadorPaquetes( new PaqueteNormalBuilder() );
+        creador.crearPaquete();
+        
+        PaqueteVacacional paquetev1 = creador.getPaquete();
+        
+        System.out.println(paquetev1.getHotel());
+        
+        creador.crearPaquete( 
+            HotelCuatroEstrellas.getInstancia(),
+            VueloClaseTurista.getInstancia(),
+            true,
+            new ArrayList<Extra>(),
+            new Date(2022, 1,1),
+            new Date(2022, 1,2)           
+        );
+        
+        PaqueteVacacional paquetev2 = creador.getPaquete();
+        
+        System.out.println(paquetev2.getHotel());
+        System.out.println(paquetev2.getTotalPaquete());
+
+        */
+        
         
     }
     
