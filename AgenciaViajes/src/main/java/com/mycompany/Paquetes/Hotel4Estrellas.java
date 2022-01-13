@@ -7,9 +7,9 @@ package com.mycompany.Paquetes;
  * @created 04-ene.-2022 18:37:08
  */
 public class Hotel4Estrellas extends Hotel {
+    
+    public final Integer precio = 100;
 
-	public Hotel4Estrellas(){
-
-	}
+    public Hotel4Estrellas(){}
 
 }

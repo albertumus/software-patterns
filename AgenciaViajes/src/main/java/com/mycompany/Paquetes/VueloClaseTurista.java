@@ -7,9 +7,11 @@ package com.mycompany.Paquetes;
  * @created 04-ene.-2022 18:37:09
  */
 public class VueloClaseTurista extends Vuelo {
+    
+    public final Integer precio = 150;
 
-	public VueloClaseTurista(){
+    public VueloClaseTurista(){
 
-	}
+    }
 
 }

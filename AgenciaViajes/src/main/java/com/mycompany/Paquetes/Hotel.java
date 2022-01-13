@@ -6,10 +6,14 @@ package com.mycompany.Paquetes;
  * @version 1.0
  * @created 04-ene.-2022 18:37:08
  */
-public class Hotel {
-
-	public Hotel(){
-
-	}
+public abstract class Hotel {
+    
+    Integer precio;
+        
+    public Integer getPrecio() {
+        return precio;
+    }
+        
+        
 
 }
