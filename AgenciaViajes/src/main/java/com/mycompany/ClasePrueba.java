@@ -62,6 +62,25 @@ public class ClasePrueba {
 
         */
         
+        /*
+        Prueba de clonacion de un paquete siguiendo el patron prototype
+        */
+        
+        /*
+        PaqueteVacacional paquete = new FabricaPaquetePreHecho()
+        .getPaquete(0).createPaquete5Estrellas( new Date(2022, 1, 1), new Date(2022,1,2) );
+        
+        System.out.println(paquete.getHotel());
+        System.out.println(paquete.getTotalPaquete());
+        
+        PaqueteVacacional copia  = (PaqueteVacacional)paquete.clone();
+        
+        System.out.println(copia.getHotel());
+        System.out.println(copia.getTotalPaquete());
+        */
+
+        
+        
         
     }
     

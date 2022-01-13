@@ -9,7 +9,7 @@ import java.util.Date;
  * @version 1.0
  * @created 04-ene.-2022 18:37:09
  */
-public class PaqueteVacacional {
+public class PaqueteVacacional implements Cloneable {
 
     public Hotel hotel;
     public Vuelo vuelo;
@@ -137,7 +137,15 @@ public class PaqueteVacacional {
         this.desayuno = desayuno;
     }
     
-    
-    
+    @Override
+    public Object clone() {
+        PaqueteVacacional otra = null;
+        try {
+            otra = (PaqueteVacacional) super.clone();
+        } catch (CloneNotSupportedException e) {
+        }
+        // Esta excepción no debería aparecer
 
+        return otra;
+    }
 }
