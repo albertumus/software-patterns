@@ -1,5 +1,7 @@
 package com.mycompany.Administracion;
 
+import java.util.Date;
+
 
 /**
  * @author admin
@@ -8,9 +10,29 @@ package com.mycompany.Administracion;
  */
 public class Cliente extends Persona {
 
-	public Cliente(){
-
-	}
+    private FichaCliente ficha;
+    
+    public Cliente( String nombre, 
+            String apellidos, 
+            Empleado e, 
+            String numeroTarjeta,
+            String dni, 
+            String genero,
+            String direccion, 
+            Date fechaAlta ){
+        super( nombre, apellidos );
+        this.ficha = new FichaCliente( 
+                dni, 
+                genero, 
+                direccion, 
+                fechaAlta,
+                new Tarjeta(numeroTarjeta), e  );
+        e.getFicha().añadirCliente(this);
+    }
+    
+    public  FichaCliente getFicha() {
+        return this.ficha;
+    }
 
 
 }

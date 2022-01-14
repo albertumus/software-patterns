@@ -1,20 +1,24 @@
-package Reservas;
+package com.mycompany.Reservas;
 
-import com.mycompany.Reservas.EstadoReserva;
+public class PagadoParcialmente extends EstadoReserva {
+    @Override
+    public void anular() {
+        this.getReserva().setEstado(new PendientePago());
+        System.out.println("Reserva devuelta");
+    }
+    @Override
+    public void pagar() {
+        this.getReserva().setEstado(new Pagado());
+        System.out.println("Reserva pagada");
+    }
+    @Override
+    public void pagarParcialmente() {}
+    
+    @Override
+    public void enviarDatosConfirmacion() {
+        System.out.println("Datos enviados al cliente");
+    }
+    @Override
+    public void enviarDatosAProveedores() {}
 
-
-/**
- * @author admin
- * @version 1.0
- * @created 04-ene.-2022 18:37:08
- */
-public class PagadoParcialmente implements EstadoReserva {
-
-	public PagadoParcialmente(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-}//end PagadoParcialmente
+}

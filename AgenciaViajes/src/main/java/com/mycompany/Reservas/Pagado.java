@@ -1,6 +1,4 @@
-package Reservas;
-
-import com.mycompany.Reservas.EstadoReserva;
+package com.mycompany.Reservas;
 
 
 /**
@@ -8,13 +6,24 @@ import com.mycompany.Reservas.EstadoReserva;
  * @version 1.0
  * @created 04-ene.-2022 18:37:08
  */
-public class Pagado implements EstadoReserva {
+public class Pagado extends EstadoReserva {
+    @Override
+    public void anular() {
+        this.getReserva().setEstado(new PendientePago());
+        System.out.println("Reserva devuelta");
+    }
+    @Override
+    public void pagar() {}
+    @Override
+    public void pagarParcialmente() {}
+    @Override
+    public void enviarDatosConfirmacion() {
+        System.out.println("Datos enviados al cliente");
+    }
+    @Override
+    public void enviarDatosAProveedores() {
+        System.out.println("Datos enviados a proveedores");
+    }
+    
 
-	public Pagado(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-}//end Pagado
+}

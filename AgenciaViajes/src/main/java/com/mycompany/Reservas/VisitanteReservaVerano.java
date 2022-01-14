@@ -1,4 +1,4 @@
-package Reservas;
+package com.mycompany.Reservas;
 
 
 /**
@@ -8,11 +8,11 @@ package Reservas;
  */
 public class VisitanteReservaVerano implements VisitanteReserva {
 
-	public VisitanteReservaVerano(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-}//end VisitanteReservaVerano
+    public double visitar(  ReservaDeFamiliar reserva ) {
+        return 0.00;
+    }
+    
+    public double visitar(  ReservaNormal reserva ) {
+        return 25.00;
+    }
+}

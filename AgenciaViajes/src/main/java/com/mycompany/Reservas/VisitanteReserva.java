@@ -1,4 +1,4 @@
-package Reservas;
+package com.mycompany.Reservas;
 
 
 /**
@@ -7,5 +7,8 @@ package Reservas;
  * @created 04-ene.-2022 18:37:09
  */
 public interface VisitanteReserva {
+    
+    public double visitar(  ReservaDeFamiliar reserva );
+    public double visitar(  ReservaNormal reserva );
 
 }

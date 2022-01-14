@@ -1,21 +1,42 @@
 package com.mycompany.Administracion;
 
+import java.util.Date;
+
 
 /**
  * @author admin
  * @version 1.0
  * @created 04-ene.-2022 18:37:08
  */
-public class FichaCliente {
+public class FichaCliente extends Ficha {
+        
+    
+    private Tarjeta tarjeta; 
+    private Empleado empleadoReferencia;
 
-	public Cliente m_Cliente;
-	public Tarjeta m_Tarjeta;
+    public FichaCliente(String dni, String genero, String direccion, Date fechaAlta, Tarjeta tarjeta, Empleado empleadoReferencia) {
+        super( dni, genero, direccion, fechaAlta );
+        this.tarjeta = tarjeta;
+        this.empleadoReferencia = empleadoReferencia;
+    }
 
-	public FichaCliente(){
+    public Tarjeta getTarjeta() {
+        return tarjeta;
+    }
 
-	}
+    public void setTarjeta(Tarjeta tarjeta) {
+        this.tarjeta = tarjeta;
+    }
 
-	public void finalize() throws Throwable {
+    public Empleado getEmpleadoReferencia() {
+        return empleadoReferencia;
+    }
 
-	}
-}//end FichaCliente
+    public void setEmpleadoReferencia(Empleado empleadoReferencia) {
+        this.empleadoReferencia = empleadoReferencia;
+    }
+
+    
+    
+
+}

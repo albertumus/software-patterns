@@ -9,13 +9,22 @@ import com.mycompany.Reservas.Reserva;
  */
 public class Tarjeta {
 
-	public Reserva m_Reserva;
+    
+    private String numeroTarjeta;
 
-	public Tarjeta(){
+    public Tarjeta(String numeroTarjeta) {
+        this.numeroTarjeta = numeroTarjeta;
+    }
 
-	}
+    public String getNumeroTarjeta() {
+        return numeroTarjeta;
+    }
 
-	public void finalize() throws Throwable {
+    public void setNumeroTarjeta(String numeroTarjeta) {
+        this.numeroTarjeta = numeroTarjeta;
+    }
+    
+    
 
-	}
-}//end Tarjeta
+
+}

@@ -16,6 +16,7 @@ public class PaqueteVacacional implements Cloneable {
     public ArrayList<Extra> extras;
     public Date desde;
     public Date hasta;
+    public String descripcion;
     
     public Boolean desayuno    = false;
     public Double pctDescuento = 0.00;
@@ -135,6 +136,14 @@ public class PaqueteVacacional implements Cloneable {
 
     public void setDesayuno(Boolean desayuno) {
         this.desayuno = desayuno;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
     @Override
