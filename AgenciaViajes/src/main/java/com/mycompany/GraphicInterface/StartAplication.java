@@ -5,6 +5,7 @@
  */
 package com.mycompany.GraphicInterface;
 
+import com.mycompany.GraphicInterface.Comunes.Login;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import javax.swing.*;

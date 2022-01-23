@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.GraphicInterface;
+package com.mycompany.GraphicInterface.Empleado;
 
 /**
  *
  * @author razvanvc
  */
-public class MainMenuCliente extends javax.swing.JPanel {
+public class MainMenuEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form MainMenuEmpleado
      */
-    public MainMenuCliente() {
+    public MainMenuEmpleado() {
         initComponents();
     }
 
@@ -29,10 +29,10 @@ public class MainMenuCliente extends javax.swing.JPanel {
 
         lbl_Logo = new javax.swing.JLabel();
         lbl_Bienvenida = new javax.swing.JLabel();
-        btn_Historial = new javax.swing.JButton();
-        btn_Facturas = new javax.swing.JButton();
-        btn_Pagos = new javax.swing.JButton();
+        btn_Reservas = new javax.swing.JButton();
+        btn_Clientes = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
+        btn_PaqueteTuristico = new javax.swing.JButton();
 
         lbl_Logo.setText("logo");
 
@@ -40,18 +40,17 @@ public class MainMenuCliente extends javax.swing.JPanel {
         lbl_Bienvenida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Bienvenida.setText("!Bienvenido ");
 
-        btn_Historial.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Historial.setText("Mi Historial");
+        btn_Reservas.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_Reservas.setText("Gestionar Reservas");
 
-        btn_Facturas.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Facturas.setText("Mis Facturas");
-
-        btn_Pagos.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Pagos.setText("Hacer un pago");
+        btn_Clientes.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_Clientes.setText("Historiales de Clientes");
 
         btn_Salir.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Salir.setText("Salir");
-        btn_Salir.setToolTipText("");
+
+        btn_PaqueteTuristico.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_PaqueteTuristico.setText("Gestionar Paquetes Turisticos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,10 +61,10 @@ public class MainMenuCliente extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                    .addComponent(btn_Historial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Facturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Pagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_Reservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_PaqueteTuristico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -76,11 +75,11 @@ public class MainMenuCliente extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(lbl_Bienvenida)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_PaqueteTuristico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Facturas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Reservas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Pagos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -89,9 +88,9 @@ public class MainMenuCliente extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Facturas;
-    private javax.swing.JButton btn_Historial;
-    private javax.swing.JButton btn_Pagos;
+    private javax.swing.JButton btn_Clientes;
+    private javax.swing.JButton btn_PaqueteTuristico;
+    private javax.swing.JButton btn_Reservas;
     private javax.swing.JButton btn_Salir;
     private javax.swing.JLabel lbl_Bienvenida;
     private javax.swing.JLabel lbl_Logo;

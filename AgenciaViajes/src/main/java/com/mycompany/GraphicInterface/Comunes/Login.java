@@ -3,7 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.GraphicInterface;
+package com.mycompany.GraphicInterface.Comunes;
+
+import com.mycompany.Administracion.Persona;
+import com.mycompany.GraphicInterface.Director.MainMenuDirector;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -11,14 +19,18 @@ package com.mycompany.GraphicInterface;
  */
 public class Login extends javax.swing.JFrame {
     
-    private final String RUTA_USUARIOS = "AQUI VA LA CARPETA PARA CARGAR LOS USUARIOS";
-    
+    private final String RUTA_USUARIOS = "./data/users";
+    private final String RUTA_PAQUETES = "./data/paquetes";
+    private final String RUTA_HISTORIALES = "./data/historiales";
+    private final String RUTA_RESERVAS = "./data/reservas";
+    private final ArrayList<Persona> usuarios;
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        usuarios = loadUsers(RUTA_USUARIOS);
     }
 
     /**
@@ -40,13 +52,12 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(740, 440));
-        setPreferredSize(new java.awt.Dimension(700, 500));
         setResizable(false);
 
         lbl_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_username.setText("Username:");
 
+        lbl_logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_logo.setText("Logo");
 
         tf_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -123,6 +134,22 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
+        /*if (usuarios != null ){
+            int iterator = 0;
+            while (iterator < usuarios.size()){
+                
+                iterator ++;
+            }
+        }
+        else {
+            MainMenuDirector window = new MainMenuDirector(usuarios);
+            window.setVisible(true);
+            this.setVisible(false);
+        }*/
+        MainMenuDirector window = new MainMenuDirector(usuarios);
+        
+        window.setVisible(true);
+        //this.setVisible(false);
         System.out.println("Click en boton");
     }//GEN-LAST:event_btn_loginActionPerformed
 
@@ -175,4 +202,16 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField pf_password;
     private javax.swing.JTextField tf_username;
     // End of variables declaration//GEN-END:variables
+
+    private ArrayList<Persona> loadUsers(String RUTA_USUARIOS) {
+        ArrayList<Persona> users = new ArrayList();
+        try {
+            FileInputStream fichero = new FileInputStream(RUTA_USUARIOS);
+            ObjectInputStream file = new ObjectInputStream(fichero);
+            users.add((Persona) file.readObject());
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("FALLO");
+        }
+        return users;
+    }
 }
