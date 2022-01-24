@@ -89,7 +89,7 @@ public class HistorialCliente extends javax.swing.JFrame {
         lbl_FechaInicio.setText("Fecha Salida");
 
         lbl_Instrucciones2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lbl_Instrucciones2.setText("2. Seleccione la reserva que quieras ver:");
+        lbl_Instrucciones2.setText("1. Seleccione la reserva que quieras ver:");
 
         cb_SPA.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_SPA.setText("SPA");
