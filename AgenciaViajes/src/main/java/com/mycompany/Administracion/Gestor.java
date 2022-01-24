@@ -12,7 +12,7 @@ public class Gestor extends Empleado {
     
     private Director director;
 
-    public Gestor( String nombre, String apellidos, Director director, String dni, String genero, String direccion, Date fechaAlta, String identificador, Integer sueldo, String numeroSS, String estadoCivil ){
+    public Gestor( String nombre, String apellidos, Director director, String dni, String genero, String direccion, Date fechaAlta, String identificador, Integer sueldo, String numeroSS, String estadoCivil, String email, String password ){
         super( nombre, apellidos, 
                  dni, 
                 genero,  
@@ -21,7 +21,9 @@ public class Gestor extends Empleado {
                 identificador,
                 sueldo,  
                 numeroSS,  
-                estadoCivil  );
+                estadoCivil,
+                email,
+                password);
         this.director = director;
         this.director.añadirSubordinado(this);
     }

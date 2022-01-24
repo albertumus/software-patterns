@@ -12,8 +12,8 @@ public abstract class  Empleado extends Persona implements AccionesEmpleado {
     private FichaEmpleado ficha;
     private EstadoEmpleado estado;
     
-    public Empleado( String nombre, String apellidos, String dni, String genero, String direccion, Date fechaAlta, String identificador, Integer sueldo, String numeroSS, String estadoCivil ) {
-        super( nombre, apellidos );
+    public Empleado( String nombre, String apellidos, String dni, String genero, String direccion, Date fechaAlta, String identificador, Integer sueldo, String numeroSS, String estadoCivil, String email, String password ) {
+        super(nombre, apellidos, email, password );
         this.ficha = new FichaEmpleado( 
                 dni, 
                 genero,  

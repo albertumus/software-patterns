@@ -13,12 +13,14 @@ public abstract class Persona {
     
     public String nombre;
     public String apellidos;
+    private String email;
     
     public Historial historial;
     
-    public Persona( String nombre, String apellidos ) {
+    public Persona( String nombre, String apellidos, String email, String password) {
         this.nombre     = nombre;
         this.apellidos  = apellidos;
+        this.email = email;
         this.historial  = new Historial();
     }
 

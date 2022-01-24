@@ -12,15 +12,8 @@ public class Cliente extends Persona {
 
     private FichaCliente ficha;
     
-    public Cliente( String nombre, 
-            String apellidos, 
-            Empleado e, 
-            String numeroTarjeta,
-            String dni, 
-            String genero,
-            String direccion, 
-            Date fechaAlta ){
-        super( nombre, apellidos );
+    public Cliente( String nombre, String apellidos, Empleado e, String numeroTarjeta, String dni, String genero, String direccion, Date fechaAlta, String email, String password){
+        super(nombre, apellidos, email, password );
         this.ficha = new FichaCliente( 
                 dni, 
                 genero, 

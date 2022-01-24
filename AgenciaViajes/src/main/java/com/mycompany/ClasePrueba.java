@@ -92,13 +92,13 @@ public class ClasePrueba {
         Ejemplo para crear emplados, clientes, directores, gestores... 
         */
         
-        Director d1 = new Director("Superintendente", "Martinez", "dni1", "hombre", "asdasd", new Date(), "0001", 2000, "0000123", "Casado" );
-        Gestor g1 = new Gestor( "Gestor", "1", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado");
-        Gestor g2 = new Gestor( "Gestor", "2", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado");
+        Director d1 = new Director("Superintendente", "Martinez", "dni1", "hombre", "asdasd", new Date(), "0001", 2000, "0000123", "Casado", "email", "password" );
+        Gestor g1 = new Gestor( "Gestor", "1", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado", "email", "password");
+        Gestor g2 = new Gestor( "Gestor", "2", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado", "email", "password");
         
-        Cliente c1 = new Cliente( "Cliente", "1", g1,"tarjeya1", "dni1", "hombre", "asdasd", new Date() );
-        Cliente c2 = new Cliente( "Cliente", "2", g2,"tarjeya2", "dni1", "hombre", "asdasd", new Date() );
-        Cliente c3 = new Cliente( "Cliente", "3", d1,"tarjeya3", "dni1", "hombre", "asdasd", new Date() );
+        Cliente c1 = new Cliente( "Cliente", "1", g1,"tarjeya1", "dni1", "hombre", "asdasd", new Date(), "email", "password" );
+        Cliente c2 = new Cliente( "Cliente", "2", g2,"tarjeya2", "dni1", "hombre", "asdasd", new Date(), "email", "password" );
+        Cliente c3 = new Cliente( "Cliente", "3", d1,"tarjeya3", "dni1", "hombre", "asdasd", new Date(), "email", "password" );
         
         /*
         Ejemplo de las acciones sobre lo empleados en funcion del estado
