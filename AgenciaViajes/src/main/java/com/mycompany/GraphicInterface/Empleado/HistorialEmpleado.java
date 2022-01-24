@@ -5,6 +5,8 @@
  */
 package com.mycompany.GraphicInterface.Empleado;
 
+import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+
 /**
  *
  * @author razvanvc
