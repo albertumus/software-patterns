@@ -151,6 +151,7 @@ public class Login extends javax.swing.JFrame {
         } catch (NumberFormatException e){
             e.printStackTrace();
         }
+        this.setVisible(false);
         /*if (usuarios != null ){
             int iterator = 0;
             while (iterator < usuarios.size()){

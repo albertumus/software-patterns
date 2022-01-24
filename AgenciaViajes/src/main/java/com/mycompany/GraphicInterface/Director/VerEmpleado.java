@@ -58,8 +58,6 @@ public class VerEmpleado extends javax.swing.JFrame {
         lbl_Nombre1 = new javax.swing.JLabel();
         tf_Nombre1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
 

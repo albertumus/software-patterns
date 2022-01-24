@@ -6,6 +6,7 @@
 package com.mycompany.GraphicInterface.Empleado;
 
 import com.mycompany.Administracion.Persona;
+import com.mycompany.GraphicInterface.Comunes.Login;
 import com.mycompany.GraphicInterface.DirectorEmpleado.CrearPaqueteTuristico;
 import java.util.ArrayList;
 
@@ -75,6 +76,11 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
 
         btn_Salir.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,13 +116,13 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_FacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FacturasActionPerformed
         // TODO add your handling code here:
         ImpresionFacturaEmpleado window = new ImpresionFacturaEmpleado();
         window.setVisible(true);
-        
     }//GEN-LAST:event_btn_FacturasActionPerformed
 
     private void btn_PaqueteTuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PaqueteTuristicoActionPerformed
@@ -130,6 +136,13 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
         HistorialEmpleado window = new HistorialEmpleado();
         window.setVisible(true);
     }//GEN-LAST:event_btn_ReservasActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        // TODO add your handling code here:
+        Login window = new Login();
+        window.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     /**
      * @param args the command line arguments

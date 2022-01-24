@@ -51,8 +51,6 @@ public class HistorialCliente extends javax.swing.JFrame {
         btn_PagarCompleto = new javax.swing.JButton();
         btn_PagarParcialmente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lbl_Reserva.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Reserva.setText("Reserva:");
 
@@ -232,6 +230,7 @@ public class HistorialCliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_PagarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PagarCompletoActionPerformed

@@ -39,8 +39,6 @@ public class MainPageEmpleados extends javax.swing.JFrame {
         btn_Detalles = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
 

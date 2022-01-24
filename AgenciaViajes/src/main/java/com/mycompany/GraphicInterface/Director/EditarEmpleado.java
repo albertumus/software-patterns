@@ -55,8 +55,6 @@ public class EditarEmpleado extends javax.swing.JFrame {
         btn_Volver = new javax.swing.JButton();
         cb_Empleado = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
 

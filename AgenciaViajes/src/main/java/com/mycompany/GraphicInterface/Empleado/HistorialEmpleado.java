@@ -56,8 +56,6 @@ public class HistorialEmpleado extends javax.swing.JFrame {
         btn_Modificar = new javax.swing.JButton();
         btn_Borrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
 
@@ -122,7 +120,7 @@ public class HistorialEmpleado extends javax.swing.JFrame {
         lbl_Instrucciones3.setText("Detalles de la reserva:");
 
         btn_CobrarCompleto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_CobrarCompleto.setText("Pago Completo");
+        btn_CobrarCompleto.setText("Cobro Completo");
         btn_CobrarCompleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CobrarCompletoActionPerformed(evt);
@@ -138,7 +136,7 @@ public class HistorialEmpleado extends javax.swing.JFrame {
         });
 
         btn_CobrarParcialmente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_CobrarParcialmente.setText("Pago Parcial");
+        btn_CobrarParcialmente.setText("Cobro Parcial");
         btn_CobrarParcialmente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CobrarParcialmenteActionPerformed(evt);
@@ -278,6 +276,7 @@ public class HistorialEmpleado extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CobrarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarCompletoActionPerformed
