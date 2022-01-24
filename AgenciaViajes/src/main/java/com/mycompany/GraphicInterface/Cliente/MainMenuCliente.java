@@ -5,14 +5,16 @@
  */
 package com.mycompany.GraphicInterface.Cliente;
 
+import com.mycompany.GraphicInterface.Comunes.Login;
+
 /**
  *
  * @author razvanvc
  */
-public class MainMenuCliente extends javax.swing.JPanel {
+public class MainMenuCliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainMenuEmpleado
+     * Creates new form MainMenuCliente2
      */
     public MainMenuCliente() {
         initComponents();
@@ -31,9 +33,11 @@ public class MainMenuCliente extends javax.swing.JPanel {
         lbl_Bienvenida = new javax.swing.JLabel();
         btn_Historial = new javax.swing.JButton();
         btn_Facturas = new javax.swing.JButton();
-        btn_Pagos = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
 
         lbl_Bienvenida.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -42,36 +46,47 @@ public class MainMenuCliente extends javax.swing.JPanel {
 
         btn_Historial.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Historial.setText("Mi Historial");
+        btn_Historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HistorialActionPerformed(evt);
+            }
+        });
 
         btn_Facturas.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Facturas.setText("Mis Facturas");
-
-        btn_Pagos.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Pagos.setText("Hacer un pago");
+        btn_Facturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_FacturasActionPerformed(evt);
+            }
+        });
 
         btn_Salir.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Salir.setText("Salir");
         btn_Salir.setToolTipText("");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                     .addComponent(btn_Historial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Facturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Pagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(lbl_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_Bienvenida)
@@ -80,18 +95,71 @@ public class MainMenuCliente extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btn_Facturas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Pagos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btn_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HistorialActionPerformed
+        // TODO add your handling code here:
+        HistorialCliente window = new HistorialCliente();
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_HistorialActionPerformed
+
+    private void btn_FacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FacturasActionPerformed
+        // TODO add your handling code here:
+        ImpresionFacturaCliente window = new ImpresionFacturaCliente();
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_FacturasActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        // TODO add your handling code here:
+        Login window = new Login();
+        window.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainMenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainMenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainMenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainMenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainMenuCliente().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Facturas;
     private javax.swing.JButton btn_Historial;
-    private javax.swing.JButton btn_Pagos;
     private javax.swing.JButton btn_Salir;
     private javax.swing.JLabel lbl_Bienvenida;
     private javax.swing.JLabel lbl_Logo;

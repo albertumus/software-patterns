@@ -114,6 +114,8 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
 
     private void btn_FacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FacturasActionPerformed
         // TODO add your handling code here:
+        ImpresionFacturaEmpleado window = new ImpresionFacturaEmpleado();
+        window.setVisible(true);
         
     }//GEN-LAST:event_btn_FacturasActionPerformed
 

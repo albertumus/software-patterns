@@ -160,6 +160,8 @@ public class MainMenuDirector extends javax.swing.JFrame {
 
     private void btn_FacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FacturasActionPerformed
         // TODO add your handling code here:
+        ImpresionFacturaDirector window = new ImpresionFacturaDirector();
+        window.setVisible(true);
     }//GEN-LAST:event_btn_FacturasActionPerformed
 
     /**
