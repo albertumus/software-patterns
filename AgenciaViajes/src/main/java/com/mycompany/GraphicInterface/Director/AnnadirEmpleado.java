@@ -224,7 +224,7 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
 
     private void btn_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AltaActionPerformed
         // TODO crear el usuario, comprobar los campos y serializarlo
-
+        
         ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha añadido el empleado correctamente");
         window.setVisible(true);
         this.setVisible(false);

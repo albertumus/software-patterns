@@ -5,11 +5,13 @@
  */
 package com.mycompany.Administracion;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public abstract class Persona {
+public abstract class Persona implements Serializable {
     
     public String nombre;
     public String apellidos;
