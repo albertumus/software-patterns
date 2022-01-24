@@ -48,9 +48,11 @@ public class HistorialEmpleado extends javax.swing.JFrame {
         cb_TransporteVIP = new javax.swing.JCheckBox();
         cb_Masaje = new javax.swing.JCheckBox();
         lbl_Instrucciones3 = new javax.swing.JLabel();
-        btn_Borrar = new javax.swing.JButton();
-        btn_Modificar = new javax.swing.JButton();
+        btn_CobrarCompleto = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
+        btn_CobrarParcialmente = new javax.swing.JButton();
+        btn_Modificar = new javax.swing.JButton();
+        btn_Borrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,14 +119,45 @@ public class HistorialEmpleado extends javax.swing.JFrame {
         lbl_Instrucciones3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones3.setText("Detalles de la reserva:");
 
-        btn_Borrar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Borrar.setText("Borrar");
-
-        btn_Modificar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Modificar.setText("Modificar");
+        btn_CobrarCompleto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_CobrarCompleto.setText("Pago Completo");
+        btn_CobrarCompleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CobrarCompletoActionPerformed(evt);
+            }
+        });
 
         btn_Volver.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Volver.setText("Volver");
+        btn_Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VolverActionPerformed(evt);
+            }
+        });
+
+        btn_CobrarParcialmente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_CobrarParcialmente.setText("Pago Parcial");
+        btn_CobrarParcialmente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CobrarParcialmenteActionPerformed(evt);
+            }
+        });
+
+        btn_Modificar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_Modificar.setText("Modificar");
+        btn_Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ModificarActionPerformed(evt);
+            }
+        });
+
+        btn_Borrar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_Borrar.setText("Borrar");
+        btn_Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,13 +167,15 @@ public class HistorialEmpleado extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_CobrarCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_CobrarParcialmente, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cb_Desayuno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cb_Masaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Borrar, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                            .addComponent(cb_Masaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btn_Modificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cb_SPA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cb_TransporteVIP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
                     .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,7 +210,11 @@ public class HistorialEmpleado extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(cb_Vuelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_Borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_Volver, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -225,6 +264,10 @@ public class HistorialEmpleado extends javax.swing.JFrame {
                     .addComponent(cb_TransporteVIP))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_CobrarCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_CobrarParcialmente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -234,6 +277,35 @@ public class HistorialEmpleado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_CobrarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarCompletoActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el cobro completo");
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_CobrarCompletoActionPerformed
+
+    private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_VolverActionPerformed
+
+    private void btn_CobrarParcialmenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarParcialmenteActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el cobro completo");
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_CobrarParcialmenteActionPerformed
+
+    private void btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModificarActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha modificado la reserva");
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_ModificarActionPerformed
+
+    private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha eliminado la reserva");
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_BorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,6 +344,8 @@ public class HistorialEmpleado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Borrar;
+    private javax.swing.JButton btn_CobrarCompleto;
+    private javax.swing.JButton btn_CobrarParcialmente;
     private javax.swing.JButton btn_Modificar;
     private javax.swing.JButton btn_Volver;
     private javax.swing.JComboBox<String> cb_DNI;

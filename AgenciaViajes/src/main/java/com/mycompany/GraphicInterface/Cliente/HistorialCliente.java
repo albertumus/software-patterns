@@ -5,6 +5,8 @@
  */
 package com.mycompany.GraphicInterface.Cliente;
 
+import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+
 /**
  *
  * @author razvanvc
@@ -46,6 +48,8 @@ public class HistorialCliente extends javax.swing.JFrame {
         lbl_Instrucciones3 = new javax.swing.JLabel();
         cb_Reserva = new javax.swing.JComboBox<>();
         lbl_Logo = new javax.swing.JLabel();
+        btn_PagarCompleto = new javax.swing.JButton();
+        btn_PagarParcialmente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +100,11 @@ public class HistorialCliente extends javax.swing.JFrame {
 
         btn_Volver.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Volver.setText("Volver");
+        btn_Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_VolverActionPerformed(evt);
+            }
+        });
 
         lbl_Instrucciones3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones3.setText("Detalles de la reserva:");
@@ -105,6 +114,22 @@ public class HistorialCliente extends javax.swing.JFrame {
 
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
+
+        btn_PagarCompleto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_PagarCompleto.setText("Pago Completo");
+        btn_PagarCompleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PagarCompletoActionPerformed(evt);
+            }
+        });
+
+        btn_PagarParcialmente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_PagarParcialmente.setText("Pago Parcial");
+        btn_PagarParcialmente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PagarParcialmenteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,12 +169,18 @@ public class HistorialCliente extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(cb_Hotel2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cb_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cb_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_PagarCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_PagarParcialmente, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -192,12 +223,33 @@ public class HistorialCliente extends javax.swing.JFrame {
                     .addComponent(cb_Masaje)
                     .addComponent(cb_TransporteVIP))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_PagarCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_PagarParcialmente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(btn_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_PagarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PagarCompletoActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el pago completo");
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_PagarCompletoActionPerformed
+
+    private void btn_PagarParcialmenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PagarParcialmenteActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el pago completo");
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_PagarParcialmenteActionPerformed
+
+    private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +287,8 @@ public class HistorialCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_PagarCompleto;
+    private javax.swing.JButton btn_PagarParcialmente;
     private javax.swing.JButton btn_Volver;
     private javax.swing.JCheckBox cb_Desayuno;
     private javax.swing.JComboBox<String> cb_Hotel2;
