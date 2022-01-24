@@ -6,7 +6,9 @@
 package com.mycompany.GraphicInterface.Director;
 
 import com.mycompany.Administracion.Persona;
+import com.mycompany.GraphicInterface.Comunes.Login;
 import com.mycompany.GraphicInterface.DirectorEmpleado.CrearPaqueteTuristico;
+import com.mycompany.GraphicInterface.Empleado.HistorialEmpleado;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +39,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
         lbl_Bienvenida = new javax.swing.JLabel();
         btn_PaqueteTuristico = new javax.swing.JButton();
         btn_Reservas = new javax.swing.JButton();
-        btn_Clientes = new javax.swing.JButton();
+        btn_Facturas = new javax.swing.JButton();
         btn_Empleados = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
 
@@ -60,9 +62,19 @@ public class MainMenuDirector extends javax.swing.JFrame {
 
         btn_Reservas.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Reservas.setText("Gestionar Reservas");
+        btn_Reservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReservasActionPerformed(evt);
+            }
+        });
 
-        btn_Clientes.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Clientes.setText("Historiales de Clientes");
+        btn_Facturas.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_Facturas.setText("Imprimir Facturas");
+        btn_Facturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_FacturasActionPerformed(evt);
+            }
+        });
 
         btn_Empleados.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Empleados.setText("Gestionar Empleados");
@@ -74,6 +86,11 @@ public class MainMenuDirector extends javax.swing.JFrame {
 
         btn_Salir.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,7 +103,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
                     .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
                     .addComponent(btn_PaqueteTuristico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_Clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Facturas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Empleados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
@@ -103,7 +120,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_Reservas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Facturas, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Empleados, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -127,6 +144,23 @@ public class MainMenuDirector extends javax.swing.JFrame {
         CrearPaqueteTuristico window = new CrearPaqueteTuristico(usuarios);
         window.setVisible(true);
     }//GEN-LAST:event_btn_PaqueteTuristicoActionPerformed
+
+    private void btn_ReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReservasActionPerformed
+        // TODO add your handling code here:
+        HistorialDirector window = new HistorialDirector();
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_ReservasActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        // TODO add your handling code here:
+        Login window = new Login();
+        window.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
+    private void btn_FacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FacturasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_FacturasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,8 +199,8 @@ public class MainMenuDirector extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Clientes;
     private javax.swing.JButton btn_Empleados;
+    private javax.swing.JButton btn_Facturas;
     private javax.swing.JButton btn_PaqueteTuristico;
     private javax.swing.JButton btn_Reservas;
     private javax.swing.JButton btn_Salir;

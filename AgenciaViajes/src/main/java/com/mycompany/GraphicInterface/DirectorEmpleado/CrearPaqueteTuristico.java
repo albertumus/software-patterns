@@ -6,6 +6,7 @@
 package com.mycompany.GraphicInterface.DirectorEmpleado;
 
 import com.mycompany.Administracion.Persona;
+import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
 import java.util.ArrayList;
 
 /**
@@ -155,6 +156,11 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         btn_Comprobar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Comprobar.setText("Comprobar");
+        btn_Comprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ComprobarActionPerformed(evt);
+            }
+        });
 
         lbl_Instrucciones4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones4.setText("2. Seleccione el tipo de paquete:");
@@ -233,6 +239,11 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         btn_Reservar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Reservar.setText("Reservar");
+        btn_Reservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ReservarActionPerformed(evt);
+            }
+        });
 
         btn_Volver.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Volver.setText("Volver");
@@ -438,6 +449,18 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btn_VolverActionPerformed
+
+    private void btn_ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReservarActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado una reserva correctamente");
+        window.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_ReservarActionPerformed
+
+    private void btn_ComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ComprobarActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Proceso de comprobacion y registro de usuario, tambien se activa la segunda parte");
+    }//GEN-LAST:event_btn_ComprobarActionPerformed
 
     /**
      * @param args the command line arguments

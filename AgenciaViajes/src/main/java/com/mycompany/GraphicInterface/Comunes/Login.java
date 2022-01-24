@@ -6,7 +6,9 @@
 package com.mycompany.GraphicInterface.Comunes;
 
 import com.mycompany.Administracion.Persona;
+import com.mycompany.GraphicInterface.Cliente.MainMenuCliente;
 import com.mycompany.GraphicInterface.Director.MainMenuDirector;
+import com.mycompany.GraphicInterface.Empleado.MainMenuEmpleado;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -134,6 +136,21 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
+        try{
+            int usuario = Integer.valueOf(tf_username.getText());
+            if (usuario == 0){
+                MainMenuDirector window = new MainMenuDirector(usuarios);
+                window.setVisible(true);
+            } else if (usuario == 1) {
+                MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
+                window.setVisible(true);
+            } else if (usuario == 2) {
+                MainMenuCliente window = new MainMenuCliente();
+                window.setVisible(true);
+            }
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+        }
         /*if (usuarios != null ){
             int iterator = 0;
             while (iterator < usuarios.size()){
@@ -146,9 +163,7 @@ public class Login extends javax.swing.JFrame {
             window.setVisible(true);
             this.setVisible(false);
         }*/
-        MainMenuDirector window = new MainMenuDirector(usuarios);
         
-        window.setVisible(true);
         //this.setVisible(false);
         System.out.println("Click en boton");
     }//GEN-LAST:event_btn_loginActionPerformed
