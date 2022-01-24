@@ -6,6 +6,7 @@
 package com.mycompany.GraphicInterface.Director;
 
 import com.mycompany.Administracion.Persona;
+import com.mycompany.GraphicInterface.DirectorEmpleado.CrearPaqueteTuristico;
 import java.util.ArrayList;
 
 /**
@@ -50,7 +51,12 @@ public class MainMenuDirector extends javax.swing.JFrame {
         lbl_Bienvenida.setText("!Bienvenido ");
 
         btn_PaqueteTuristico.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_PaqueteTuristico.setText("Gestionar Paquetes Turisticos");
+        btn_PaqueteTuristico.setText("Crear Paquete Turistico");
+        btn_PaqueteTuristico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PaqueteTuristicoActionPerformed(evt);
+            }
+        });
 
         btn_Reservas.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Reservas.setText("Gestionar Reservas");
@@ -115,6 +121,12 @@ public class MainMenuDirector extends javax.swing.JFrame {
         window.setVisible(true);
 
     }//GEN-LAST:event_btn_EmpleadosActionPerformed
+
+    private void btn_PaqueteTuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PaqueteTuristicoActionPerformed
+        // TODO add your handling code here:
+        CrearPaqueteTuristico window = new CrearPaqueteTuristico(usuarios);
+        window.setVisible(true);
+    }//GEN-LAST:event_btn_PaqueteTuristicoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -46,7 +46,7 @@ public class ClasePrueba {
                 .getPaquete(0).createPaquete5Estrellas( new Date(2022, 1, 1), new Date(2022,1,2) );
         */
         
-        /* Ejemplo de Patron Builder para construir un paquete paso a paso
+        // Ejemplo de Patron Builder para construir un paquete paso a paso
         
         CreadorPaquetes creador = new CreadorPaquetes( new PaqueteNormalBuilder() );
         creador.crearPaquete();
@@ -69,7 +69,7 @@ public class ClasePrueba {
         System.out.println(paquetev2.getHotel());
         System.out.println(paquetev2.getTotalPaquete());
 
-        */
+        
         
         /*
         Prueba de clonacion de un paquete siguiendo el patron prototype
