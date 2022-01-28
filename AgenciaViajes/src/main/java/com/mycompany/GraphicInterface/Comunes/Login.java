@@ -5,6 +5,10 @@
  */
 package com.mycompany.GraphicInterface.Comunes;
 
+import javax.swing.ImageIcon;
+import com.mycompany.Administracion.Cliente;
+import com.mycompany.Administracion.Director;
+import com.mycompany.Administracion.Gestor;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Cliente.MainMenuCliente;
 import com.mycompany.GraphicInterface.Director.MainMenuDirector;
@@ -13,14 +17,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
  * @author razvanvc
  */
 public class Login extends javax.swing.JFrame {
-    
+
     private final String RUTA_USUARIOS = "./data/users";
     private final String RUTA_PAQUETES = "./data/paquetes";
     private final String RUTA_HISTORIALES = "./data/historiales";
@@ -32,7 +35,12 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
         usuarios = loadUsers(RUTA_USUARIOS);
+        System.out.println(usuarios);
+        lbl_registro.setVisible(false);
     }
 
     /**
@@ -45,7 +53,7 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         lbl_username = new javax.swing.JLabel();
-        lbl_logo = new javax.swing.JLabel();
+        lbl_Logo = new javax.swing.JLabel();
         tf_username = new javax.swing.JTextField();
         lbl_password = new javax.swing.JLabel();
         pf_password = new javax.swing.JPasswordField();
@@ -59,8 +67,8 @@ public class Login extends javax.swing.JFrame {
         lbl_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_username.setText("Username:");
 
-        lbl_logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_logo.setText("Logo");
+        lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Logo.setText("Logo");
 
         tf_username.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         tf_username.setSize(new java.awt.Dimension(76, 23));
@@ -93,7 +101,7 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(157, 157, 157)
@@ -114,7 +122,7 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,21 +144,31 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-        try{
-            int usuario = Integer.valueOf(tf_username.getText());
-            if (usuario == 0){
-                MainMenuDirector window = new MainMenuDirector(usuarios);
-                window.setVisible(true);
-            } else if (usuario == 1) {
-                MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
-                window.setVisible(true);
-            } else if (usuario == 2) {
-                MainMenuCliente window = new MainMenuCliente();
-                window.setVisible(true);
+        String usuario = tf_username.getText();
+        String password = pf_password.getText();
+        Persona usuarioActual = null;
+        if (usuario != null && password != null) {
+            for (Persona usuario1 : usuarios) {
+                if (usuario1.getEmail().equals(usuario) && usuario1.getPassword().equals(password)) {
+                    usuarioActual = usuario1;
+                }
             }
-        } catch (NumberFormatException e){
-            e.printStackTrace();
+            if (usuarioActual != null) {
+                if (usuarioActual instanceof Director) {
+                    MainMenuDirector window = new MainMenuDirector(usuarios);
+                    window.setVisible(true);
+                } else if ( usuarioActual instanceof Gestor) {
+                    MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
+                    window.setVisible(true);
+                } else if (usuarioActual instanceof Cliente) {
+                    MainMenuCliente window = new MainMenuCliente((Cliente) usuarioActual);
+                    window.setVisible(true);
+                } else {
+                    System.out.print("ERROR");
+                }
+            }
         }
+
         this.setVisible(false);
         /*if (usuarios != null ){
             int iterator = 0;
@@ -164,7 +182,7 @@ public class Login extends javax.swing.JFrame {
             window.setVisible(true);
             this.setVisible(false);
         }*/
-        
+
         //this.setVisible(false);
         System.out.println("Click en boton");
     }//GEN-LAST:event_btn_loginActionPerformed
@@ -211,7 +229,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
-    private javax.swing.JLabel lbl_logo;
+    private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_password;
     private javax.swing.JLabel lbl_registro;
     private javax.swing.JLabel lbl_username;
@@ -224,9 +242,10 @@ public class Login extends javax.swing.JFrame {
         try {
             FileInputStream fichero = new FileInputStream(RUTA_USUARIOS);
             ObjectInputStream file = new ObjectInputStream(fichero);
-            users.add((Persona) file.readObject());
+            users = ((ArrayList<Persona>) file.readObject());
         } catch (IOException | ClassNotFoundException ex) {
-            System.out.println("FALLO");
+            //System.out.println("FALLO");
+            ex.printStackTrace();
         }
         return users;
     }

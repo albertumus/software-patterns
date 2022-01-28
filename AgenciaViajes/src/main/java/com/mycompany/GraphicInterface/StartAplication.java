@@ -22,10 +22,10 @@ public class StartAplication extends javax.swing.JFrame {
     public StartAplication() {
         initComponents();
         
-        ImageIcon icon = new ImageIcon("/images/fondo.png");
-        System.out.println(icon);
+        ImageIcon icon = new ImageIcon("./images/fondo.png");
         if (icon!=null){
             lbl_Bienvenida.setIcon(icon);
+            lbl_Bienvenida.setText("");
         } else {
             lbl_Bienvenida.setText("PULSA ENTER PARA EMPEZAR");
         }

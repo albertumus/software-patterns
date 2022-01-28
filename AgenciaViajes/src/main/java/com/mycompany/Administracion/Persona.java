@@ -13,16 +13,17 @@ import java.io.Serializable;
  */
 public abstract class Persona implements Serializable {
     
-    public String nombre;
-    public String apellidos;
-    private String email;
-    
-    public Historial historial;
+    private final String nombre;
+    private final String apellidos;
+    private final String email;
+    private final String password;
+    private final Historial historial;
     
     public Persona( String nombre, String apellidos, String email, String password) {
         this.nombre     = nombre;
         this.apellidos  = apellidos;
         this.email = email;
+        this.password = password;
         this.historial  = new Historial();
     }
 
@@ -30,20 +31,18 @@ public abstract class Persona implements Serializable {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getApellidos() {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
     
-    
-
     public Historial getHistorial() {
         return historial;
     }

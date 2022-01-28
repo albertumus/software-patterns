@@ -5,11 +5,13 @@
  */
 package com.mycompany.Administracion;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public abstract class EstadoEmpleado implements AccionesEmpleado {
+public abstract class EstadoEmpleado implements AccionesEmpleado, Serializable{
     
     private Empleado empleado;
     

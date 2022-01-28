@@ -31,7 +31,7 @@ public abstract class  Reserva implements AccionesReserva {
         this.tarjeta        = this.cliente.getFicha().getTarjeta();
         this.estado         = new PendientePago();
         this.estado.setReserva(this);
-        this.cliente.historial.addReserva( this );
+        this.cliente.getHistorial().addReserva( this );
         
     }
     @Override

@@ -6,6 +6,7 @@
 package com.mycompany.GraphicInterface.Empleado;
 
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,9 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
      */
     public ImpresionFacturaEmpleado() {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
     }
 
     /**

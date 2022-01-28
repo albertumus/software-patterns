@@ -5,9 +5,10 @@
  */
 package com.mycompany.Administracion;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Ficha {    
+public abstract class Ficha implements Serializable{    
 
     private String dni;
     private String genero;

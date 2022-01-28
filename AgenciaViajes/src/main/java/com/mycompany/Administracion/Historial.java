@@ -6,13 +6,14 @@
 package com.mycompany.Administracion;
 
 import com.mycompany.Reservas.Reserva;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author admin
  */
-public class Historial {
+public class Historial implements Serializable{
     
     public ArrayList<Reserva> reservas;
     

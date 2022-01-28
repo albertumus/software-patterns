@@ -7,6 +7,7 @@ package com.mycompany.GraphicInterface.Director;
 
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
 import com.mycompany.GraphicInterface.DirectorEmpleado.*;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +20,9 @@ public class HistorialDirector extends javax.swing.JFrame {
      */
     public HistorialDirector() {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
     }
 
     /**

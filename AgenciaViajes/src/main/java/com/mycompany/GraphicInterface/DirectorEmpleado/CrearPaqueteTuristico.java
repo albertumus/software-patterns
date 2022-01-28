@@ -8,6 +8,7 @@ package com.mycompany.GraphicInterface.DirectorEmpleado;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,6 +22,9 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
     private static ArrayList<Persona> usuarios;
     public CrearPaqueteTuristico(ArrayList<Persona> usuarios) {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
         CrearPaqueteTuristico.usuarios = usuarios;
     }
 

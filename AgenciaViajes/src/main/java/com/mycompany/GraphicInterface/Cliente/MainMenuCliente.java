@@ -5,7 +5,9 @@
  */
 package com.mycompany.GraphicInterface.Cliente;
 
+import com.mycompany.Administracion.Cliente;
 import com.mycompany.GraphicInterface.Comunes.Login;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -13,11 +15,17 @@ import com.mycompany.GraphicInterface.Comunes.Login;
  */
 public class MainMenuCliente extends javax.swing.JFrame {
 
+    private static Cliente usuarioActual;
     /**
      * Creates new form MainMenuCliente2
      */
-    public MainMenuCliente() {
+    public MainMenuCliente(Cliente usuarioActual) {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
+        MainMenuCliente.usuarioActual = usuarioActual;
+        lbl_Bienvenida.setText("!Bienvenido "+usuarioActual.getNombre()+"!");
     }
 
     /**
@@ -153,7 +161,7 @@ public class MainMenuCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenuCliente().setVisible(true);
+                new MainMenuCliente(usuarioActual).setVisible(true);
             }
         });
     }

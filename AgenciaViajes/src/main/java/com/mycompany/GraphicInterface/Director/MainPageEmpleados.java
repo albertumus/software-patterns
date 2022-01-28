@@ -7,6 +7,7 @@ package com.mycompany.GraphicInterface.Director;
 
 import com.mycompany.Administracion.Persona;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,6 +21,9 @@ public class MainPageEmpleados extends javax.swing.JFrame {
     private static ArrayList<Persona> usuarios;
     public MainPageEmpleados(ArrayList<Persona> usuarios) {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
         MainPageEmpleados.usuarios = usuarios;
     }
 

@@ -5,6 +5,8 @@
  */
 package com.mycompany.GraphicInterface.Comunes;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author razvanvc
@@ -17,6 +19,9 @@ public class ConfirmacionOperacion extends javax.swing.JFrame {
     private static String texto = "";
     public ConfirmacionOperacion(String texto) {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
         lbl_operacion.setText(texto);
     }
 

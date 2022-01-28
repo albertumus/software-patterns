@@ -9,6 +9,7 @@ import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.Login;
 import com.mycompany.GraphicInterface.DirectorEmpleado.CrearPaqueteTuristico;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,6 +23,9 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
     private static ArrayList<Persona> usuarios;
     public MainMenuEmpleado(ArrayList<Persona> usuarios) {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
         this.usuarios = usuarios;
     }
 

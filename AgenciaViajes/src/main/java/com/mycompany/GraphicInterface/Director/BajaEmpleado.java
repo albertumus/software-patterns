@@ -8,6 +8,7 @@ package com.mycompany.GraphicInterface.Director;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,6 +22,9 @@ public class BajaEmpleado extends javax.swing.JFrame {
     private static ArrayList<Persona> usuarios;
     public BajaEmpleado(ArrayList<Persona> usuarios) {
         initComponents();
+        ImageIcon icon = new ImageIcon("./images/Logo.png");
+        lbl_Logo.setIcon(icon);
+        lbl_Logo.setText("");
         BajaEmpleado.usuarios = usuarios;
     }
 
