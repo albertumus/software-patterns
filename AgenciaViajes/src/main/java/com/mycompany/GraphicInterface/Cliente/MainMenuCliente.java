@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  */
 public class MainMenuCliente extends javax.swing.JFrame {
 
-    private static Cliente usuarioActual;
+    public static Cliente usuarioActual;
     /**
      * Creates new form MainMenuCliente2
      */

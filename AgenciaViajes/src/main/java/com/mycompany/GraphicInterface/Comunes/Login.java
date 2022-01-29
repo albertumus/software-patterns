@@ -14,8 +14,10 @@ import com.mycompany.GraphicInterface.Cliente.MainMenuCliente;
 import com.mycompany.GraphicInterface.Director.MainMenuDirector;
 import com.mycompany.GraphicInterface.Empleado.MainMenuEmpleado;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -24,11 +26,11 @@ import java.util.ArrayList;
  */
 public class Login extends javax.swing.JFrame {
 
-    private final String RUTA_USUARIOS = "./data/users";
+    private static final String RUTA_USUARIOS = "./data/users";
     private final String RUTA_PAQUETES = "./data/paquetes";
     private final String RUTA_HISTORIALES = "./data/historiales";
     private final String RUTA_RESERVAS = "./data/reservas";
-    private final ArrayList<Persona> usuarios;
+    public static ArrayList<Persona> usuarios;
 
     /**
      * Creates new form Login
@@ -38,7 +40,7 @@ public class Login extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        usuarios = loadUsers(RUTA_USUARIOS);
+        usuarios = loadUsers();
         System.out.println(usuarios);
         lbl_registro.setVisible(false);
     }
@@ -237,16 +239,27 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField tf_username;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<Persona> loadUsers(String RUTA_USUARIOS) {
+    public static ArrayList<Persona> loadUsers() {
         ArrayList<Persona> users = new ArrayList();
         try {
             FileInputStream fichero = new FileInputStream(RUTA_USUARIOS);
             ObjectInputStream file = new ObjectInputStream(fichero);
             users = ((ArrayList<Persona>) file.readObject());
         } catch (IOException | ClassNotFoundException ex) {
-            //System.out.println("FALLO");
             ex.printStackTrace();
         }
         return users;
+    }
+    
+    public static void saveUsers(){
+        try {
+            FileOutputStream fichero = new FileOutputStream(RUTA_USUARIOS);
+
+            try (ObjectOutputStream usuario = new ObjectOutputStream(fichero)) {
+                usuario.writeObject(usuarios);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

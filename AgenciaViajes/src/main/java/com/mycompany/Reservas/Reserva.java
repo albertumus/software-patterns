@@ -4,6 +4,7 @@ import com.mycompany.Administracion.Cliente;
 import com.mycompany.Administracion.Empleado;
 import com.mycompany.Administracion.Tarjeta;
 import com.mycompany.Paquetes.PaqueteVacacional;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,9 +12,9 @@ import java.util.Date;
  * @version 1.0
  * @created 04-ene.-2022 18:37:09
  */
-public abstract class  Reserva implements AccionesReserva {
+public abstract class  Reserva implements AccionesReserva,Serializable {
 
-    public PaqueteVacacional paquete;
+    protected PaqueteVacacional paquete;
     public EstadoReserva estado;
 
     public Date     fechaReserva;
@@ -32,8 +33,8 @@ public abstract class  Reserva implements AccionesReserva {
         this.estado         = new PendientePago();
         this.estado.setReserva(this);
         this.cliente.getHistorial().addReserva( this );
-        
     }
+    
     @Override
     public void anular() {
         this.estado.anular();
@@ -98,5 +99,20 @@ public abstract class  Reserva implements AccionesReserva {
         this.tarjeta = tarjeta;
     }
 
+    public PaqueteVacacional getPaquete() {
+        return paquete;
+    }
 
+    public void setPaquete(PaqueteVacacional paquete) {
+        this.paquete = paquete;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+    
 }

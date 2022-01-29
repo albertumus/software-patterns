@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Historial implements Serializable{
     
-    public ArrayList<Reserva> reservas;
+    private final ArrayList<Reserva> reservas;
     
     public Historial() {   
         reservas = new ArrayList<Reserva>();   
@@ -28,5 +28,8 @@ public class Historial implements Serializable{
     public void removeReserva(Reserva r) {
         this.reservas.remove(r);
     }
-    
+
+    public ArrayList<Reserva> getReservas() {
+        return reservas;
+    }
 }

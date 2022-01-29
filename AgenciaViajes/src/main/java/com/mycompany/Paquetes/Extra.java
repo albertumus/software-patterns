@@ -5,18 +5,17 @@
  */
 package com.mycompany.Paquetes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public abstract class Extra {
+public abstract class Extra implements Serializable {
     
     public Integer precio;
 
     public Integer getPrecio() {
         return precio;
     }
-    
-    
-    
 }

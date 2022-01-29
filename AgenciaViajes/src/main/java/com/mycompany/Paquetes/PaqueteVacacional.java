@@ -1,5 +1,6 @@
 package com.mycompany.Paquetes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * @version 1.0
  * @created 04-ene.-2022 18:37:09
  */
-public class PaqueteVacacional implements Cloneable {
+public class PaqueteVacacional implements Cloneable, Serializable {
 
     public Hotel hotel;
     public Vuelo vuelo;

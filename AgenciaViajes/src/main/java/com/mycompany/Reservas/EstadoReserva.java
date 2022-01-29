@@ -5,11 +5,13 @@
  */
 package com.mycompany.Reservas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author admin
  */
-public abstract class EstadoReserva implements AccionesReserva {
+public abstract class EstadoReserva implements AccionesReserva, Serializable {
     
     private Reserva reserva;
 
