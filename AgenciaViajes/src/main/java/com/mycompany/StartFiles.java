@@ -30,13 +30,13 @@ public class StartFiles {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Director d1 = new Director("Superintendente", "Martinez", "dni1", "hombre", "asdasd", new Date(), "0001", 2000, "0000123", "Casado", "admin@admin.com", "admin" );
-        Gestor g1 = new Gestor( "Gestor", "1", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado", "emailg1@email.com", "passwordg1");
-        Gestor g2 = new Gestor( "Gestor", "2", d1, "dni1", "hombre", "asdasd", new Date(), "0002", 1500, "0000124", "Casado", "emailg2@email.com", "passwordg2");
+        Director d1 = new Director("Superintendente", "Martinez", "32549988C", "Hombre", "asdasd", new Date(), "32549988C", 2000, "0000123", "Casado", "admin@admin.com", "admin" );
+        Gestor g1 = new Gestor( "Gestor", "1", d1, "25086788K", "Mujer", "asdasd", new Date(), "25086788K", 1500, "0000123", "Casado", "emailg1@email.com", "passwordg1");
+        Gestor g2 = new Gestor( "Gestor", "2", d1, "10808819S", "Otro", "asdasd", new Date(), "10808819S", 1500, "0000124", "Casado", "emailg2@email.com", "passwordg2");
         
-        Cliente c1 = new Cliente( "Cliente A", "1", g1,"tarjeya1", "dni1", "hombre", "asdasd", new Date(), "a@a.com", "a" );
-        Cliente c2 = new Cliente( "Cliente B", "2", g2,"tarjeya2", "dni1", "hombre", "asdasd", new Date(), "b@b.com", "b" );
-        Cliente c3 = new Cliente( "Cliente C", "3", d1,"tarjeya3", "dni1", "hombre", "asdasd", new Date(), "c@c.com", "c" );
+        Cliente c1 = new Cliente( "Cliente A", "1", g1,"tarjeya1", "34190069V", "Hombre", "asdasd", new Date(), "a@a.com", "a" );
+        Cliente c2 = new Cliente( "Cliente B", "2", g2,"tarjeya2", "57460746F", "Hombre", "asdasd", new Date(), "b@b.com", "b" );
+        Cliente c3 = new Cliente( "Cliente C", "3", d1,"tarjeya3", "81359583G", "Hombre", "asdasd", new Date(), "c@c.com", "c" );
         
         ArrayList <Persona> usuarios = new ArrayList();
         
@@ -44,7 +44,7 @@ public class StartFiles {
         PaqueteVacacional p2 = new FabricaPaquetePreHecho().getPaquete(0).createPaquete5Estrellas(new Date(122, 1, 3), new Date(122,1,5));
         
         Reserva r1 = new ReservaNormal(p1,new Date(),g1,c1);
-        Reserva r2 = new ReservaNormal(p2,new Date(),g1,c1);
+        Reserva r2 = new ReservaNormal(p2,new Date(),g2,c1);
         
         usuarios.add(d1);
         usuarios.add(g1);

@@ -5,7 +5,17 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
+import com.mycompany.Administracion.Director;
+import com.mycompany.Administracion.Empleado;
+import com.mycompany.Administracion.Gestor;
+import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+import static com.mycompany.GraphicInterface.Comunes.Login.loadUsers;
+import static com.mycompany.GraphicInterface.Comunes.Login.saveUsers;
+import com.mycompany.GraphicInterface.Comunes.OperacionErronea;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuario;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuarios;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 
 /**
@@ -22,6 +32,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
+        loadCB();
     }
 
     /**
@@ -54,6 +65,10 @@ public class EditarEmpleado extends javax.swing.JFrame {
         btn_Editar = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
         cb_Empleado = new javax.swing.JComboBox<>();
+        lbl_Email = new javax.swing.JLabel();
+        tf_Email = new javax.swing.JTextField();
+        lbl_ID = new javax.swing.JLabel();
+        tf_ID = new javax.swing.JTextField();
 
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
@@ -119,6 +134,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
 
         btn_Editar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Editar.setText("Editar Empleado");
+        btn_Editar.setEnabled(false);
         btn_Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_EditarActionPerformed(evt);
@@ -135,6 +151,25 @@ public class EditarEmpleado extends javax.swing.JFrame {
 
         cb_Empleado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Empleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un empleado" }));
+        cb_Empleado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_EmpleadoItemStateChanged(evt);
+            }
+        });
+
+        lbl_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Email.setText("Numero S. Social:");
+
+        tf_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_Email.setToolTipText("");
+        tf_Email.setEnabled(false);
+
+        lbl_ID.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_ID.setText("Identificador:");
+
+        tf_ID.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_ID.setToolTipText("");
+        tf_ID.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,6 +178,14 @@ public class EditarEmpleado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tf_ID))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tf_Email))
                     .addComponent(btn_Editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lbl_EstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,6 +239,10 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 .addComponent(cb_Empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tf_Nombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -218,7 +265,11 @@ public class EditarEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfnd_Sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_Email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_NSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_NSS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -239,16 +290,153 @@ public class EditarEmpleado extends javax.swing.JFrame {
 
     private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
         // TODO crear el usuario, comprobar los campos y serializarlo
+        if (comprobarCampos()) {
+            for (Persona usuario : usuarios) {
+                if (usuario instanceof Director) {
+                    if (((Director) usuario).getFicha().getIdentificador().equals(cb_Empleado.getSelectedItem().toString())) {
+                        usuario.setApellidos(tf_Apellidos.getText());
+                        ((Director) usuario).getFicha().setDni(tf_DNI.getText());
+                        ((Director) usuario).getFicha().setDireccion(tf_Direccion.getText());
+                        usuario.setEmail(tf_Email.getText());
+                        ((Director) usuario).getFicha().setEstadoCivil(cb_EstadoCivil.getSelectedItem().toString());
+                        ((Director) usuario).getFicha().setGenero(cb_Genero.getSelectedItem().toString());
+                        ((Director) usuario).getFicha().setNumeroSS(tf_NSS.getText());
+                        ((Director) usuario).getFicha().setSueldo(Integer.parseInt(tfnd_Sueldo.getText()));
+                        usuario.setNombre(tf_Nombre.getText());
+                        break;
+                    }
+                } else if (usuario instanceof Gestor) {
+                    if ( ((Gestor) usuario).getFicha().getIdentificador().equals(cb_Empleado.getSelectedItem().toString())){
+                        usuario.setApellidos(tf_Apellidos.getText());
+                        ((Gestor) usuario).getFicha().setDni(tf_DNI.getText());
+                        ((Gestor) usuario).getFicha().setDireccion(tf_Direccion.getText());
+                        usuario.setEmail(tf_Email.getText());
+                        ((Gestor) usuario).getFicha().setEstadoCivil(cb_EstadoCivil.getSelectedItem().toString());
+                        ((Gestor) usuario).getFicha().setGenero(cb_Genero.getSelectedItem().toString());
+                        ((Gestor) usuario).getFicha().setNumeroSS(tf_NSS.getText());
+                        ((Gestor) usuario).getFicha().setSueldo(Integer.parseInt(tfnd_Sueldo.getText()));
+                        usuario.setNombre(tf_Nombre.getText());
+                        break;
+                    }
+                }
+            }
+            saveUsers();
+            loadUsers();
+            ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha añadido el empleado correctamente");
+            window.setVisible(true);
+            this.setVisible(false);
+        }
 
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha añadido el empleado correctamente");
-        window.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_btn_EditarActionPerformed
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btn_VolverActionPerformed
+
+    private void cb_EmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_EmpleadoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            tf_Apellidos.setText("");
+            tf_DNI.setText("");
+            tf_Direccion.setText("");
+            tf_Email.setText("");
+            cb_EstadoCivil.setSelectedIndex(0);
+            cb_Genero.setSelectedIndex(0);
+            tf_ID.setText("");
+            tf_NSS.setText("");
+            tf_Nombre.setText("");
+            tfnd_Sueldo.setText("");
+
+            tf_Apellidos.setEnabled(false);
+            tf_DNI.setEnabled(false);
+            tf_Direccion.setEnabled(false);
+            tf_Email.setEnabled(false);
+            cb_EstadoCivil.setEnabled(false);
+            cb_Genero.setEnabled(false);
+            tf_NSS.setEnabled(false);
+            tf_Nombre.setEnabled(false);
+            tfnd_Sueldo.setEnabled(false);
+            btn_Editar.setEnabled(false);
+
+            if (cb_Empleado.getSelectedIndex() != 0) {
+                for (Persona usuario1 : usuarios) {
+                    if (usuario1 instanceof Gestor) {
+                        Gestor usu = (Gestor) usuario1;
+                        if ((usu.getDirector().equals(usuario))) {
+                            if (usu.getFicha().getIdentificador().equals(cb_Empleado.getSelectedItem().toString())) {
+
+                                tf_Apellidos.setEnabled(true);
+                                tf_DNI.setEnabled(true);
+                                tf_Direccion.setEnabled(true);
+                                tf_Email.setEnabled(true);
+                                cb_EstadoCivil.setEnabled(true);
+                                cb_Genero.setEnabled(true);
+                                tf_NSS.setEnabled(true);
+                                tf_Nombre.setEnabled(true);
+                                tfnd_Sueldo.setEnabled(true);
+                                btn_Editar.setEnabled(true);
+
+                                tf_Apellidos.setText(usu.getApellidos());
+                                tf_DNI.setText(usu.getFicha().getDni());
+                                tf_Direccion.setText(usu.getFicha().getDireccion());
+                                tf_Email.setText(usu.getEmail());
+                                try {
+                                    cb_EstadoCivil.setSelectedItem(usu.getFicha().getEstadoCivil());
+                                    cb_Genero.setSelectedItem(usu.getFicha().getGenero());
+                                } catch (Exception e) {
+                                    cb_EstadoCivil.setSelectedIndex(0);
+                                    cb_Genero.setSelectedIndex(0);
+                                }
+
+                                tf_ID.setText(usu.getFicha().getIdentificador());
+                                tf_NSS.setText(usu.getFicha().getNumeroSS());
+                                tf_Nombre.setText(usu.getNombre());
+                                tfnd_Sueldo.setText(String.valueOf(usu.getFicha().getSueldo()));
+
+                                break;
+                            }
+                        }
+                    } else if (usuario1 instanceof Director) {
+                        Director usu = (Director) usuario1;
+                        if (usu.getFicha().getIdentificador().equals(cb_Empleado.getSelectedItem().toString())) {
+
+                            tf_Apellidos.setEnabled(true);
+                            tf_DNI.setEnabled(true);
+                            tf_Direccion.setEnabled(true);
+                            tf_Email.setEnabled(true);
+                            cb_EstadoCivil.setEnabled(true);
+                            cb_Genero.setEnabled(true);
+                            tf_NSS.setEnabled(true);
+                            tf_Nombre.setEnabled(true);
+                            tfnd_Sueldo.setEnabled(true);
+                            btn_Editar.setEnabled(true);
+
+                            tf_Apellidos.setText(usu.getApellidos());
+                            tf_DNI.setText(usu.getFicha().getDni());
+                            tf_Direccion.setText(usu.getFicha().getDireccion());
+                            tf_Email.setText(usu.getEmail());
+                            try {
+                                cb_EstadoCivil.setSelectedItem(usu.getFicha().getEstadoCivil());
+                                cb_Genero.setSelectedItem(usu.getFicha().getGenero());
+                            } catch (Exception e) {
+                                cb_EstadoCivil.setSelectedIndex(0);
+                                cb_Genero.setSelectedIndex(0);
+                            }
+
+                            tf_ID.setText(usu.getFicha().getIdentificador());
+                            tf_NSS.setText(usu.getFicha().getNumeroSS());
+                            tf_Nombre.setText(usu.getNombre());
+                            tfnd_Sueldo.setText(String.valueOf(usu.getFicha().getSueldo()));
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_EmpleadoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -297,8 +485,10 @@ public class EditarEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Apellidos;
     private javax.swing.JLabel lbl_DNI;
     private javax.swing.JLabel lbl_Direccion;
+    private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_EstadoCivil;
     private javax.swing.JLabel lbl_Genero;
+    private javax.swing.JLabel lbl_ID;
     private javax.swing.JLabel lbl_Instrucciones;
     private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_NSS;
@@ -307,8 +497,101 @@ public class EditarEmpleado extends javax.swing.JFrame {
     private javax.swing.JTextField tf_Apellidos;
     private javax.swing.JTextField tf_DNI;
     private javax.swing.JTextField tf_Direccion;
+    private javax.swing.JTextField tf_Email;
+    private javax.swing.JTextField tf_ID;
     private javax.swing.JTextField tf_NSS;
     private javax.swing.JTextField tf_Nombre;
     private javax.swing.JTextField tfnd_Sueldo;
     // End of variables declaration//GEN-END:variables
+
+    private void loadCB() {
+        for (Persona usuario1 : usuarios) {
+            if (usuario1 instanceof Gestor) {
+                if (((Gestor) usuario1).getDirector().equals(usuario)) {
+                    cb_Empleado.addItem(((Gestor) usuario1).getFicha().getIdentificador());
+                }
+
+            } else if (usuario1 instanceof Director) {
+                if (usuario1.equals(usuario)) {
+                    cb_Empleado.addItem(((Director) usuario1).getFicha().getIdentificador());
+                }
+            }
+        }
+    }
+
+    private boolean comprobarCampos() {
+        boolean OK = true;
+        int sueldo = 0;
+        String errores = "<html> Tienes los siguientes errores: <br/>";
+        if (tf_Nombre.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo nombre no puede estar vacio <br/>");
+        }
+        if (tf_Apellidos.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo apellido no puede estar vacio <br/>");
+        }
+        if (tf_DNI.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo DNI no puede estar vacio <br/>");
+        }
+        if (tf_Direccion.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo nombre no puede estar vacio <br/>");
+        }
+        if (cb_Genero.getSelectedIndex() == 0) {
+            OK = false;
+            errores = errores.concat("Se ha de seleccionar un genero <br/>");
+        }
+        if (tfnd_Sueldo.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo sueldo no puede estar vacio <br/>");
+        }
+        if (tf_NSS.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo NSS no puede estar vacio <br/>");
+        }
+        if (tf_Email.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo email no puede estar vacio <br/>");
+        }
+        try {
+            sueldo = Integer.valueOf(tfnd_Sueldo.getText());
+            if (sueldo < 0) {
+                OK = false;
+                errores = errores.concat("El campo sueldo tiene que ser mayor que 0 <br/>");
+            }
+        } catch (NumberFormatException e) {
+            OK = false;
+            errores = errores.concat("El campo sueldo tiene que ser numerico <br/>");
+        }
+
+        for (Persona usuario : usuarios) {
+            if (usuario instanceof Empleado) {
+                Empleado user = (Empleado) usuario;
+                if (user.getFicha().getIdentificador().equals(cb_Empleado.getSelectedItem().toString())) {
+                    continue;
+                }
+                if (user.getEmail().equals(tf_Email.getText())) {
+                    OK = false;
+                    errores = errores.concat("El email ya se encuentra registrado <br/>");
+                    break;
+                }
+
+                if (user.getFicha().getDni().equals(tf_DNI.getText())) {
+                    OK = false;
+                    errores = errores.concat("El DNI ya se encuentra registrado <br/>");
+                    break;
+                }
+            }
+
+        }
+
+        if (!OK) {
+            OperacionErronea window = new OperacionErronea(errores);
+            window.setVisible(true);
+        }
+
+        return OK;
+    }
 }

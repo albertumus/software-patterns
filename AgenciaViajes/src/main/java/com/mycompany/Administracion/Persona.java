@@ -15,9 +15,9 @@ public abstract class Persona implements Serializable {
 
     private static final long serialVersionUID = 6529685098267757690L;
 
-    private final String nombre;
-    private final String apellidos;
-    private final String email;
+    private String nombre;
+    private String apellidos;
+    private String email;
     private final String password;
     private final Historial historial;
 
@@ -47,6 +47,18 @@ public abstract class Persona implements Serializable {
 
     public Historial getHistorial() {
         return historial;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
