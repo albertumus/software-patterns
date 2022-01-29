@@ -57,6 +57,8 @@ public class StartAplication extends javax.swing.JFrame {
         lbl_Bienvenida.setText("PULSA ENTER PARA CONTINUAR");
         lbl_Bienvenida.setToolTipText("");
         lbl_Bienvenida.setAlignmentX(0.5F);
+        lbl_Bienvenida.setMaximumSize(new java.awt.Dimension(1024, 590));
+        lbl_Bienvenida.setMinimumSize(new java.awt.Dimension(1024, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,14 +66,14 @@ public class StartAplication extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(lbl_Bienvenida, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

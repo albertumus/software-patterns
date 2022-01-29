@@ -119,9 +119,9 @@ public class ImpresionFacturaCliente extends javax.swing.JFrame {
         if (cb_Reserva.getSelectedIndex()!=0){
             Reserva r = usuarioActual.getHistorial().getReservas().get(cb_Reserva.getSelectedIndex()-1);
             r.imprimirFactura();
+            ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha impreso la factura");
+            window.setVisible(true);
         }
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha impreso la factura");
-        window.setVisible(true);
     }//GEN-LAST:event_btn_ImprimirActionPerformed
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed

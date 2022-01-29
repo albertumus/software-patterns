@@ -5,6 +5,7 @@
  */
 package com.mycompany.GraphicInterface.Comunes;
 
+import com.mycompany.Administracion.Activo;
 import javax.swing.ImageIcon;
 import com.mycompany.Administracion.Cliente;
 import com.mycompany.Administracion.Director;
@@ -160,15 +161,27 @@ public class Login extends javax.swing.JFrame {
                     MainMenuDirector window = new MainMenuDirector(usuarios);
                     window.setVisible(true);
                 } else if ( usuarioActual instanceof Gestor) {
-                    MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
-                    window.setVisible(true);
+                    if (((Gestor) usuarioActual).getEstado() instanceof Activo){
+                        MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
+                        window.setVisible(true);
+                    } else {
+                        OperacionErronea window = new OperacionErronea("El empleado esta de baja o desactivado");
+                        window.setVisible(true);
+                    }
                 } else if (usuarioActual instanceof Cliente) {
                     MainMenuCliente window = new MainMenuCliente((Cliente) usuarioActual);
                     window.setVisible(true);
                 } else {
-                    System.out.print("ERROR");
+                    OperacionErronea window = new OperacionErronea("El usuario no se encuentra registrado");
+                    window.setVisible(true);
                 }
+            } else {
+                OperacionErronea window = new OperacionErronea("El usuario no se encuentra registrado");
+                window.setVisible(true);
             }
+        } else {
+            OperacionErronea window = new OperacionErronea("Los campos de usuario y contraseña tienen que estar completos");
+            window.setVisible(true);
         }
 
         this.setVisible(false);
