@@ -4,7 +4,11 @@ import com.mycompany.Administracion.Cliente;
 import com.mycompany.Administracion.Empleado;
 import com.mycompany.Administracion.Tarjeta;
 import com.mycompany.Paquetes.PaqueteVacacional;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,6 +37,7 @@ public abstract class  Reserva implements AccionesReserva,Serializable {
         this.estado         = new PendientePago();
         this.estado.setReserva(this);
         this.cliente.getHistorial().addReserva( this );
+        this.precio = paquete.getTotalPaquete();
     }
     
     @Override
@@ -113,6 +118,40 @@ public abstract class  Reserva implements AccionesReserva,Serializable {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public void imprimirFactura() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String fechaIDA = format.format(this.getPaquete().getDesde());
+        String fechaVUELTA = format.format(this.getPaquete().getHasta());
+        
+        String Ach_Text = "./Facturas/Factura-"+ this.getCliente().getFicha().getDni() + "-" + fechaIDA + "-" + fechaVUELTA +".txt";
+        
+        
+        try {
+            
+            FileWriter text = new FileWriter(Ach_Text, true);
+            PrintWriter pw = new PrintWriter(text);
+
+            
+            pw.println("Nombre: " + this.getCliente().getNombre());
+            pw.println("Apellidos: " + this.getCliente().getApellidos());
+            pw.println("----------------------------------------------------------------------");
+            pw.println("Direccion: " + this.getCliente().getFicha().getDireccion());
+            pw.println("Email: " + this.getCliente().getEmail());
+            pw.println("DNI: " + this.getCliente().getFicha().getDni());
+            pw.println("----------------------------------------------------------------------");
+            pw.println("Fecha de reserva: " + format.format(this.getFechaReserva()));
+            pw.println("Fecha de salida: " + format.format(this.getPaquete().getDesde()));
+            pw.println("Fecha de regreso: " + format.format(this.getPaquete().getHasta()));
+            pw.println("----------------------------------------------------------------------");
+            pw.println("TOTAL : " + this.getPrecio());
+            
+            text.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
 }

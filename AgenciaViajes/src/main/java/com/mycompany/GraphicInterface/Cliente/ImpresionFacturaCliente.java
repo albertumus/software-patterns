@@ -5,7 +5,10 @@
  */
 package com.mycompany.GraphicInterface.Cliente;
 
+import static com.mycompany.GraphicInterface.Cliente.MainMenuCliente.usuarioActual;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+import com.mycompany.Reservas.Reserva;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 
 /**
@@ -22,6 +25,7 @@ public class ImpresionFacturaCliente extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
+        loadComboReservas();
     }
 
     /**
@@ -112,6 +116,10 @@ public class ImpresionFacturaCliente extends javax.swing.JFrame {
 
     private void btn_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImprimirActionPerformed
         // TODO add your handling code here:
+        if (cb_Reserva.getSelectedIndex()!=0){
+            Reserva r = usuarioActual.getHistorial().getReservas().get(cb_Reserva.getSelectedIndex()-1);
+            r.imprimirFactura();
+        }
         ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha impreso la factura");
         window.setVisible(true);
     }//GEN-LAST:event_btn_ImprimirActionPerformed
@@ -164,4 +172,12 @@ public class ImpresionFacturaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_Reserva;
     // End of variables declaration//GEN-END:variables
+
+    private void loadComboReservas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+        usuarioActual.getHistorial().getReservas().forEach(reserva -> {
+            cb_Reserva.addItem(format.format(reserva.getPaquete().getDesde()) + " - " + format.format(reserva.getPaquete().getHasta()));
+        });
+    }
 }

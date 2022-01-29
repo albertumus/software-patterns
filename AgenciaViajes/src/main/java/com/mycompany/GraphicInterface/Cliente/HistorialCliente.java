@@ -20,7 +20,6 @@ import com.mycompany.Paquetes.PaqueteVacacional;
 import com.mycompany.Paquetes.TransporteVIP;
 import com.mycompany.Paquetes.VueloClaseTurista;
 import com.mycompany.Paquetes.VueloPrimeraClase;
-import com.mycompany.Reservas.Pagado;
 import com.mycompany.Reservas.PagadoParcialmente;
 import com.mycompany.Reservas.PendientePago;
 import com.mycompany.Reservas.Reserva;
