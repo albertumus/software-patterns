@@ -51,7 +51,7 @@ public class MainPageEmpleados extends javax.swing.JFrame {
         });
 
         btn_Baja.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_Baja.setText("Baja Empleado");
+        btn_Baja.setText("Alta/Baja Empleado");
         btn_Baja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_BajaActionPerformed(evt);
@@ -132,7 +132,7 @@ public class MainPageEmpleados extends javax.swing.JFrame {
 
     private void btn_BajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BajaActionPerformed
         // TODO add your handling code here:
-        BajaEmpleado window = new BajaEmpleado();
+        Alta_BajaEmpleado window = new Alta_BajaEmpleado();
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_BajaActionPerformed
