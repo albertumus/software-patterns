@@ -158,7 +158,7 @@ public class Login extends javax.swing.JFrame {
             }
             if (usuarioActual != null) {
                 if (usuarioActual instanceof Director) {
-                    MainMenuDirector window = new MainMenuDirector(usuarios);
+                    MainMenuDirector window = new MainMenuDirector(usuarios, (Director) usuarioActual);
                     window.setVisible(true);
                 } else if ( usuarioActual instanceof Gestor) {
                     if (((Gestor) usuarioActual).getEstado() instanceof Activo){

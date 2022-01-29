@@ -5,6 +5,8 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
+import com.mycompany.Administracion.Director;
+import com.mycompany.Administracion.Gestor;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.Login;
 import com.mycompany.GraphicInterface.DirectorEmpleado.CrearPaqueteTuristico;
@@ -21,13 +23,15 @@ public class MainMenuDirector extends javax.swing.JFrame {
     /**
      * Creates new form MainMenuDirector
      */
-    private static ArrayList<Persona> usuarios;
-    public MainMenuDirector(ArrayList<Persona> usuarios) {
+    protected static ArrayList<Persona> usuarios;
+    protected static Director usuario;
+    public MainMenuDirector(ArrayList<Persona> usuarios, Director usuarioActual) {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        this.usuarios = usuarios;
+        MainMenuDirector.usuarios = usuarios;
+        MainMenuDirector.usuario = usuarioActual;
     }
 
     /**
@@ -137,9 +141,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_EmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EmpleadosActionPerformed
-        ArrayList<Persona> usuarios = null;
-        // TODO add your handling code here:
-        MainPageEmpleados window = new MainPageEmpleados(usuarios);
+        MainPageEmpleados window = new MainPageEmpleados();
         window.setVisible(true);
 
     }//GEN-LAST:event_btn_EmpleadosActionPerformed
@@ -200,7 +202,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenuDirector(usuarios).setVisible(true);
+                new MainMenuDirector(usuarios, usuario).setVisible(true);
             }
         });
     }

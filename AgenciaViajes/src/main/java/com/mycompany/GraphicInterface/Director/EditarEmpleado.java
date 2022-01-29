@@ -5,9 +5,7 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
-import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,13 +17,11 @@ public class EditarEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form AnnadirEmpleado
      */
-    private static ArrayList<Persona> usuarios;
-    public EditarEmpleado(ArrayList<Persona> usuarios) {
+    public EditarEmpleado() {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        EditarEmpleado.usuarios = usuarios;
     }
 
     /**
@@ -287,7 +283,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditarEmpleado(usuarios).setVisible(true);
+                new EditarEmpleado().setVisible(true);
             }
         });
     }

@@ -5,8 +5,6 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
-import com.mycompany.Administracion.Persona;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,13 +16,11 @@ public class MainPageEmpleados extends javax.swing.JFrame {
     /**
      * Creates new form MainPageEmpleados
      */
-    private static ArrayList<Persona> usuarios;
-    public MainPageEmpleados(ArrayList<Persona> usuarios) {
+    public MainPageEmpleados() {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        MainPageEmpleados.usuarios = usuarios;
     }
 
     /**
@@ -129,28 +125,28 @@ public class MainPageEmpleados extends javax.swing.JFrame {
 
     private void btn_AnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AnnadirActionPerformed
         // TODO add your handling code here:
-        AnnadirEmpleado window = new AnnadirEmpleado(usuarios);
+        AnnadirEmpleado window = new AnnadirEmpleado();
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_AnnadirActionPerformed
 
     private void btn_BajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BajaActionPerformed
         // TODO add your handling code here:
-        BajaEmpleado window = new BajaEmpleado(usuarios);
+        BajaEmpleado window = new BajaEmpleado();
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_BajaActionPerformed
 
     private void btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModificarActionPerformed
         // TODO add your handling code here:
-        EditarEmpleado window = new EditarEmpleado(usuarios);
+        EditarEmpleado window = new EditarEmpleado();
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ModificarActionPerformed
 
     private void btn_DetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DetallesActionPerformed
         // TODO add your handling code here:
-        VerEmpleado window = new VerEmpleado(usuarios);
+        VerEmpleado window = new VerEmpleado();
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_DetallesActionPerformed
@@ -191,7 +187,7 @@ public class MainPageEmpleados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainPageEmpleados(usuarios).setVisible(true);
+                new MainPageEmpleados().setVisible(true);
             }
         });
     }

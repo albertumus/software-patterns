@@ -19,13 +19,11 @@ public class VerEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form AnnadirEmpleado
      */
-    private static ArrayList<Persona> usuarios;
-    public VerEmpleado(ArrayList<Persona> usuarios) {
+    public VerEmpleado() {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        VerEmpleado.usuarios = usuarios;
     }
 
     /**
@@ -303,7 +301,7 @@ public class VerEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VerEmpleado(usuarios).setVisible(true);
+                new VerEmpleado().setVisible(true);
             }
         });
     }

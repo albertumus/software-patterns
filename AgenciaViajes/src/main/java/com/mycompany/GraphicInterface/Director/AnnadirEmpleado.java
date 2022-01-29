@@ -5,9 +5,16 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
+import com.mycompany.Administracion.Empleado;
+import com.mycompany.Administracion.Gestor;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
-import java.util.ArrayList;
+import static com.mycompany.GraphicInterface.Comunes.Login.loadUsers;
+import static com.mycompany.GraphicInterface.Comunes.Login.saveUsers;
+import com.mycompany.GraphicInterface.Comunes.OperacionErronea;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuario;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuarios;
+import java.util.Date;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,13 +26,11 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form AnnadirEmpleado
      */
-    private static ArrayList<Persona> usuarios;
-    public AnnadirEmpleado(ArrayList<Persona> usuarios) {
+    public AnnadirEmpleado() {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        AnnadirEmpleado.usuarios = usuarios;
     }
 
     /**
@@ -57,6 +62,10 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
         cb_EstadoCivil = new javax.swing.JComboBox<>();
         btn_Alta = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
+        lbl_Email = new javax.swing.JLabel();
+        tf_Email = new javax.swing.JTextField();
+        lbl_Password = new javax.swing.JLabel();
+        tf_Password = new javax.swing.JTextField();
 
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
@@ -128,52 +137,73 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
             }
         });
 
+        lbl_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Email.setText("Email:");
+
+        tf_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_Email.setToolTipText("");
+
+        lbl_Password.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Password.setText("Password:");
+
+        tf_Password.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_Password.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_Alta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbl_EstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cb_EstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_NSS, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tf_NSS))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbl_Sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfnd_Sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tf_Nombre))
-                    .addComponent(lbl_Instrucciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lbl_DNI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_Apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_Apellidos))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbl_Genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))
+                        .addComponent(tf_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_Alta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lbl_EstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cb_EstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lbl_NSS, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(tf_NSS))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lbl_Sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(tfnd_Sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(tf_Nombre))
+                        .addComponent(lbl_Instrucciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lbl_DNI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_Apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tf_Apellidos))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lbl_Genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -199,7 +229,15 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_Email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_Password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -228,10 +266,29 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
 
     private void btn_AltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AltaActionPerformed
         // TODO crear el usuario, comprobar los campos y serializarlo
-        
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha añadido el empleado correctamente");
-        window.setVisible(true);
-        this.setVisible(false);
+        if (comprobarValores()) {
+            Gestor g = new Gestor(
+                    tf_Nombre.getText(), 
+                    tf_Apellidos.getText(),
+                    usuario,
+                    tf_DNI.getText(),
+                    cb_Genero.getSelectedItem().toString(),
+                    tf_Direccion.getText(),
+                    new Date(),
+                    tf_DNI.getText(),
+                    Integer.valueOf(tfnd_Sueldo.getText()),
+                    tf_NSS.getText(),
+                    cb_EstadoCivil.getSelectedItem().toString(),
+                    tf_Email.getText(),
+                    tf_Password.getText()
+            );
+            usuarios.add(g);
+            saveUsers();
+            loadUsers();
+            ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha añadido el empleado correctamente");
+            window.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btn_AltaActionPerformed
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
@@ -270,7 +327,7 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AnnadirEmpleado(usuarios).setVisible(true);
+                new AnnadirEmpleado().setVisible(true);
             }
         });
     }
@@ -283,18 +340,99 @@ public class AnnadirEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Apellidos;
     private javax.swing.JLabel lbl_DNI;
     private javax.swing.JLabel lbl_Direccion;
+    private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_EstadoCivil;
     private javax.swing.JLabel lbl_Genero;
     private javax.swing.JLabel lbl_Instrucciones;
     private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_NSS;
     private javax.swing.JLabel lbl_Nombre;
+    private javax.swing.JLabel lbl_Password;
     private javax.swing.JLabel lbl_Sueldo;
     private javax.swing.JTextField tf_Apellidos;
     private javax.swing.JTextField tf_DNI;
     private javax.swing.JTextField tf_Direccion;
+    private javax.swing.JTextField tf_Email;
     private javax.swing.JTextField tf_NSS;
     private javax.swing.JTextField tf_Nombre;
+    private javax.swing.JTextField tf_Password;
     private javax.swing.JTextField tfnd_Sueldo;
     // End of variables declaration//GEN-END:variables
+
+    private boolean comprobarValores() {
+        boolean OK = true;
+        int sueldo = 0;
+        String errores = "<html> Tienes los siguientes errores: <br/>";
+        if (tf_Nombre.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo nombre no puede estar vacio <br/>");
+        }
+        if (tf_Apellidos.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo apellido no puede estar vacio <br/>");
+        }
+        if (tf_DNI.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo DNI no puede estar vacio <br/>");
+        }
+        if (tf_Direccion.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo nombre no puede estar vacio <br/>");
+        }
+        if (cb_Genero.getSelectedIndex() == 0) {
+            OK = false;
+            errores = errores.concat("Se ha de seleccionar un genero <br/>");
+        }
+        if (tfnd_Sueldo.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo sueldo no puede estar vacio <br/>");
+        }
+        if (tf_NSS.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo NSS no puede estar vacio <br/>");
+        }
+        if (tf_Email.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo email no puede estar vacio <br/>");
+        }
+        if (tf_Password.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo password no puede estar vacio <br/>");
+        }
+        try {
+            sueldo = Integer.valueOf(tfnd_Sueldo.getText());
+            if (sueldo < 0) {
+                OK = false;
+                errores = errores.concat("El campo sueldo tiene que ser mayor que 0 <br/>");
+            }
+        } catch (NumberFormatException e) {
+            OK = false;
+            errores = errores.concat("El campo sueldo tiene que ser numerico <br/>");
+        }
+
+        for (Persona usuario : usuarios) {
+            if (usuario instanceof Empleado) {
+                Empleado user = (Empleado) usuario;
+                if (user.getEmail().equals(tf_Email.getText())) {
+                    OK = false;
+                    errores = errores.concat("El email ya se encuentra registrado <br/>");
+                    break;
+                }
+
+                if (user.getFicha().getDni().equals(tf_DNI.getText())) {
+                    OK = false;
+                    errores = errores.concat("El DNI ya se encuentra registrado <br/>");
+                    break;
+                }
+            }
+
+        }
+        
+        if (!OK){
+            OperacionErronea window = new OperacionErronea(errores);
+            window.setVisible(true);
+        }
+
+        return OK;
+    }
 }

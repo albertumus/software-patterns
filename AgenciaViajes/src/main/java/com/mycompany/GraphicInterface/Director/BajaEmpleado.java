@@ -19,13 +19,11 @@ public class BajaEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form BajaEmpleado
      */
-    private static ArrayList<Persona> usuarios;
-    public BajaEmpleado(ArrayList<Persona> usuarios) {
+    public BajaEmpleado() {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        BajaEmpleado.usuarios = usuarios;
     }
 
     /**
@@ -201,7 +199,7 @@ public class BajaEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BajaEmpleado(usuarios).setVisible(true);
+                new BajaEmpleado().setVisible(true);
             }
         });
     }
