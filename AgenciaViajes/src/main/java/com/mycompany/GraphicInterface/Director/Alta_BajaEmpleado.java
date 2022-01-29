@@ -228,18 +228,20 @@ public class Alta_BajaEmpleado extends javax.swing.JFrame {
             tf_DNI.setText("");
             btn_Alta.setEnabled(false);
             btn_Baja.setEnabled(false);
-            for (Persona usuario1 : usuarios) {
-                if (usuario1 instanceof Gestor) {
-                    Gestor usu = (Gestor) usuario1;
-                    if ((usu.getDirector().equals(usuario))) {
-                        if (usu.getFicha().getDni().equals(cb_Empleado.getSelectedItem().toString())) {
-                            tf_Nombre.setText(usu.getNombre());
-                            tf_Apellidos.setText(usu.getApellidos());
-                            tf_DNI.setText(usu.getFicha().getDni());
-                            if (usu.getEstado() instanceof Activo) {
-                                btn_Baja.setEnabled(true);
-                            } else {
-                                btn_Alta.setEnabled(true);
+            if (cb_Empleado.getSelectedIndex() != 0) {
+                for (Persona usuario1 : usuarios) {
+                    if (usuario1 instanceof Gestor) {
+                        Gestor usu = (Gestor) usuario1;
+                        if ((usu.getDirector().equals(usuario))) {
+                            if (usu.getFicha().getDni().equals(cb_Empleado.getSelectedItem().toString())) {
+                                tf_Nombre.setText(usu.getNombre());
+                                tf_Apellidos.setText(usu.getApellidos());
+                                tf_DNI.setText(usu.getFicha().getDni());
+                                if (usu.getEstado() instanceof Activo) {
+                                    btn_Baja.setEnabled(true);
+                                } else {
+                                    btn_Alta.setEnabled(true);
+                                }
                             }
                         }
                     }

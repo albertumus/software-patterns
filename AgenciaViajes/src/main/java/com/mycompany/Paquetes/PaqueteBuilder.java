@@ -12,6 +12,8 @@ import java.util.Date;
  */
 public abstract class PaqueteBuilder implements Cloneable, Serializable {
 
+    private static final long serialVersionUID = 6529685098267757690L;
+
     protected PaqueteVacacional paquete;
     
     public PaqueteVacacional getPaquete() {

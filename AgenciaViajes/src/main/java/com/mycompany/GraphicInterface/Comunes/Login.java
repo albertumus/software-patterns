@@ -160,10 +160,12 @@ public class Login extends javax.swing.JFrame {
                 if (usuarioActual instanceof Director) {
                     MainMenuDirector window = new MainMenuDirector(usuarios, (Director) usuarioActual);
                     window.setVisible(true);
+                    this.setVisible(false);
                 } else if ( usuarioActual instanceof Gestor) {
                     if (((Gestor) usuarioActual).getEstado() instanceof Activo){
                         MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
                         window.setVisible(true);
+                        this.setVisible(false);
                     } else {
                         OperacionErronea window = new OperacionErronea("El empleado esta de baja o desactivado");
                         window.setVisible(true);
@@ -171,6 +173,7 @@ public class Login extends javax.swing.JFrame {
                 } else if (usuarioActual instanceof Cliente) {
                     MainMenuCliente window = new MainMenuCliente((Cliente) usuarioActual);
                     window.setVisible(true);
+                    this.setVisible(false);
                 } else {
                     OperacionErronea window = new OperacionErronea("El usuario no se encuentra registrado");
                     window.setVisible(true);
@@ -183,23 +186,6 @@ public class Login extends javax.swing.JFrame {
             OperacionErronea window = new OperacionErronea("Los campos de usuario y contraseña tienen que estar completos");
             window.setVisible(true);
         }
-
-        this.setVisible(false);
-        /*if (usuarios != null ){
-            int iterator = 0;
-            while (iterator < usuarios.size()){
-                
-                iterator ++;
-            }
-        }
-        else {
-            MainMenuDirector window = new MainMenuDirector(usuarios);
-            window.setVisible(true);
-            this.setVisible(false);
-        }*/
-
-        //this.setVisible(false);
-        System.out.println("Click en boton");
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void lbl_registroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_registroMouseClicked

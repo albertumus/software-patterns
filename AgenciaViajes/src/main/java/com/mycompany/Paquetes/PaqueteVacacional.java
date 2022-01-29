@@ -12,6 +12,8 @@ import java.util.Date;
  */
 public class PaqueteVacacional implements Cloneable, Serializable {
 
+    private static final long serialVersionUID = 6529685098267757690L;
+
     public Hotel hotel;
     public Vuelo vuelo;
     public ArrayList<Extra> extras;

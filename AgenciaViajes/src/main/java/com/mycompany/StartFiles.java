@@ -30,9 +30,9 @@ public class StartFiles {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Director d1 = new Director("Superintendente", "Martinez", "dni1", "hombre", "asdasd", new Date(), "0001", 2000, "0000123", "Casado", "emaild1@email.com", "passwordd1" );
+        Director d1 = new Director("Superintendente", "Martinez", "dni1", "hombre", "asdasd", new Date(), "0001", 2000, "0000123", "Casado", "admin@admin.com", "admin" );
         Gestor g1 = new Gestor( "Gestor", "1", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado", "emailg1@email.com", "passwordg1");
-        Gestor g2 = new Gestor( "Gestor", "2", d1, "dni1", "hombre", "asdasd", new Date(), "0001", 1500, "0000123", "Casado", "emailg2@email.com", "passwordg2");
+        Gestor g2 = new Gestor( "Gestor", "2", d1, "dni1", "hombre", "asdasd", new Date(), "0002", 1500, "0000124", "Casado", "emailg2@email.com", "passwordg2");
         
         Cliente c1 = new Cliente( "Cliente A", "1", g1,"tarjeya1", "dni1", "hombre", "asdasd", new Date(), "a@a.com", "a" );
         Cliente c2 = new Cliente( "Cliente B", "2", g2,"tarjeya2", "dni1", "hombre", "asdasd", new Date(), "b@b.com", "b" );

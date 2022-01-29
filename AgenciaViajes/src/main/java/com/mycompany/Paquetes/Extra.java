@@ -12,6 +12,8 @@ import java.io.Serializable;
  * @author admin
  */
 public abstract class Extra implements Serializable {
+
+    private static final long serialVersionUID = 6529685098267757690L;
     
     public Integer precio;
 

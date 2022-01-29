@@ -8,8 +8,10 @@ import java.io.Serializable;
  * @version 1.0
  * @created 04-ene.-2022 18:37:09
  */
-public class Tarjeta implements Serializable{
+public class Tarjeta implements Serializable {
 
+private static final long serialVersionUID = 6529685098267757690L;
+    
     
     private String numeroTarjeta;
 

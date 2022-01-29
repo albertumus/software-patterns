@@ -8,8 +8,10 @@ package com.mycompany.Administracion;
 import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Ficha implements Serializable{    
+public abstract class Ficha implements Serializable {    
 
+    private static final long serialVersionUID = 6529685098267757690L;
+    
     private String dni;
     private String genero;
     private String direccion;

@@ -10,7 +10,7 @@ import java.util.Date;
  * @created 04-ene.-2022 18:37:08
  */
 public class FichaEmpleado extends Ficha implements FichaEmpleadoInterface {
-    
+     
     private String identificador;
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private Integer sueldo;
@@ -64,8 +64,13 @@ public class FichaEmpleado extends Ficha implements FichaEmpleadoInterface {
     public void setNumeroSS(String numeroSS) {
         this.numeroSS = numeroSS;
     }
-    
-    
 
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
     
 }

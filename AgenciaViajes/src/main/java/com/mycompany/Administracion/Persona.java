@@ -12,19 +12,21 @@ import java.io.Serializable;
  * @author admin
  */
 public abstract class Persona implements Serializable {
-    
+
+    private static final long serialVersionUID = 6529685098267757690L;
+
     private final String nombre;
     private final String apellidos;
     private final String email;
     private final String password;
     private final Historial historial;
-    
-    public Persona( String nombre, String apellidos, String email, String password) {
-        this.nombre     = nombre;
-        this.apellidos  = apellidos;
+
+    public Persona(String nombre, String apellidos, String email, String password) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
         this.email = email;
         this.password = password;
-        this.historial  = new Historial();
+        this.historial = new Historial();
     }
 
     public String getNombre() {
@@ -42,9 +44,9 @@ public abstract class Persona implements Serializable {
     public String getPassword() {
         return password;
     }
-    
+
     public Historial getHistorial() {
         return historial;
     }
-    
+
 }

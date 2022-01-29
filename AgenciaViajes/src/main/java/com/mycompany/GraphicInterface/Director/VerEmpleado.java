@@ -5,8 +5,13 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
+import com.mycompany.Administracion.Activo;
+import com.mycompany.Administracion.Gestor;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuario;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuarios;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
@@ -24,6 +29,7 @@ public class VerEmpleado extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
+        loadCB();
     }
 
     /**
@@ -57,8 +63,10 @@ public class VerEmpleado extends javax.swing.JFrame {
         tf_EstadoCivil = new javax.swing.JTextField();
         lbl_FechaAlta = new javax.swing.JLabel();
         tf_FechaAlta = new javax.swing.JTextField();
-        lbl_Nombre1 = new javax.swing.JLabel();
-        tf_Nombre1 = new javax.swing.JTextField();
+        lbl_ID = new javax.swing.JLabel();
+        tf_ID = new javax.swing.JTextField();
+        lbl_Email = new javax.swing.JLabel();
+        tf_Email = new javax.swing.JTextField();
 
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
@@ -124,6 +132,11 @@ public class VerEmpleado extends javax.swing.JFrame {
 
         cb_Empleado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Empleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un empleado" }));
+        cb_Empleado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_EmpleadoItemStateChanged(evt);
+            }
+        });
 
         tf_Genero.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         tf_Genero.setToolTipText("");
@@ -140,12 +153,19 @@ public class VerEmpleado extends javax.swing.JFrame {
         tf_FechaAlta.setToolTipText("");
         tf_FechaAlta.setEnabled(false);
 
-        lbl_Nombre1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lbl_Nombre1.setText("Identificador:");
+        lbl_ID.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_ID.setText("Identificador:");
 
-        tf_Nombre1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        tf_Nombre1.setToolTipText("");
-        tf_Nombre1.setEnabled(false);
+        tf_ID.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_ID.setToolTipText("");
+        tf_ID.setEnabled(false);
+
+        lbl_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Email.setText("Email:");
+
+        tf_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_Email.setToolTipText("");
+        tf_Email.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,9 +175,9 @@ public class VerEmpleado extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_Nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tf_Nombre1))
+                        .addComponent(tf_ID))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lbl_Sueldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -193,12 +213,14 @@ public class VerEmpleado extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lbl_EstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_NSS, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(lbl_FechaAlta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbl_FechaAlta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_Email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_NSS)
                             .addComponent(tf_EstadoCivil)
-                            .addComponent(tf_FechaAlta, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(tf_FechaAlta, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tf_Email, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -212,8 +234,8 @@ public class VerEmpleado extends javax.swing.JFrame {
                 .addComponent(cb_Empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbl_Nombre1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_Nombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,7 +268,11 @@ public class VerEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_EstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tf_EstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_FechaAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tf_FechaAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -263,6 +289,48 @@ public class VerEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btn_VolverActionPerformed
+
+    private void cb_EmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_EmpleadoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            tf_Apellidos.setText("");
+            tf_DNI.setText("");
+            tf_Direccion.setText("");
+            tf_Email.setText("");
+            tf_EstadoCivil.setText("");
+            tf_FechaAlta.setText("");
+            tf_Genero.setText("");
+            tf_ID.setText("");
+            tf_NSS.setText("");
+            tf_Nombre.setText("");
+            tfnd_Sueldo.setText("");
+
+            if (cb_Empleado.getSelectedIndex() != 0) {
+                for (Persona usuario1 : usuarios) {
+                    if (usuario1 instanceof Gestor) {
+                        Gestor usu = (Gestor) usuario1;
+                        if ((usu.getDirector().equals(usuario))) {
+                            if (usu.getFicha().getDni().equals(cb_Empleado.getSelectedItem().toString())) {
+                                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                                tf_Apellidos.setText(usu.getApellidos());
+                                tf_DNI.setText(usu.getFicha().getDni());
+                                tf_Direccion.setText(usu.getFicha().getDireccion());
+                                tf_Email.setText(usu.getEmail());
+                                tf_EstadoCivil.setText(usu.getFicha().getEstadoCivil());
+                                tf_FechaAlta.setText(format.format(usu.getFicha().getFechaAlta()));
+                                tf_Genero.setText(usu.getFicha().getGenero());
+                                tf_ID.setText(usu.getFicha().getIdentificador());
+                                tf_NSS.setText(usu.getFicha().getNumeroSS());
+                                tf_Nombre.setText(usu.getNombre());
+                                tfnd_Sueldo.setText(String.valueOf(usu.getFicha().getSueldo()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_EmpleadoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -312,24 +380,36 @@ public class VerEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Apellidos;
     private javax.swing.JLabel lbl_DNI;
     private javax.swing.JLabel lbl_Direccion;
+    private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_EstadoCivil;
     private javax.swing.JLabel lbl_FechaAlta;
     private javax.swing.JLabel lbl_Genero;
+    private javax.swing.JLabel lbl_ID;
     private javax.swing.JLabel lbl_Instrucciones;
     private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_NSS;
     private javax.swing.JLabel lbl_Nombre;
-    private javax.swing.JLabel lbl_Nombre1;
     private javax.swing.JLabel lbl_Sueldo;
     private javax.swing.JTextField tf_Apellidos;
     private javax.swing.JTextField tf_DNI;
     private javax.swing.JTextField tf_Direccion;
+    private javax.swing.JTextField tf_Email;
     private javax.swing.JTextField tf_EstadoCivil;
     private javax.swing.JTextField tf_FechaAlta;
     private javax.swing.JTextField tf_Genero;
+    private javax.swing.JTextField tf_ID;
     private javax.swing.JTextField tf_NSS;
     private javax.swing.JTextField tf_Nombre;
-    private javax.swing.JTextField tf_Nombre1;
     private javax.swing.JTextField tfnd_Sueldo;
     // End of variables declaration//GEN-END:variables
+
+    private void loadCB() {
+        for (Persona usuario1 : usuarios) {
+            if (usuario1 instanceof Gestor) {
+                if (((Gestor) usuario1).getDirector().equals(usuario)) {
+                    cb_Empleado.addItem(((Gestor) usuario1).getFicha().getIdentificador());
+                }
+            }
+        }
+    }
 }

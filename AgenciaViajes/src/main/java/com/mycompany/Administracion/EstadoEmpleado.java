@@ -11,7 +11,9 @@ import java.io.Serializable;
  *
  * @author admin
  */
-public abstract class EstadoEmpleado implements AccionesEmpleado, Serializable{
+public abstract class EstadoEmpleado implements AccionesEmpleado, Serializable {
+    
+    private static final long serialVersionUID = 6529685098267757690L;
     
     private Empleado empleado;
     

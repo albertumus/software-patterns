@@ -9,6 +9,8 @@ import java.io.Serializable;
  * @created 04-ene.-2022 18:37:09
  */
 public abstract class Vuelo implements Serializable {
+
+    private static final long serialVersionUID = 6529685098267757690L;
     
     Integer precio; 
         
