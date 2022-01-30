@@ -23,6 +23,7 @@ import com.mycompany.Paquetes.PaqueteVacacional;
 import com.mycompany.Paquetes.TransporteVIP;
 import com.mycompany.Paquetes.VueloClaseTurista;
 import com.mycompany.Paquetes.VueloPrimeraClase;
+import com.mycompany.Reservas.Pagado;
 import com.mycompany.Reservas.PagadoParcialmente;
 import com.mycompany.Reservas.PendientePago;
 import com.mycompany.Reservas.Reserva;
@@ -510,6 +511,12 @@ public class HistorialEmpleado extends javax.swing.JFrame {
                         reservaSeleccionada = reserva;
                         loadReservaSeleccionada(reserva);
                         enableFields(true, false);
+                        if (reserva.getEstado() instanceof Pagado){
+                            btn_CobrarCompleto.setEnabled(false);
+                            btn_CobrarParcialmente.setEnabled(false);
+                        } else if (reserva.getEstado() instanceof PagadoParcialmente){
+                            btn_CobrarParcialmente.setEnabled(false);
+                        }
                         break;
                     }
 

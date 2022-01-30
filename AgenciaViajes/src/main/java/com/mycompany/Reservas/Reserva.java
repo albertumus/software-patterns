@@ -39,7 +39,6 @@ public abstract class  Reserva implements AccionesReserva, Serializable {
         this.estado         = new PendientePago();
         this.estado.setReserva(this);
         this.cliente.getHistorial().addReserva( this );
-        this.precio = paquete.getTotalPaquete();
     }
     
     @Override
@@ -115,7 +114,7 @@ public abstract class  Reserva implements AccionesReserva, Serializable {
     }
 
     public Double getPrecio() {
-        return precio;
+        return this.getPaquete().getTotalPaquete();
     }
 
     public void setPrecio(Double precio) {
@@ -123,7 +122,7 @@ public abstract class  Reserva implements AccionesReserva, Serializable {
     }
 
     public void imprimirFactura() {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String fechaIDA = format.format(this.getPaquete().getDesde());
         String fechaVUELTA = format.format(this.getPaquete().getHasta());
         
@@ -147,7 +146,7 @@ public abstract class  Reserva implements AccionesReserva, Serializable {
             pw.println("Fecha de salida: " + format.format(this.getPaquete().getDesde()));
             pw.println("Fecha de regreso: " + format.format(this.getPaquete().getHasta()));
             pw.println("----------------------------------------------------------------------");
-            pw.println("TOTAL : " + this.getPrecio());
+            pw.println("TOTAL : " + this.getPaquete().getTotalPaquete());
             
             text.close();
 

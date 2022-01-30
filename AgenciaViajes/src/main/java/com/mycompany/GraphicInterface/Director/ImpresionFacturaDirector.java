@@ -216,6 +216,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
             empleadoSeleccionado = null;
             clienteSeleccionado = null;
             reservaSeleccionada = null;
+            btn_Imprimir.setEnabled(false);
 
             if (cb_Empleado.getSelectedIndex() != 0) {
                 for (Persona usuario1 : usuarios) {
@@ -243,6 +244,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
             cleanCBReserva();
             clienteSeleccionado = null;
             reservaSeleccionada = null;
+            btn_Imprimir.setEnabled(false);
 
             if (cb_Cliente.getSelectedIndex() != 0) {
                 for (Persona usuario1 : usuarios) {
@@ -266,6 +268,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
 
             reservaSeleccionada = null;
+            btn_Imprimir.setEnabled(false);
 
             if (cb_Reserva.getSelectedIndex() != 0) {
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -281,7 +284,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
                 for (Reserva reserva : clienteSeleccionado.getHistorial().getReservas()) {
                     if (reserva.getPaquete().getDesde().equals(fecha1) && reserva.getPaquete().getHasta().equals(fecha2)) {
                         reservaSeleccionada = reserva;
-                        
+                        btn_Imprimir.setEnabled(true);
                         break;
                     }
 
