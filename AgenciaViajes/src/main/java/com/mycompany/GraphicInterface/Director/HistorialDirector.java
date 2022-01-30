@@ -46,7 +46,7 @@ public class HistorialDirector extends javax.swing.JFrame {
      */
     private Empleado empleadoSeleccionado;
     private Cliente clienteSeleccionado;
-    private Object reservaSeleccionada;
+    private Reserva reservaSeleccionada;
 
     public HistorialDirector() {
         initComponents();
