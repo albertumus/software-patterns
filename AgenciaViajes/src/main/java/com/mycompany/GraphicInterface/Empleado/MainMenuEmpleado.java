@@ -5,6 +5,7 @@
  */
 package com.mycompany.GraphicInterface.Empleado;
 
+import com.mycompany.Administracion.Gestor;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.Login;
 import com.mycompany.GraphicInterface.DirectorEmpleado.CrearPaqueteTuristico;
@@ -20,13 +21,15 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form MainMenuEmpleado
      */
-    private static ArrayList<Persona> usuarios;
-    public MainMenuEmpleado(ArrayList<Persona> usuarios) {
+    protected static ArrayList<Persona> usuarios;
+    protected static Gestor usuario;
+    public MainMenuEmpleado(ArrayList<Persona> usuarios, Gestor usuarioActual) {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
-        this.usuarios = usuarios;
+        MainMenuEmpleado.usuarios = usuarios;
+        MainMenuEmpleado.usuario = usuarioActual;
     }
 
     /**
@@ -179,7 +182,7 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenuEmpleado(usuarios).setVisible(true);
+                new MainMenuEmpleado(usuarios, usuario).setVisible(true);
             }
         });
     }

@@ -55,7 +55,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
         lbl_Instrucciones2 = new javax.swing.JLabel();
         lbl_DNI1 = new javax.swing.JLabel();
         cb_Cliente = new javax.swing.JComboBox<>();
-        btn_CobrarCompleto = new javax.swing.JButton();
+        btn_Imprimir = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
         lbl_Instrucciones3 = new javax.swing.JLabel();
         lbl_Reserva = new javax.swing.JLabel();
@@ -93,12 +93,12 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
             }
         });
 
-        btn_CobrarCompleto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_CobrarCompleto.setText("Imprimir Factura");
-        btn_CobrarCompleto.setEnabled(false);
-        btn_CobrarCompleto.addActionListener(new java.awt.event.ActionListener() {
+        btn_Imprimir.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_Imprimir.setText("Imprimir Factura");
+        btn_Imprimir.setEnabled(false);
+        btn_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CobrarCompletoActionPerformed(evt);
+                btn_ImprimirActionPerformed(evt);
             }
         });
 
@@ -133,7 +133,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btn_CobrarCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +181,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
                     .addComponent(lbl_Reserva)
                     .addComponent(cb_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_CobrarCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -191,12 +191,12 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_CobrarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarCompletoActionPerformed
+    private void btn_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImprimirActionPerformed
         // TODO add your handling code here:
         reservaSeleccionada.imprimirFactura();
         ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha impreso la factura correctamente");
         window.setVisible(true);
-    }//GEN-LAST:event_btn_CobrarCompletoActionPerformed
+    }//GEN-LAST:event_btn_ImprimirActionPerformed
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
         // TODO add your handling code here:
@@ -240,6 +240,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
 
             cb_Reserva.setEnabled(false);
             cb_Reserva.setSelectedIndex(0);
+            cleanCBReserva();
             clienteSeleccionado = null;
             reservaSeleccionada = null;
 
@@ -325,7 +326,7 @@ public class ImpresionFacturaDirector extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_CobrarCompleto;
+    private javax.swing.JButton btn_Imprimir;
     private javax.swing.JButton btn_Volver;
     private javax.swing.JComboBox<String> cb_Cliente;
     private javax.swing.JComboBox<String> cb_Empleado;

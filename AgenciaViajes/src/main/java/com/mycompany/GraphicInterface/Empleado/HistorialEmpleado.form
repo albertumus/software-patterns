@@ -22,72 +22,81 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btn_CobrarCompleto" min="-2" pref="209" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btn_CobrarParcialmente" min="-2" pref="208" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cb_Desayuno" max="32767" attributes="0"/>
-                          <Component id="cb_Masaje" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="cb_SPA" max="32767" attributes="0"/>
-                          <Component id="cb_TransporteVIP" alignment="0" pref="200" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="lbl_Logo" max="32767" attributes="0"/>
-                  <Component id="lbl_Instrucciones1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbl_DNI1" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cb_DNI" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="lbl_Instrucciones7" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="ftf_FechaInicio" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="ftf_FechaInicio1" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbl_FechaInicio" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lbl_FechaFin" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="lbl_Instrucciones2" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbl_Reserva" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cb_Reserva" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="lbl_Instrucciones3" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lbl_Vuelo" max="32767" attributes="0"/>
-                          <Component id="lbl_Hotel2" pref="200" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_DNI1" min="-2" pref="200" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cb_Hotel2" min="-2" pref="217" max="-2" attributes="0"/>
+                              <Component id="cb_Cliente" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="cb_Vuelo" max="32767" attributes="0"/>
+                              <Component id="lbl_Reserva" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cb_Reserva" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cb_Masaje" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cb_Desayuno" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btn_CobrarCompleto" alignment="0" pref="209" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_CobrarParcialmente" min="-2" pref="208" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btn_Borrar" min="-2" pref="209" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btn_Modificar" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbl_Logo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbl_Instrucciones1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbl_Instrucciones7" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="ftf_FechaInicio" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="ftf_FechaFin" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_FechaInicio" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lbl_FechaFin" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lbl_Instrucciones2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lbl_Instrucciones3" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lbl_Vuelo" max="32767" attributes="0"/>
+                                  <Component id="lbl_Hotel" pref="200" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="cb_Hotel" min="-2" pref="217" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="cb_Vuelo" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btn_Borrar" min="-2" pref="209" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_Modificar" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btn_Volver" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="cb_TransporteVIP" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="cb_SPA" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btn_Volver" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,7 +110,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbl_DNI1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cb_DNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbl_Instrucciones2" min="-2" max="-2" attributes="0"/>
@@ -120,12 +129,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ftf_FechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ftf_FechaInicio1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ftf_FechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_Hotel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cb_Hotel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_Hotel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_Hotel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -134,7 +143,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbl_Instrucciones7" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cb_Desayuno" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cb_SPA" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -184,7 +193,7 @@
         <Property name="text" type="java.lang.String" value="DNI:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cb_DNI">
+    <Component class="javax.swing.JComboBox" name="cb_Cliente">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -195,6 +204,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_ClienteItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -225,7 +237,11 @@
             <StringItem index="0" value="Seleccione un cliente"/>
           </StringArray>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_ReservaItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -241,6 +257,7 @@
     <Component class="javax.swing.JFormattedTextField" name="ftf_FechaInicio">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_FechaFin">
@@ -251,12 +268,13 @@
         <Property name="text" type="java.lang.String" value="Fecha Regreso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="ftf_FechaInicio1">
+    <Component class="javax.swing.JFormattedTextField" name="ftf_FechaFin">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_Hotel2">
+    <Component class="javax.swing.JLabel" name="lbl_Hotel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -264,7 +282,7 @@
         <Property name="text" type="java.lang.String" value="Estrellas del Hotel:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cb_Hotel2">
+    <Component class="javax.swing.JComboBox" name="cb_Hotel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -288,7 +306,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tipo de vuelo;"/>
+        <Property name="text" type="java.lang.String" value="Tipo de vuelo:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cb_Vuelo">
@@ -323,6 +341,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Desayuno"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cb_SPA">
@@ -331,6 +350,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="SPA"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cb_TransporteVIP">
@@ -339,6 +359,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Transporte VIP"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cb_Masaje">
@@ -347,6 +368,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Masaje"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_Instrucciones3">
@@ -363,6 +385,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cobro Completo"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CobrarCompletoActionPerformed"/>
@@ -385,6 +408,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cobro Parcial"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CobrarParcialmenteActionPerformed"/>
@@ -396,6 +420,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ModificarActionPerformed"/>
@@ -407,6 +432,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Borrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BorrarActionPerformed"/>

@@ -163,7 +163,7 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                 } else if ( usuarioActual instanceof Gestor) {
                     if (((Gestor) usuarioActual).getEstado() instanceof Activo){
-                        MainMenuEmpleado window = new MainMenuEmpleado(usuarios);
+                        MainMenuEmpleado window = new MainMenuEmpleado(usuarios, (Gestor) usuarioActual);
                         window.setVisible(true);
                         this.setVisible(false);
                     } else {

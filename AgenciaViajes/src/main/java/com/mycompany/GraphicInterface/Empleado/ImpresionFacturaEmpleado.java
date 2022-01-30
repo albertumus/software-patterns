@@ -5,7 +5,15 @@
  */
 package com.mycompany.GraphicInterface.Empleado;
 
+import com.mycompany.Administracion.Cliente;
+import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+import static com.mycompany.GraphicInterface.Empleado.MainMenuEmpleado.usuario;
+import static com.mycompany.GraphicInterface.Empleado.MainMenuEmpleado.usuarios;
+import com.mycompany.Reservas.Reserva;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 
 /**
@@ -14,6 +22,8 @@ import javax.swing.ImageIcon;
  */
 public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
 
+    private Cliente clienteSeleccionado;
+    private Reserva reservaSeleccionada;
     /**
      * Creates new form ImpresionFactura
      */
@@ -22,6 +32,7 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
+        loadCBClientes();
     }
 
     /**
@@ -36,7 +47,7 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
         lbl_Logo = new javax.swing.JLabel();
         lbl_Instrucciones1 = new javax.swing.JLabel();
         lbl_DNI1 = new javax.swing.JLabel();
-        cb_DNI = new javax.swing.JComboBox<>();
+        cb_Cliente = new javax.swing.JComboBox<>();
         lbl_Instrucciones2 = new javax.swing.JLabel();
         lbl_Reserva = new javax.swing.JLabel();
         cb_Reserva = new javax.swing.JComboBox<>();
@@ -52,8 +63,13 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
         lbl_DNI1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_DNI1.setText("DNI:");
 
-        cb_DNI.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_DNI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Cliente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        cb_Cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Cliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_ClienteItemStateChanged(evt);
+            }
+        });
 
         lbl_Instrucciones2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones2.setText("2. Seleccione la reserva que quieras imprimir:");
@@ -63,6 +79,12 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
 
         cb_Reserva.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Reserva.setEnabled(false);
+        cb_Reserva.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_ReservaItemStateChanged(evt);
+            }
+        });
 
         btn_Volver.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Volver.setText("Volver");
@@ -74,6 +96,7 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
 
         btn_Imprimir.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Imprimir.setText("Imprimir Factura");
+        btn_Imprimir.setEnabled(false);
         btn_Imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ImprimirActionPerformed(evt);
@@ -92,7 +115,7 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_DNI1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cb_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbl_Instrucciones2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,7 +135,7 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_DNI1)
-                    .addComponent(cb_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbl_Instrucciones2)
                 .addGap(18, 18, 18)
@@ -131,15 +154,69 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btn_VolverActionPerformed
 
     private void btn_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ImprimirActionPerformed
-        // TODO add your handling code here:
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha impreso la factura");
+        reservaSeleccionada.imprimirFactura();
+        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha impreso la factura correctamente");
         window.setVisible(true);
     }//GEN-LAST:event_btn_ImprimirActionPerformed
+
+    private void cb_ClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ClienteItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            cb_Reserva.setEnabled(false);
+            cb_Reserva.setSelectedIndex(0);
+            cleanCBReserva();
+            clienteSeleccionado = null;
+            reservaSeleccionada = null;
+
+            if (cb_Cliente.getSelectedIndex() != 0) {
+                for (Persona usuario1 : usuarios) {
+                    if (usuario1 instanceof Cliente) {
+                        Cliente usu = (Cliente) usuario1;
+                        if (usu.getFicha().getDni().equals(cb_Cliente.getSelectedItem().toString())) {
+                            clienteSeleccionado = usu;
+                            cb_Reserva.setEnabled(true);
+                            loadCBReservas();
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_ClienteItemStateChanged
+
+    private void cb_ReservaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ReservaItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            reservaSeleccionada = null;
+
+            if (cb_Reserva.getSelectedIndex() != 0) {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                String[] parts = cb_Reserva.getSelectedItem().toString().split("-");
+                Date fecha1 = null;
+                Date fecha2 = null;
+                try {
+                    fecha1 = format.parse(parts[0]);
+                    fecha2 = format.parse(parts[1]);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                for (Reserva reserva : clienteSeleccionado.getHistorial().getReservas()) {
+                    if (reserva.getPaquete().getDesde().equals(fecha1) && reserva.getPaquete().getHasta().equals(fecha2)) {
+                        reservaSeleccionada = reserva;
+                        
+                        break;
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_ReservaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -180,7 +257,7 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Imprimir;
     private javax.swing.JButton btn_Volver;
-    private javax.swing.JComboBox<String> cb_DNI;
+    private javax.swing.JComboBox<String> cb_Cliente;
     private javax.swing.JComboBox<String> cb_Reserva;
     private javax.swing.JLabel lbl_DNI1;
     private javax.swing.JLabel lbl_Instrucciones1;
@@ -188,4 +265,23 @@ public class ImpresionFacturaEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_Reserva;
     // End of variables declaration//GEN-END:variables
+
+    private void loadCBReservas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        for (Reserva reserva : clienteSeleccionado.getHistorial().getReservas()) {
+            cb_Reserva.addItem(format.format(reserva.getPaquete().getDesde()) + "-" + format.format(reserva.getPaquete().getHasta()));
+        }
+    }
+
+    private void loadCBClientes() {
+        for (Cliente cliente : usuario.getFicha().getClientes()) {
+            cb_Cliente.addItem(cliente.getFicha().getDni());
+        }
+    }
+
+    private void cleanCBReserva() {
+        for (int i = 1; i < cb_Reserva.getItemCount(); i++) {
+            cb_Reserva.removeItemAt(i);
+        }
+    }
 }
