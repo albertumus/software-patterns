@@ -312,7 +312,7 @@ public class VerEmpleado extends javax.swing.JFrame {
                         Gestor usu = (Gestor) usuario1;
                         if ((usu.getDirector().equals(usuario))) {
                             if (usu.getFicha().getDni().equals(cb_Empleado.getSelectedItem().toString())) {
-                                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                                 tf_Apellidos.setText(usu.getApellidos());
                                 tf_DNI.setText(usu.getFicha().getDni());
                                 tf_Direccion.setText(usu.getFicha().getDireccion());

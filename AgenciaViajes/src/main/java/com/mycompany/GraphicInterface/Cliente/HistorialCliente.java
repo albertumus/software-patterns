@@ -321,7 +321,7 @@ public class HistorialCliente extends javax.swing.JFrame {
                     btn_PagarParcialmente.setEnabled(true);
                 } else if (reserva.getEstado() instanceof PagadoParcialmente) btn_PagarCompleto.setEnabled(true);
                 
-                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 ftf_FechaFin.setText(format.format(paqueteReserva.getHasta()));
                 ftf_FechaInicio.setText(format.format(paqueteReserva.getDesde()));
                 if (paqueteReserva.getHotel() instanceof HotelCincoEstrellas) {
@@ -417,10 +417,10 @@ public class HistorialCliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadComboReservas() {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         usuarioActual.getHistorial().getReservas().forEach(reserva -> {
-            cb_Reserva.addItem(format.format(reserva.getPaquete().getDesde()) + " - " + format.format(reserva.getPaquete().getHasta()));
+            cb_Reserva.addItem(format.format(reserva.getPaquete().getDesde()) + "-" + format.format(reserva.getPaquete().getHasta()));
         });
     }
 

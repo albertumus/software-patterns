@@ -33,7 +33,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_DNI2" min="-2" pref="173" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cb_DNI1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cb_Empleado" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lbl_Instrucciones2" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -51,13 +51,13 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_DNI1" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="cb_DNI" min="-2" pref="244" max="-2" attributes="0"/>
+                          <Component id="cb_Cliente" min="-2" pref="244" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lbl_Instrucciones5" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="ftf_FechaInicio" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ftf_FechaInicio1" max="32767" attributes="0"/>
+                          <Component id="ftf_FechaFin" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lbl_FechaInicio" min="-2" pref="200" max="-2" attributes="0"/>
@@ -73,12 +73,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="lbl_Vuelo" max="32767" attributes="0"/>
-                              <Component id="lbl_Hotel2" pref="200" max="32767" attributes="0"/>
+                              <Component id="lbl_Hotel" pref="200" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cb_Hotel2" min="-2" pref="217" max="-2" attributes="0"/>
+                                  <Component id="cb_Hotel" min="-2" pref="217" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -109,14 +109,14 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbl_DNI2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cb_DNI1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_Empleado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbl_Instrucciones2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbl_DNI1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cb_DNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbl_Instrucciones3" min="-2" max="-2" attributes="0"/>
@@ -135,12 +135,12 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ftf_FechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ftf_FechaInicio1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ftf_FechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbl_Hotel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cb_Hotel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_Hotel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_Hotel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -199,7 +199,7 @@
         <Property name="text" type="java.lang.String" value="DNI:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cb_DNI1">
+    <Component class="javax.swing.JComboBox" name="cb_Empleado">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -210,6 +210,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_EmpleadoItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -230,7 +233,7 @@
         <Property name="text" type="java.lang.String" value="DNI:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cb_DNI">
+    <Component class="javax.swing.JComboBox" name="cb_Cliente">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -240,7 +243,11 @@
             <StringItem index="0" value="Seleccione un cliente"/>
           </StringArray>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_ClienteItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -268,10 +275,14 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="Seleccione un cliente"/>
+            <StringItem index="0" value="Seleccione una reserva"/>
           </StringArray>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_ReservaItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -295,6 +306,7 @@
     <Component class="javax.swing.JFormattedTextField" name="ftf_FechaInicio">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_FechaFin">
@@ -305,12 +317,13 @@
         <Property name="text" type="java.lang.String" value="Fecha Regreso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="ftf_FechaInicio1">
+    <Component class="javax.swing.JFormattedTextField" name="ftf_FechaFin">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl_Hotel2">
+    <Component class="javax.swing.JLabel" name="lbl_Hotel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -318,7 +331,7 @@
         <Property name="text" type="java.lang.String" value="Estrellas del Hotel:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cb_Hotel2">
+    <Component class="javax.swing.JComboBox" name="cb_Hotel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="0"/>
@@ -377,6 +390,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Desayuno"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cb_SPA">
@@ -385,6 +399,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="SPA"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cb_TransporteVIP">
@@ -393,6 +408,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Transporte VIP"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cb_Masaje">
@@ -401,7 +417,32 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Masaje"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_CobrarCompleto">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cobro Completo"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CobrarCompletoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_CobrarParcialmente">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cobro Parcial"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CobrarParcialmenteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_Borrar">
       <Properties>
@@ -409,6 +450,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Borrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_BorrarActionPerformed"/>
@@ -420,6 +462,7 @@
           <Font name="Helvetica Neue" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ModificarActionPerformed"/>
@@ -434,28 +477,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_VolverActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_CobrarCompleto">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Helvetica Neue" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Cobro Completo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CobrarCompletoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btn_CobrarParcialmente">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Helvetica Neue" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Cobro Parcial"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CobrarParcialmenteActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -174,7 +174,7 @@ public class ImpresionFacturaCliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadComboReservas() {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         usuarioActual.getHistorial().getReservas().forEach(reserva -> {
             cb_Reserva.addItem(format.format(reserva.getPaquete().getDesde()) + " - " + format.format(reserva.getPaquete().getHasta()));

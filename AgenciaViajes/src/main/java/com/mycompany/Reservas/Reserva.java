@@ -123,11 +123,11 @@ public abstract class  Reserva implements AccionesReserva, Serializable {
     }
 
     public void imprimirFactura() {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String fechaIDA = format.format(this.getPaquete().getDesde());
         String fechaVUELTA = format.format(this.getPaquete().getHasta());
         
-        String Ach_Text = "./Facturas/Factura-"+ this.getCliente().getFicha().getDni() + "-" + fechaIDA + "-" + fechaVUELTA +".txt";
+        String Ach_Text = "./Facturas/Factura-"+ this.getCliente().getFicha().getDni() + "_" + fechaIDA + "_" + fechaVUELTA +".txt";
         
         
         try {

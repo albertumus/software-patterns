@@ -5,8 +5,34 @@
  */
 package com.mycompany.GraphicInterface.Director;
 
+import com.mycompany.Administracion.Cliente;
+import com.mycompany.Administracion.Director;
+import com.mycompany.Administracion.Empleado;
+import com.mycompany.Administracion.Gestor;
+import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
-import com.mycompany.GraphicInterface.DirectorEmpleado.*;
+import static com.mycompany.GraphicInterface.Comunes.Login.loadUsers;
+import static com.mycompany.GraphicInterface.Comunes.Login.saveUsers;
+import com.mycompany.GraphicInterface.Comunes.OperacionErronea;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuario;
+import static com.mycompany.GraphicInterface.Director.MainMenuDirector.usuarios;
+import com.mycompany.Paquetes.CircuitoSPA;
+import com.mycompany.Paquetes.Extra;
+import com.mycompany.Paquetes.HotelCincoEstrellas;
+import com.mycompany.Paquetes.HotelCuatroEstrellas;
+import com.mycompany.Paquetes.HotelTresEstrellas;
+import com.mycompany.Paquetes.Masaje;
+import com.mycompany.Paquetes.PaqueteVacacional;
+import com.mycompany.Paquetes.TransporteVIP;
+import com.mycompany.Paquetes.VueloClaseTurista;
+import com.mycompany.Paquetes.VueloPrimeraClase;
+import com.mycompany.Reservas.PagadoParcialmente;
+import com.mycompany.Reservas.PendientePago;
+import com.mycompany.Reservas.Reserva;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,11 +44,16 @@ public class HistorialDirector extends javax.swing.JFrame {
     /**
      * Creates new form HistorialEmpleado
      */
+    private Empleado empleadoSeleccionado;
+    private Cliente clienteSeleccionado;
+    private Object reservaSeleccionada;
+
     public HistorialDirector() {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
+        loadCBEmpleados();
     }
 
     /**
@@ -37,10 +68,10 @@ public class HistorialDirector extends javax.swing.JFrame {
         lbl_Logo = new javax.swing.JLabel();
         lbl_Instrucciones1 = new javax.swing.JLabel();
         lbl_DNI2 = new javax.swing.JLabel();
-        cb_DNI1 = new javax.swing.JComboBox<>();
+        cb_Empleado = new javax.swing.JComboBox<>();
         lbl_Instrucciones2 = new javax.swing.JLabel();
         lbl_DNI1 = new javax.swing.JLabel();
-        cb_DNI = new javax.swing.JComboBox<>();
+        cb_Cliente = new javax.swing.JComboBox<>();
         lbl_Instrucciones3 = new javax.swing.JLabel();
         lbl_Reserva = new javax.swing.JLabel();
         cb_Reserva = new javax.swing.JComboBox<>();
@@ -48,9 +79,9 @@ public class HistorialDirector extends javax.swing.JFrame {
         lbl_FechaInicio = new javax.swing.JLabel();
         ftf_FechaInicio = new javax.swing.JFormattedTextField();
         lbl_FechaFin = new javax.swing.JLabel();
-        ftf_FechaInicio1 = new javax.swing.JFormattedTextField();
-        lbl_Hotel2 = new javax.swing.JLabel();
-        cb_Hotel2 = new javax.swing.JComboBox<>();
+        ftf_FechaFin = new javax.swing.JFormattedTextField();
+        lbl_Hotel = new javax.swing.JLabel();
+        cb_Hotel = new javax.swing.JComboBox<>();
         lbl_Vuelo = new javax.swing.JLabel();
         cb_Vuelo = new javax.swing.JComboBox<>();
         lbl_Instrucciones5 = new javax.swing.JLabel();
@@ -58,11 +89,11 @@ public class HistorialDirector extends javax.swing.JFrame {
         cb_SPA = new javax.swing.JCheckBox();
         cb_TransporteVIP = new javax.swing.JCheckBox();
         cb_Masaje = new javax.swing.JCheckBox();
+        btn_CobrarCompleto = new javax.swing.JButton();
+        btn_CobrarParcialmente = new javax.swing.JButton();
         btn_Borrar = new javax.swing.JButton();
         btn_Modificar = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
-        btn_CobrarCompleto = new javax.swing.JButton();
-        btn_CobrarParcialmente = new javax.swing.JButton();
 
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
@@ -73,8 +104,13 @@ public class HistorialDirector extends javax.swing.JFrame {
         lbl_DNI2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_DNI2.setText("DNI:");
 
-        cb_DNI1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_DNI1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un empleado" }));
+        cb_Empleado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        cb_Empleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un empleado" }));
+        cb_Empleado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_EmpleadoItemStateChanged(evt);
+            }
+        });
 
         lbl_Instrucciones2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones2.setText("2. Seleccione el DNI del Cliente:");
@@ -82,8 +118,14 @@ public class HistorialDirector extends javax.swing.JFrame {
         lbl_DNI1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_DNI1.setText("DNI:");
 
-        cb_DNI.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_DNI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Cliente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        cb_Cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Cliente.setEnabled(false);
+        cb_Cliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_ClienteItemStateChanged(evt);
+            }
+        });
 
         lbl_Instrucciones3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones3.setText("3. Seleccione la reserva que quieras ver:");
@@ -92,7 +134,13 @@ public class HistorialDirector extends javax.swing.JFrame {
         lbl_Reserva.setText("Reserva:");
 
         cb_Reserva.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una reserva" }));
+        cb_Reserva.setEnabled(false);
+        cb_Reserva.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_ReservaItemStateChanged(evt);
+            }
+        });
 
         lbl_Instrucciones4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones4.setText("Detalles de la reserva:");
@@ -101,18 +149,20 @@ public class HistorialDirector extends javax.swing.JFrame {
         lbl_FechaInicio.setText("Fecha Salida");
 
         ftf_FechaInicio.setToolTipText("");
+        ftf_FechaInicio.setEnabled(false);
 
         lbl_FechaFin.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_FechaFin.setText("Fecha Regreso");
 
-        ftf_FechaInicio1.setToolTipText("");
+        ftf_FechaFin.setToolTipText("");
+        ftf_FechaFin.setEnabled(false);
 
-        lbl_Hotel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lbl_Hotel2.setText("Estrellas del Hotel:");
+        lbl_Hotel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Hotel.setText("Estrellas del Hotel:");
 
-        cb_Hotel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_Hotel2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un hotel", "Hotel 5 estrellas", "Hotel 4 estrellas", "Hotel 3 estrellas" }));
-        cb_Hotel2.setEnabled(false);
+        cb_Hotel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        cb_Hotel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un hotel", "Hotel 5 estrellas", "Hotel 4 estrellas", "Hotel 3 estrellas" }));
+        cb_Hotel.setEnabled(false);
 
         lbl_Vuelo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Vuelo.setText("Tipo de vuelo;");
@@ -126,18 +176,41 @@ public class HistorialDirector extends javax.swing.JFrame {
 
         cb_Desayuno.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Desayuno.setText("Desayuno");
+        cb_Desayuno.setEnabled(false);
 
         cb_SPA.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_SPA.setText("SPA");
+        cb_SPA.setEnabled(false);
 
         cb_TransporteVIP.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_TransporteVIP.setText("Transporte VIP");
+        cb_TransporteVIP.setEnabled(false);
 
         cb_Masaje.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Masaje.setText("Masaje");
+        cb_Masaje.setEnabled(false);
+
+        btn_CobrarCompleto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_CobrarCompleto.setText("Cobro Completo");
+        btn_CobrarCompleto.setEnabled(false);
+        btn_CobrarCompleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CobrarCompletoActionPerformed(evt);
+            }
+        });
+
+        btn_CobrarParcialmente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        btn_CobrarParcialmente.setText("Cobro Parcial");
+        btn_CobrarParcialmente.setEnabled(false);
+        btn_CobrarParcialmente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CobrarParcialmenteActionPerformed(evt);
+            }
+        });
 
         btn_Borrar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Borrar.setText("Borrar");
+        btn_Borrar.setEnabled(false);
         btn_Borrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_BorrarActionPerformed(evt);
@@ -146,6 +219,7 @@ public class HistorialDirector extends javax.swing.JFrame {
 
         btn_Modificar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Modificar.setText("Modificar");
+        btn_Modificar.setEnabled(false);
         btn_Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ModificarActionPerformed(evt);
@@ -157,22 +231,6 @@ public class HistorialDirector extends javax.swing.JFrame {
         btn_Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_VolverActionPerformed(evt);
-            }
-        });
-
-        btn_CobrarCompleto.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_CobrarCompleto.setText("Cobro Completo");
-        btn_CobrarCompleto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CobrarCompletoActionPerformed(evt);
-            }
-        });
-
-        btn_CobrarParcialmente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        btn_CobrarParcialmente.setText("Cobro Parcial");
-        btn_CobrarParcialmente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CobrarParcialmenteActionPerformed(evt);
             }
         });
 
@@ -192,7 +250,7 @@ public class HistorialDirector extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lbl_DNI2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(cb_DNI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_Empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lbl_Instrucciones2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -206,12 +264,12 @@ public class HistorialDirector extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lbl_DNI1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(18, 18, 18)
-                            .addComponent(cb_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lbl_Instrucciones5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(ftf_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(ftf_FechaInicio1))
+                            .addComponent(ftf_FechaFin))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(lbl_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
@@ -224,11 +282,11 @@ public class HistorialDirector extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lbl_Vuelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_Hotel2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                                .addComponent(lbl_Hotel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(18, 18, 18)
-                                    .addComponent(cb_Hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cb_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(18, 18, 18)
                                     .addComponent(cb_Vuelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -250,13 +308,13 @@ public class HistorialDirector extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_DNI2)
-                    .addComponent(cb_DNI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_Empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbl_Instrucciones2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_DNI1)
-                    .addComponent(cb_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbl_Instrucciones3)
                 .addGap(18, 18, 18)
@@ -272,11 +330,11 @@ public class HistorialDirector extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ftf_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ftf_FechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftf_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Hotel2)
-                    .addComponent(cb_Hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_Hotel)
+                    .addComponent(cb_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Vuelo)
@@ -310,32 +368,217 @@ public class HistorialDirector extends javax.swing.JFrame {
 
     private void btn_CobrarCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarCompletoActionPerformed
         // TODO add your handling code here:
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el cobro completo");
-        window.setVisible(true);
+        for (Persona persona : usuarios) {
+            if (persona.equals(clienteSeleccionado)) {
+                Cliente c = (Cliente) persona;
+                System.out.println("CLIENTE ENCONTRADO");
+                for (Reserva reserva : c.getHistorial().getReservas()) {
+                    if (reserva.equals(reservaSeleccionada)) {
+                        System.out.println("RESERVA ENCONTRADA");
+                        reserva.getEstado().pagar();
+                        btn_CobrarCompleto.setEnabled(false);
+                        btn_CobrarParcialmente.setEnabled(false);
+                        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el cobro completo");
+                        window.setVisible(true);
+                        saveUsers();
+                        loadUsers();
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }//GEN-LAST:event_btn_CobrarCompletoActionPerformed
 
     private void btn_CobrarParcialmenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CobrarParcialmenteActionPerformed
         // TODO add your handling code here:
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el cobro completo");
-        window.setVisible(true);
+        for (Persona persona : usuarios) {
+            if (persona.equals(clienteSeleccionado)) {
+                Cliente c = (Cliente) persona;
+                System.out.println("CLIENTE ENCONTRADO");
+                for (Reserva reserva : c.getHistorial().getReservas()) {
+                    if (reserva.equals(reservaSeleccionada)) {
+                        System.out.println("RESERVA ENCONTRADA");
+                        reserva.getEstado().pagarParcialmente();
+                        btn_CobrarParcialmente.setEnabled(false);
+                        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado el cobro parcial");
+                        window.setVisible(true);
+                        saveUsers();
+                        loadUsers();
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }//GEN-LAST:event_btn_CobrarParcialmenteActionPerformed
 
     private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
         // TODO add your handling code here:
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha eliminado la reserva");
-        window.setVisible(true);
+        for (Persona persona : usuarios) {
+            if (persona.equals(clienteSeleccionado)) {
+                Cliente c = (Cliente) persona;
+                System.out.println("CLIENTE ENCONTRADO");
+                for (Reserva reserva : c.getHistorial().getReservas()) {
+                    if (reserva.equals(reservaSeleccionada)) {
+                        System.out.println("RESERVA ENCONTRADA");
+                        c.getHistorial().removeReserva(reserva);
+                        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha eliminado la reserva");
+                        window.setVisible(true);
+                        saveUsers();
+                        loadUsers();
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }//GEN-LAST:event_btn_BorrarActionPerformed
 
     private void btn_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ModificarActionPerformed
         // TODO add your handling code here:
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha modificado la reserva");
-        window.setVisible(true);
+        if (comprobarCamposReserva()) {
+            for (Persona persona : usuarios) {
+                if (persona.equals(clienteSeleccionado)) {
+                    Cliente c = (Cliente) persona;
+                    System.out.println("CLIENTE ENCONTRADO");
+                    for (Reserva reserva : c.getHistorial().getReservas()) {
+                        if (reserva.equals(reservaSeleccionada)) {
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                            System.out.println("RESERVA ENCONTRADA");
+                            reserva.getPaquete().setDesayuno(cb_Desayuno.isSelected());
+                            try {
+                                reserva.getPaquete().setDesde(format.parse(ftf_FechaInicio.getText()));
+                                reserva.getPaquete().setHasta(format.parse(ftf_FechaFin.getText()));
+                            } catch (ParseException ex) {}
+                            if (cb_Vuelo.getSelectedIndex() == 1){
+                                reserva.getPaquete().setVuelo(new VueloClaseTurista());
+                            } else {
+                                reserva.getPaquete().setVuelo(new VueloPrimeraClase());
+                            }
+                            switch (cb_Hotel.getSelectedIndex()) {
+                                case 1:
+                                    reserva.getPaquete().setHotel(new HotelCincoEstrellas());
+                                    break;
+                                case 2:
+                                    reserva.getPaquete().setHotel(new HotelCuatroEstrellas());
+                                    break;
+                                default:
+                                    reserva.getPaquete().setHotel(new HotelTresEstrellas());
+                                    break;
+                            }
+                            ArrayList<Extra> extras = new ArrayList();
+                            if (cb_Masaje.isSelected()) extras.add(new Masaje());
+                            if (cb_SPA.isSelected()) extras.add(new CircuitoSPA());
+                            if (cb_TransporteVIP.isSelected()) extras.add(new TransporteVIP());
+                            
+                            reserva.getPaquete().setExtras(extras);
+
+                            ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha modificado la reserva");
+                            window.setVisible(true);
+                            saveUsers();
+                            loadUsers();
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
     }//GEN-LAST:event_btn_ModificarActionPerformed
 
     private void btn_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_btn_VolverActionPerformed
+
+    private void cb_EmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_EmpleadoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            cb_Cliente.setEnabled(false);
+            cb_Cliente.setSelectedIndex(0);
+            cleanCBCliente();
+            cb_Reserva.setEnabled(false);
+            cb_Reserva.setSelectedIndex(0);
+            cleanCBReserva();
+            enableFields(false, true);
+            empleadoSeleccionado = null;
+            clienteSeleccionado = null;
+            reservaSeleccionada = null;
+
+            if (cb_Empleado.getSelectedIndex() != 0) {
+                for (Persona usuario1 : usuarios) {
+                    if (usuario1 instanceof Empleado) {
+                        Empleado usu = (Empleado) usuario1;
+                        if (usu.getFicha().getIdentificador().equals(cb_Empleado.getSelectedItem().toString())) {
+                            empleadoSeleccionado = usu;
+                            cb_Cliente.setEnabled(true);
+                            loadCBClientes();
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_EmpleadoItemStateChanged
+
+    private void cb_ClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ClienteItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            cb_Reserva.setEnabled(false);
+            cb_Reserva.setSelectedIndex(0);
+            enableFields(false, true);
+            clienteSeleccionado = null;
+            reservaSeleccionada = null;
+
+            if (cb_Cliente.getSelectedIndex() != 0) {
+                for (Persona usuario1 : usuarios) {
+                    if (usuario1 instanceof Cliente) {
+                        Cliente usu = (Cliente) usuario1;
+                        if (usu.getFicha().getDni().equals(cb_Cliente.getSelectedItem().toString())) {
+                            clienteSeleccionado = usu;
+                            cb_Reserva.setEnabled(true);
+                            loadCBReservas();
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_ClienteItemStateChanged
+
+    private void cb_ReservaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ReservaItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+
+            enableFields(false, true);
+            reservaSeleccionada = null;
+
+            if (cb_Reserva.getSelectedIndex() != 0) {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                String[] parts = cb_Reserva.getSelectedItem().toString().split("-");
+                Date fecha1 = null;
+                Date fecha2 = null;
+                try {
+                    fecha1 = format.parse(parts[0]);
+                    fecha2 = format.parse(parts[1]);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                for (Reserva reserva : clienteSeleccionado.getHistorial().getReservas()) {
+                    if (reserva.getPaquete().getDesde().equals(fecha1) && reserva.getPaquete().getHasta().equals(fecha2)) {
+                        reservaSeleccionada = reserva;
+                        loadReservaSeleccionada(reserva);
+                        enableFields(true, false);
+                        break;
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_cb_ReservaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -379,22 +622,22 @@ public class HistorialDirector extends javax.swing.JFrame {
     private javax.swing.JButton btn_CobrarParcialmente;
     private javax.swing.JButton btn_Modificar;
     private javax.swing.JButton btn_Volver;
-    private javax.swing.JComboBox<String> cb_DNI;
-    private javax.swing.JComboBox<String> cb_DNI1;
+    private javax.swing.JComboBox<String> cb_Cliente;
     private javax.swing.JCheckBox cb_Desayuno;
-    private javax.swing.JComboBox<String> cb_Hotel2;
+    private javax.swing.JComboBox<String> cb_Empleado;
+    private javax.swing.JComboBox<String> cb_Hotel;
     private javax.swing.JCheckBox cb_Masaje;
     private javax.swing.JComboBox<String> cb_Reserva;
     private javax.swing.JCheckBox cb_SPA;
     private javax.swing.JCheckBox cb_TransporteVIP;
     private javax.swing.JComboBox<String> cb_Vuelo;
+    private javax.swing.JFormattedTextField ftf_FechaFin;
     private javax.swing.JFormattedTextField ftf_FechaInicio;
-    private javax.swing.JFormattedTextField ftf_FechaInicio1;
     private javax.swing.JLabel lbl_DNI1;
     private javax.swing.JLabel lbl_DNI2;
     private javax.swing.JLabel lbl_FechaFin;
     private javax.swing.JLabel lbl_FechaInicio;
-    private javax.swing.JLabel lbl_Hotel2;
+    private javax.swing.JLabel lbl_Hotel;
     private javax.swing.JLabel lbl_Instrucciones1;
     private javax.swing.JLabel lbl_Instrucciones2;
     private javax.swing.JLabel lbl_Instrucciones3;
@@ -404,4 +647,161 @@ public class HistorialDirector extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Reserva;
     private javax.swing.JLabel lbl_Vuelo;
     // End of variables declaration//GEN-END:variables
+
+    private void loadCBEmpleados() {
+        for (Persona usuario1 : usuarios) {
+            if (usuario1 instanceof Gestor) {
+                if (((Gestor) usuario1).getDirector().equals(usuario)) {
+                    cb_Empleado.addItem(((Gestor) usuario1).getFicha().getIdentificador());
+                }
+
+            } else if (usuario1 instanceof Director) {
+                if (usuario1.equals(usuario)) {
+                    cb_Empleado.addItem(((Director) usuario1).getFicha().getIdentificador());
+                }
+            }
+        }
+    }
+
+    private void loadCBReservas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        for (Reserva reserva : clienteSeleccionado.getHistorial().getReservas()) {
+            cb_Reserva.addItem(format.format(reserva.getPaquete().getDesde()) + "-" + format.format(reserva.getPaquete().getHasta()));
+        }
+    }
+
+    private void loadCBClientes() {
+        for (Cliente cliente : empleadoSeleccionado.getFicha().getClientes()) {
+            cb_Cliente.addItem(cliente.getFicha().getDni());
+        }
+    }
+
+    private void loadReservaSeleccionada(Reserva reserva) {
+        PaqueteVacacional paqueteReserva = reserva.getPaquete();
+
+        if (reserva.getEstado() instanceof PendientePago) {
+            btn_CobrarCompleto.setEnabled(true);
+            btn_CobrarParcialmente.setEnabled(true);
+        } else if (reserva.getEstado() instanceof PagadoParcialmente) {
+            btn_CobrarCompleto.setEnabled(true);
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        ftf_FechaFin.setText(format.format(paqueteReserva.getHasta()));
+        ftf_FechaInicio.setText(format.format(paqueteReserva.getDesde()));
+        if (paqueteReserva.getHotel() instanceof HotelCincoEstrellas) {
+            cb_Hotel.setSelectedIndex(1);
+        } else if (paqueteReserva.getHotel() instanceof HotelCuatroEstrellas) {
+            cb_Hotel.setSelectedIndex(2);
+        } else if (paqueteReserva.getHotel() instanceof HotelTresEstrellas) {
+            cb_Hotel.setSelectedIndex(3);
+        }
+
+        if (paqueteReserva.getVuelo() instanceof VueloClaseTurista) {
+            cb_Vuelo.setSelectedIndex(1);
+        } else if (paqueteReserva.getVuelo() instanceof VueloPrimeraClase) {
+            cb_Vuelo.setSelectedIndex(2);
+        }
+
+        if (paqueteReserva.getDesayuno()) {
+            cb_Desayuno.setSelected(true);
+        }
+
+        for (Extra extra : paqueteReserva.getExtras()) {
+            if (extra instanceof Masaje) {
+                cb_Masaje.setSelected(true);
+            }
+            if (extra instanceof TransporteVIP) {
+                cb_TransporteVIP.setSelected(true);
+            }
+            if (extra instanceof CircuitoSPA) {
+                cb_SPA.setSelected(true);
+            }
+        }
+
+    }
+
+    private void cleanCBCliente() {
+        for (int i = 1; i < cb_Cliente.getItemCount(); i++) {
+            cb_Cliente.removeItemAt(i);
+        }
+    }
+
+    private void cleanCBReserva() {
+        for (int i = 1; i < cb_Reserva.getItemCount(); i++) {
+            cb_Reserva.removeItemAt(i);
+        }
+    }
+
+    /**
+     *
+     * @param enabled status of the components
+     * @param reset reset fields
+     */
+    private void enableFields(boolean enabled, boolean reset) {
+
+        ftf_FechaInicio.setEnabled(enabled);
+        ftf_FechaFin.setEnabled(enabled);
+        cb_Hotel.setEnabled(enabled);
+        cb_Vuelo.setEnabled(enabled);
+        cb_Desayuno.setEnabled(enabled);
+        cb_Masaje.setEnabled(enabled);
+        cb_SPA.setEnabled(enabled);
+        cb_TransporteVIP.setEnabled(enabled);
+        btn_CobrarCompleto.setEnabled(enabled);
+        btn_CobrarParcialmente.setEnabled(enabled);
+        btn_Borrar.setEnabled(enabled);
+        btn_Modificar.setEnabled(enabled);
+
+        if (reset) {
+            ftf_FechaInicio.setText("");
+            ftf_FechaFin.setText("");
+            cb_Hotel.setSelectedIndex(0);
+            cb_Vuelo.setSelectedIndex(0);
+            cb_Desayuno.setSelected(false);
+            cb_Masaje.setSelected(false);
+            cb_SPA.setSelected(false);
+            cb_TransporteVIP.setSelected(false);
+        }
+    }
+
+    private boolean comprobarCamposReserva() {
+        boolean OK = true;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String errores = "<html> Tienes los siguientes errores: <br/>";
+        if (ftf_FechaInicio.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo fecha salida no puede estar vacio <br/>");
+        }
+        if (ftf_FechaFin.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo fecha regreso no puede estar vacio <br/>");
+        }
+        if (cb_Hotel.getSelectedIndex() == 0) {
+            OK = false;
+            errores = errores.concat("Se ha de seleccionar un hotel <br/>");
+        }
+        if (cb_Vuelo.getSelectedIndex() == 0) {
+            OK = false;
+            errores = errores.concat("Se ha de seleccionar un vuelo <br/>");
+        }
+        
+        try {
+            //FECHA
+            if (ftf_FechaInicio.getText().length()==10 && ftf_FechaFin.getText().length() == 10){
+                Date fechaIDA = format.parse(ftf_FechaInicio.getText());
+                Date fechaVUELTA = format.parse(ftf_FechaFin.getText());
+            } else throw new Exception();
+        } catch (Exception e) {
+            OK = false;
+            errores = errores.concat("Los campos de fecha tienen que tener el formato dd/mm/aaaa <br/>");
+        }
+        
+        if (!OK){
+            OperacionErronea window = new OperacionErronea(errores);
+            window.setVisible(true);
+        }
+
+        return OK;
+    }
 }

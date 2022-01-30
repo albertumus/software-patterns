@@ -95,6 +95,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         rbtng_Cliente.add(rb_ClienteRegistrado);
         rb_ClienteRegistrado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        rb_ClienteRegistrado.setSelected(true);
         rb_ClienteRegistrado.setText("Cliente Registrado");
 
         rbtng_Cliente.add(rb_ClienteNuevo);
@@ -150,7 +151,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         cb_Genero.setEnabled(false);
 
         lbl_Tarjeta.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lbl_Tarjeta.setText("Sueldo:");
+        lbl_Tarjeta.setText("Tarjeta:");
 
         tf_Tarjeta.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         tf_Tarjeta.setToolTipText("");
@@ -223,19 +224,15 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         lbl_Instrucciones7.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones7.setText("Extras");
 
-        cbbtng_Extras.add(cb_Desayuno);
         cb_Desayuno.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Desayuno.setText("Desayuno");
 
-        cbbtng_Extras.add(cb_Masaje);
         cb_Masaje.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Masaje.setText("Masaje");
 
-        cbbtng_Extras.add(cb_SPA);
         cb_SPA.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_SPA.setText("SPA");
 
-        cbbtng_Extras.add(cb_TransporteVIP);
         cb_TransporteVIP.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_TransporteVIP.setText("Transporte VIP");
 
@@ -346,7 +343,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                                         .addGap(25, 25, 25)
                                         .addComponent(cb_SPA, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cb_TransporteVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(lbl_Instrucciones7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_Reservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -355,7 +352,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
