@@ -30,21 +30,29 @@ public class StartFiles {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Director d1 = new Director("Superintendente", "Martinez", "32549988C", "Hombre", "asdasd", new Date(), "32549988C", 2000, "0000123", "Casado", "admin@admin.com", "admin" );
-        Gestor g1 = new Gestor( "Gestor", "1", d1, "25086788K", "Mujer", "asdasd", new Date(), "25086788K", 1500, "0000123", "Casado", "emailg1@email.com", "passwordg1");
-        Gestor g2 = new Gestor( "Gestor", "2", d1, "10808819S", "Otro", "asdasd", new Date(), "10808819S", 1500, "0000124", "Casado", "emailg2@email.com", "passwordg2");
+        Director d1 = new Director("Antonio", "Martinez", "32549988C", "Hombre", "Calle False N1", new Date(), "32549988C", 2000, "0000001", "Casado", "antonio.martinez@traveair.com", "antonio" );
+        Gestor g1 = new Gestor( "Antonia", "Almodovar", d1, "25086788K", "Mujer", "Calle Numeral N2", new Date(), "25086788K", 1500, "0000002", "Casado", "antonia.almodovar@traveair.com", "antonia");
+        Gestor g2 = new Gestor( "Samuel", "Terron", d1, "10808819S", "Otro", "Calle Numpcial 5", new Date(), "10808819S", 1500, "0000003", "Casado", "samuel.terron@traveair.com", "samuel");
         
-        Cliente c1 = new Cliente( "Cliente A", "1", g1,"tarjeya1", "34190069V", "Hombre", "asdasd", new Date(), "a@a.com", "a" );
-        Cliente c2 = new Cliente( "Cliente B", "2", g2,"tarjeya2", "57460746F", "Hombre", "asdasd", new Date(), "b@b.com", "b" );
-        Cliente c3 = new Cliente( "Cliente C", "3", d1,"tarjeya3", "81359583G", "Hombre", "asdasd", new Date(), "c@c.com", "c" );
+        Cliente c1 = new Cliente( "Adriana", "Gonzalez", g1,"1234567890123456", "34190069V", "Mujer", "asdasd", new Date(), "adriana12@yahoo.com", "adriana" );
+        Cliente c2 = new Cliente( "Raquel", "Garcia", g2,"2345678901234567", "57460746F", "Mujer", "asdasd", new Date(), "raquelgar@hotmail.com", "raquel" );
+        Cliente c3 = new Cliente( "Raul", "Vazquez", d1,"3456789012345678", "81359583G", "Hombre", "asdasd", new Date(), "raulvazquez@gmail.com", "raul123" );
         
         ArrayList <Persona> usuarios = new ArrayList();
         
         PaqueteVacacional p1 = new FabricaPaquetePreHecho().getPaquete(0).createPaquete5Estrellas(new Date(122, 1, 1), new Date(122,1,2));
-        PaqueteVacacional p2 = new FabricaPaquetePreHecho().getPaquete(0).createPaquete5Estrellas(new Date(122, 1, 3), new Date(122,1,5));
+        PaqueteVacacional p2 = new FabricaPaquetePreHecho().getPaquete(1).createPaquete5Estrellas(new Date(122, 1, 3), new Date(122,1,5));
+        PaqueteVacacional p3 = new FabricaPaquetePreHecho().getPaquete(0).createPaquete5Estrellas(new Date(122, 1, 5), new Date(122,1,8));
+        PaqueteVacacional p4 = new FabricaPaquetePreHecho().getPaquete(1).createPaquete5Estrellas(new Date(122, 1, 7), new Date(122,1,11));
+        PaqueteVacacional p5 = new FabricaPaquetePreHecho().getPaquete(0).createPaquete5Estrellas(new Date(122, 1, 9), new Date(122,1,14));
+        PaqueteVacacional p6 = new FabricaPaquetePreHecho().getPaquete(1).createPaquete5Estrellas(new Date(122, 1, 11), new Date(122,1,25));
         
         Reserva r1 = new ReservaNormal(p1,new Date(),g1,c1);
-        Reserva r2 = new ReservaNormal(p2,new Date(),g2,c1);
+        Reserva r2 = new ReservaNormal(p2,new Date(),d1,c1);
+        Reserva r3 = new ReservaNormal(p3,new Date(),g1,c2);
+        Reserva r4 = new ReservaNormal(p4,new Date(),g2,c2);
+        Reserva r5 = new ReservaNormal(p5,new Date(),d1,c3);
+        Reserva r6 = new ReservaNormal(p6,new Date(),g2,c3);
         
         usuarios.add(d1);
         usuarios.add(g1);
