@@ -148,7 +148,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
 
     private void btn_PaqueteTuristicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PaqueteTuristicoActionPerformed
         // TODO add your handling code here:
-        CrearPaqueteTuristico window = new CrearPaqueteTuristico(usuarios);
+        CrearPaqueteTuristico window = new CrearPaqueteTuristico(usuarios, usuario);
         window.setVisible(true);
     }//GEN-LAST:event_btn_PaqueteTuristicoActionPerformed
 

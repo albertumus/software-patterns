@@ -5,9 +5,33 @@
  */
 package com.mycompany.GraphicInterface.DirectorEmpleado;
 
+import Filtros.FiltroPersonaNIF;
+import com.mycompany.Administracion.Cliente;
+import com.mycompany.Administracion.Empleado;
 import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Comunes.ConfirmacionOperacion;
+import com.mycompany.GraphicInterface.Comunes.OperacionErronea;
+import com.mycompany.Ordenaciones.EstrategiaConcretaNombre;
+import com.mycompany.Paquetes.CircuitoSPA;
+import com.mycompany.Paquetes.CreadorPaquetes;
+import com.mycompany.Paquetes.Extra;
+import com.mycompany.Paquetes.FabricaPaquetePreHecho;
+import com.mycompany.Paquetes.HotelCincoEstrellas;
+import com.mycompany.Paquetes.HotelCuatroEstrellas;
+import com.mycompany.Paquetes.HotelTresEstrellas;
+import com.mycompany.Paquetes.Masaje;
+import com.mycompany.Paquetes.PaqueteNormalBuilder;
+import com.mycompany.Paquetes.PaqueteVacacional;
+import com.mycompany.Paquetes.TransporteVIP;
+import com.mycompany.Paquetes.VueloClaseTurista;
+import com.mycompany.Paquetes.VueloPrimeraClase;
+import com.mycompany.Reservas.Reserva;
+import com.mycompany.Reservas.ReservaNormal;
+import java.awt.event.ItemEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,14 +44,17 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
      * Creates new form CrearPaqueteTuristico
      */
     private static ArrayList<Persona> usuarios;
-    public CrearPaqueteTuristico(ArrayList<Persona> usuarios) {
+    private static Empleado empleado;
+
+    public CrearPaqueteTuristico(ArrayList<Persona> usuarios, Empleado empleado) {
         initComponents();
         ImageIcon icon = new ImageIcon("./images/Logo.png");
         lbl_Logo.setIcon(icon);
         lbl_Logo.setText("");
         CrearPaqueteTuristico.usuarios = usuarios;
+        CrearPaqueteTuristico.empleado = empleado;
+        loadCBClientes();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,14 +67,13 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         rbtng_Cliente = new javax.swing.ButtonGroup();
         rbtng_Paquete = new javax.swing.ButtonGroup();
-        cbbtng_Extras = new javax.swing.ButtonGroup();
         lbl_Logo = new javax.swing.JLabel();
         lbl_Instrucciones1 = new javax.swing.JLabel();
         rb_ClienteRegistrado = new javax.swing.JRadioButton();
         rb_ClienteNuevo = new javax.swing.JRadioButton();
         lbl_Instrucciones2 = new javax.swing.JLabel();
         lbl_DNI1 = new javax.swing.JLabel();
-        cb_DNI = new javax.swing.JComboBox<>();
+        cb_Cliente = new javax.swing.JComboBox<>();
         lbl_Instrucciones3 = new javax.swing.JLabel();
         lbl_Nombre = new javax.swing.JLabel();
         tf_Nombre = new javax.swing.JTextField();
@@ -68,7 +94,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         lbl_FechaInicio = new javax.swing.JLabel();
         lbl_FechaFin = new javax.swing.JLabel();
         ftf_FechaInicio = new javax.swing.JFormattedTextField();
-        ftf_FechaInicio1 = new javax.swing.JFormattedTextField();
+        ftf_FechaFin = new javax.swing.JFormattedTextField();
         lbl_Instrucciones5 = new javax.swing.JLabel();
         lbl_Tipo = new javax.swing.JLabel();
         cb_Tipo = new javax.swing.JComboBox<>();
@@ -86,6 +112,10 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         cb_TransporteVIP = new javax.swing.JCheckBox();
         btn_Reservar = new javax.swing.JButton();
         btn_Volver = new javax.swing.JButton();
+        lbl_Email = new javax.swing.JLabel();
+        tf_Email = new javax.swing.JTextField();
+        lbl_Password = new javax.swing.JLabel();
+        tf_Password = new javax.swing.JTextField();
 
         lbl_Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Logo.setText("logo");
@@ -97,10 +127,20 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         rb_ClienteRegistrado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         rb_ClienteRegistrado.setSelected(true);
         rb_ClienteRegistrado.setText("Cliente Registrado");
+        rb_ClienteRegistrado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_ClienteRegistradoItemStateChanged(evt);
+            }
+        });
 
         rbtng_Cliente.add(rb_ClienteNuevo);
         rb_ClienteNuevo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         rb_ClienteNuevo.setText("Nuevo Cliente");
+        rb_ClienteNuevo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_ClienteNuevoItemStateChanged(evt);
+            }
+        });
 
         lbl_Instrucciones2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones2.setText("Cliente Registrado:");
@@ -108,9 +148,13 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         lbl_DNI1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_DNI1.setText("DNI:");
 
-        cb_DNI.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_DNI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
-        cb_DNI.setEnabled(false);
+        cb_Cliente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        cb_Cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cliente" }));
+        cb_Cliente.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_ClienteItemStateChanged(evt);
+            }
+        });
 
         lbl_Instrucciones3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones3.setText("Alta de Cliente:");
@@ -159,6 +203,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         btn_Comprobar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Comprobar.setText("Comprobar");
+        btn_Comprobar.setEnabled(false);
         btn_Comprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ComprobarActionPerformed(evt);
@@ -172,10 +217,20 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         rb_PaquetePrehecho.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         rb_PaquetePrehecho.setSelected(true);
         rb_PaquetePrehecho.setText("Paquete Prehecho");
+        rb_PaquetePrehecho.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_PaquetePrehechoItemStateChanged(evt);
+            }
+        });
 
         rbtng_Paquete.add(rb_PaquetePersonalizado);
         rb_PaquetePersonalizado.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         rb_PaquetePersonalizado.setText("Paquete Personalizado");
+        rb_PaquetePersonalizado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_PaquetePersonalizadoItemStateChanged(evt);
+            }
+        });
 
         lbl_FechaInicio.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_FechaInicio.setText("Fecha Salida");
@@ -185,7 +240,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         ftf_FechaInicio.setToolTipText("");
 
-        ftf_FechaInicio1.setToolTipText("");
+        ftf_FechaFin.setToolTipText("");
 
         lbl_Instrucciones5.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones5.setText("Paquetes Prehechos:");
@@ -194,15 +249,13 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         lbl_Tipo.setText("Tipo de paquete:");
 
         cb_Tipo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        cb_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Paquete Ahorro", "PaqueteLujo" }));
-        cb_Tipo.setEnabled(false);
+        cb_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Paquete Ahorro", "Paquete Lujo" }));
 
         lbl_Hotel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Hotel.setText("Estrellas del Hotel:");
 
         cb_Hotel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Hotel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un hotel", "Hotel 5 estrellas", "Hotel 4 estrellas", "Hotel 3 estrellas" }));
-        cb_Hotel.setEnabled(false);
 
         lbl_Instrucciones6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lbl_Instrucciones6.setText("Paquetes Personalizado:");
@@ -215,7 +268,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         cb_Hotel2.setEnabled(false);
 
         lbl_Vuelo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lbl_Vuelo.setText("Tipo de vuelo;");
+        lbl_Vuelo.setText("Tipo de Vuelo:");
 
         cb_Vuelo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Vuelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona un vuelo", "Turista", "Primera Clase" }));
@@ -226,18 +279,23 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
         cb_Desayuno.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Desayuno.setText("Desayuno");
+        cb_Desayuno.setEnabled(false);
 
         cb_Masaje.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_Masaje.setText("Masaje");
+        cb_Masaje.setEnabled(false);
 
         cb_SPA.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_SPA.setText("SPA");
+        cb_SPA.setEnabled(false);
 
         cb_TransporteVIP.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         cb_TransporteVIP.setText("Transporte VIP");
+        cb_TransporteVIP.setEnabled(false);
 
         btn_Reservar.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btn_Reservar.setText("Reservar");
+        btn_Reservar.setEnabled(false);
         btn_Reservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ReservarActionPerformed(evt);
@@ -252,6 +310,20 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
             }
         });
 
+        lbl_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Email.setText("Email");
+
+        tf_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_Email.setToolTipText("");
+        tf_Email.setEnabled(false);
+
+        lbl_Password.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lbl_Password.setText("Password");
+
+        tf_Password.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        tf_Password.setToolTipText("");
+        tf_Password.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -259,104 +331,114 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_Instrucciones1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_DNI1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cb_DNI, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbl_Tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_Nombre))
-                            .addComponent(lbl_Instrucciones3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lbl_DNI2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl_Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tf_Apellidos))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lbl_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_Instrucciones2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rb_ClienteRegistrado, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(rb_ClienteNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btn_Comprobar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cb_Tipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Instrucciones5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rb_PaquetePrehecho, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(rb_PaquetePersonalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_Instrucciones4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ftf_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(ftf_FechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_Instrucciones6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lbl_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(cb_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(lbl_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_Hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cb_Hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl_Vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cb_Vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cb_Desayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cb_Masaje, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_Volver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_Instrucciones1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addComponent(cb_SPA, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lbl_DNI1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cb_Cliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cb_TransporteVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(lbl_Instrucciones7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Reservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(lbl_Tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tf_Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tf_Nombre))
+                                    .addComponent(lbl_Instrucciones3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(lbl_DNI2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lbl_Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tf_Apellidos))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lbl_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbl_Instrucciones2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(rb_ClienteRegistrado, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(25, 25, 25)
+                                        .addComponent(rb_ClienteNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_Comprobar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lbl_Email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tf_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbl_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tf_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cb_Masaje, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                        .addComponent(cb_Desayuno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(25, 25, 25)
+                                            .addComponent(cb_SPA, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cb_TransporteVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lbl_Instrucciones7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_Reservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cb_Tipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_Instrucciones5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(rb_PaquetePrehecho, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(25, 25, 25)
+                                    .addComponent(rb_PaquetePersonalizado, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbl_Instrucciones4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(ftf_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(25, 25, 25)
+                                    .addComponent(ftf_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbl_Instrucciones6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cb_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbl_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(25, 25, 25)
+                                    .addComponent(lbl_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbl_Hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cb_Hotel2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lbl_Vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cb_Vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
+                .addComponent(lbl_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(lbl_Instrucciones1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -367,7 +449,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_DNI1)
-                            .addComponent(cb_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(lbl_Instrucciones3)
                         .addGap(18, 18, 18)
@@ -378,10 +460,41 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbl_Apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tf_Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_DNI2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lbl_DNI2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_Instrucciones7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cb_Desayuno)
+                            .addComponent(cb_SPA))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cb_Masaje)
+                            .addComponent(cb_TransporteVIP))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_Comprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_Reservar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbl_Instrucciones4)
                         .addGap(18, 18, 18)
@@ -395,7 +508,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ftf_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ftf_FechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ftf_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(lbl_Instrucciones5)
                         .addGap(18, 18, 18)
@@ -406,7 +519,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_Hotel)
                             .addComponent(cb_Hotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addGap(18, 18, 18)
                         .addComponent(lbl_Instrucciones6)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -415,30 +528,8 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_Vuelo)
-                            .addComponent(cb_Vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_Instrucciones7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_Genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_Desayuno)
-                    .addComponent(cb_SPA))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_Tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_Masaje)
-                    .addComponent(cb_TransporteVIP))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Comprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Reservar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_Vuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         pack();
@@ -452,15 +543,194 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
     private void btn_ReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReservarActionPerformed
         // TODO add your handling code here:
-        ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado una reserva correctamente");
-        window.setVisible(true);
-        this.setVisible(false);
+        if (comprobarDatosPaquete()) {
+            Cliente c1 = null;
+            if (rb_ClienteNuevo.isSelected()) {
+                c1 = new Cliente(
+                        tf_Nombre.getText(),
+                        tf_Apellidos.getText(),
+                        empleado,
+                        tf_Tarjeta.getText(),
+                        tf_DNI.getText(),
+                        cb_Genero.getSelectedItem().toString(),
+                        tf_Direccion.getText(),
+                        new Date(),
+                        tf_Email.getText(),
+                        tf_Password.getText()
+                );
+                usuarios.add(c1);
+            } else {
+                FiltroPersonaNIF filtro = new FiltroPersonaNIF(usuarios);
+                c1 = (Cliente) filtro.encontrarPersona(cb_Cliente.getSelectedItem().toString()).get(0);
+            }
+            PaqueteVacacional p1 = null;
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            if (rb_PaquetePrehecho.isSelected()) {
+                try {
+                    switch (cb_Hotel.getSelectedIndex()) {
+                        case 1:
+                            p1 = new FabricaPaquetePreHecho().getPaquete(cb_Tipo.getSelectedIndex() - 1).createPaquete5Estrellas(format.parse(ftf_FechaInicio.getText()), format.parse(ftf_FechaFin.getText()));
+                            break;
+                        case 2:
+                            p1 = new FabricaPaquetePreHecho().getPaquete(cb_Tipo.getSelectedIndex() - 1).createPaquete4Estrellas(format.parse(ftf_FechaInicio.getText()), format.parse(ftf_FechaFin.getText()));
+                            break;
+                        case 3:
+                            p1 = new FabricaPaquetePreHecho().getPaquete(cb_Tipo.getSelectedIndex() - 1).createPaquete3Estrellas(format.parse(ftf_FechaInicio.getText()), format.parse(ftf_FechaFin.getText()));
+                            break;
+                    }
+                } catch (ParseException e) {
+                }
+            } else {
+                CreadorPaquetes creador = new CreadorPaquetes(new PaqueteNormalBuilder());
+                ArrayList<Extra> extra = new ArrayList();
+                if (cb_SPA.isSelected()) {
+                    extra.add(new CircuitoSPA());
+                }
+                if (cb_Masaje.isSelected()) {
+                    extra.add(new Masaje());
+                }
+                if (cb_TransporteVIP.isSelected()) {
+                    extra.add(new TransporteVIP());
+                }
+                Boolean desayuno = cb_Desayuno.isSelected();
+                try {
+                    switch (cb_Hotel2.getSelectedIndex()) {
+                        case 1:
+                            if (cb_Vuelo.getSelectedIndex() == 1) {
+                                creador.crearPaquete(
+                                        HotelCincoEstrellas.getInstancia(),
+                                        VueloClaseTurista.getInstancia(),
+                                        desayuno,
+                                        extra,
+                                        format.parse(ftf_FechaInicio.getText()),
+                                        format.parse(ftf_FechaFin.getText())
+                                );
+                            } else {
+                                creador.crearPaquete(
+                                        HotelCincoEstrellas.getInstancia(),
+                                        VueloPrimeraClase.getInstancia(),
+                                        desayuno,
+                                        extra,
+                                        format.parse(ftf_FechaInicio.getText()),
+                                        format.parse(ftf_FechaFin.getText())
+                                );
+                            }
+                            break;
+                        case 2:
+                            if (cb_Vuelo.getSelectedIndex() == 1) {
+                                creador.crearPaquete(
+                                        HotelCuatroEstrellas.getInstancia(),
+                                        VueloClaseTurista.getInstancia(),
+                                        desayuno,
+                                        extra,
+                                        format.parse(ftf_FechaInicio.getText()),
+                                        format.parse(ftf_FechaFin.getText())
+                                );
+                            } else {
+                                creador.crearPaquete(
+                                        HotelCuatroEstrellas.getInstancia(),
+                                        VueloPrimeraClase.getInstancia(),
+                                        desayuno,
+                                        extra,
+                                        format.parse(ftf_FechaInicio.getText()),
+                                        format.parse(ftf_FechaFin.getText())
+                                );
+                            }
+                            break;
+                        case 3:
+                            if (cb_Vuelo.getSelectedIndex() == 1) {
+                                creador.crearPaquete(
+                                        HotelTresEstrellas.getInstancia(),
+                                        VueloClaseTurista.getInstancia(),
+                                        desayuno,
+                                        extra,
+                                        format.parse(ftf_FechaInicio.getText()),
+                                        format.parse(ftf_FechaFin.getText())
+                                );
+                            } else {
+                                creador.crearPaquete(
+                                        HotelTresEstrellas.getInstancia(),
+                                        VueloPrimeraClase.getInstancia(),
+                                        desayuno,
+                                        extra,
+                                        format.parse(ftf_FechaInicio.getText()),
+                                        format.parse(ftf_FechaFin.getText())
+                                );
+                            }
+                            break;
+                    }
+
+                } catch (ParseException e) {
+                }
+
+                p1 = creador.getPaquete();
+            }
+
+            Reserva r1 = new ReservaNormal(p1, new Date(), empleado, c1);
+            ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado una reserva correctamente");
+            window.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btn_ReservarActionPerformed
 
     private void btn_ComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ComprobarActionPerformed
         // TODO add your handling code here:
-        System.out.println("Proceso de comprobacion y registro de usuario, tambien se activa la segunda parte");
+        if (comprobarClienteNuevo()) {
+
+            tf_Nombre.setEnabled(false);
+            tf_Apellidos.setEnabled(false);
+            tf_Email.setEnabled(false);
+            tf_Password.setEnabled(false);
+            tf_DNI.setEnabled(false);
+            tf_Direccion.setEnabled(false);
+            cb_Genero.setEnabled(false);
+            tf_Tarjeta.setEnabled(false);
+            btn_Comprobar.setEnabled(false);
+
+            switchPaquetePrehecho(true);
+            switchPaquetePersonalizado(false);
+        }
     }//GEN-LAST:event_btn_ComprobarActionPerformed
+
+    private void rb_ClienteRegistradoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_ClienteRegistradoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            switchClienteRegistrado(true);
+        }
+    }//GEN-LAST:event_rb_ClienteRegistradoItemStateChanged
+
+    private void rb_ClienteNuevoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_ClienteNuevoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            switchClienteRegistrado(false);
+        }
+    }//GEN-LAST:event_rb_ClienteNuevoItemStateChanged
+
+    private void cb_ClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ClienteItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            btn_Reservar.setEnabled(false);
+            if (cb_Cliente.getSelectedIndex() != 0) {
+                btn_Reservar.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_cb_ClienteItemStateChanged
+
+    private void rb_PaquetePrehechoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_PaquetePrehechoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            switchPaquetePrehecho(true);
+            switchPaquetePersonalizado(false);
+        }
+    }//GEN-LAST:event_rb_PaquetePrehechoItemStateChanged
+
+    private void rb_PaquetePersonalizadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_PaquetePersonalizadoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            switchPaquetePrehecho(false);
+            switchPaquetePersonalizado(true);
+        }
+    }//GEN-LAST:event_rb_PaquetePersonalizadoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -492,7 +762,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearPaqueteTuristico(usuarios).setVisible(true);
+                new CrearPaqueteTuristico(usuarios, empleado).setVisible(true);
             }
         });
     }
@@ -501,7 +771,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
     private javax.swing.JButton btn_Comprobar;
     private javax.swing.JButton btn_Reservar;
     private javax.swing.JButton btn_Volver;
-    private javax.swing.JComboBox<String> cb_DNI;
+    private javax.swing.JComboBox<String> cb_Cliente;
     private javax.swing.JCheckBox cb_Desayuno;
     private javax.swing.JComboBox<String> cb_Genero;
     private javax.swing.JComboBox<String> cb_Hotel;
@@ -511,13 +781,13 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_Tipo;
     private javax.swing.JCheckBox cb_TransporteVIP;
     private javax.swing.JComboBox<String> cb_Vuelo;
-    private javax.swing.ButtonGroup cbbtng_Extras;
+    private javax.swing.JFormattedTextField ftf_FechaFin;
     private javax.swing.JFormattedTextField ftf_FechaInicio;
-    private javax.swing.JFormattedTextField ftf_FechaInicio1;
     private javax.swing.JLabel lbl_Apellidos;
     private javax.swing.JLabel lbl_DNI1;
     private javax.swing.JLabel lbl_DNI2;
     private javax.swing.JLabel lbl_Direccion;
+    private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_FechaFin;
     private javax.swing.JLabel lbl_FechaInicio;
     private javax.swing.JLabel lbl_Genero;
@@ -532,6 +802,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Instrucciones7;
     private javax.swing.JLabel lbl_Logo;
     private javax.swing.JLabel lbl_Nombre;
+    private javax.swing.JLabel lbl_Password;
     private javax.swing.JLabel lbl_Tarjeta;
     private javax.swing.JLabel lbl_Tipo;
     private javax.swing.JLabel lbl_Vuelo;
@@ -544,7 +815,192 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
     private javax.swing.JTextField tf_Apellidos;
     private javax.swing.JTextField tf_DNI;
     private javax.swing.JTextField tf_Direccion;
+    private javax.swing.JTextField tf_Email;
     private javax.swing.JTextField tf_Nombre;
+    private javax.swing.JTextField tf_Password;
     private javax.swing.JTextField tf_Tarjeta;
     // End of variables declaration//GEN-END:variables
+
+    private void loadCBClientes() {
+        EstrategiaConcretaNombre ordenNombre = new EstrategiaConcretaNombre(usuarios);
+        for (Persona persona : ordenNombre.ordenDescendente()) {
+            if (persona instanceof Cliente) {
+                cb_Cliente.addItem((((Cliente) persona).getFicha().getDni()));
+            }
+        }
+    }
+
+    private void switchPaquetePersonalizado(boolean state) {
+        if (!state) {
+            cb_Desayuno.setSelected(state);
+            cb_Masaje.setSelected(state);
+            cb_SPA.setSelected(state);
+            cb_TransporteVIP.setSelected(state);
+        }
+        cb_Hotel2.setEnabled(state);
+        cb_Hotel2.setSelectedIndex(0);
+        cb_Vuelo.setEnabled(state);
+        cb_Vuelo.setSelectedIndex(0);
+        cb_Desayuno.setEnabled(state);
+        cb_Masaje.setEnabled(state);
+        cb_SPA.setEnabled(state);
+        cb_TransporteVIP.setEnabled(state);
+        btn_Reservar.setEnabled(state);
+    }
+
+    private void switchPaquetePrehecho(boolean state) {
+        cb_Tipo.setEnabled(state);
+        cb_Tipo.setSelectedIndex(0);
+        cb_Hotel.setEnabled(state);
+        cb_Hotel.setSelectedIndex(0);
+        btn_Reservar.setEnabled(state);
+    }
+
+    private void switchClienteRegistrado(boolean state) {
+        cb_Cliente.setEnabled(state);
+
+        tf_Nombre.setEnabled(!state);
+        tf_Nombre.setText("");
+        tf_Apellidos.setEnabled(!state);
+        tf_Apellidos.setText("");
+        tf_Email.setEnabled(!state);
+        tf_Email.setText("");
+        tf_Password.setEnabled(!state);
+        tf_Password.setText("");
+        tf_DNI.setEnabled(!state);
+        tf_DNI.setText("");
+        tf_Direccion.setEnabled(!state);
+        tf_Direccion.setText("");
+        cb_Genero.setEnabled(!state);
+        cb_Genero.setSelectedIndex(0);
+        tf_Tarjeta.setEnabled(!state);
+        tf_Tarjeta.setText("");
+        btn_Comprobar.setEnabled(!state);
+
+        rb_PaquetePrehecho.setEnabled(state);
+        rb_PaquetePersonalizado.setEnabled(state);
+        ftf_FechaInicio.setEnabled(state);
+        ftf_FechaInicio.setText("");
+        ftf_FechaFin.setEnabled(state);
+        ftf_FechaFin.setText("");
+        rb_PaquetePrehecho.setSelected(true);
+        rb_PaquetePersonalizado.setSelected(false);
+
+        switchPaquetePrehecho(state);
+
+        switchPaquetePersonalizado(false);
+    }
+
+    private boolean comprobarClienteNuevo() {
+        boolean OK = true;
+        String errores = "<html> Tienes los siguientes errores: <br/>";
+        if (tf_Nombre.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo nombre no puede estar vacio <br/>");
+        }
+        if (tf_Apellidos.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo apellido no puede estar vacio <br/>");
+        }
+        if (tf_DNI.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo DNI no puede estar vacio <br/>");
+        }
+        if (tf_Direccion.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo nombre no puede estar vacio <br/>");
+        }
+        if (cb_Genero.getSelectedIndex() == 0) {
+            OK = false;
+            errores = errores.concat("Se ha de seleccionar un genero <br/>");
+        }
+        if (tf_Email.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo email no puede estar vacio <br/>");
+        }
+        if (tf_Password.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo password no puede estar vacio <br/>");
+        }
+        if (tf_Tarjeta.getText().equals("")) {
+            OK = false;
+            errores = errores.concat("El campo tarjeta no puede estar vacio <br/>");
+        }
+
+        for (Persona usuario : usuarios) {
+            if (usuario.getEmail().equals(tf_Email.getText())) {
+                OK = false;
+                errores = errores.concat("El email ya se encuentra registrado <br/>");
+                break;
+            }
+            if (usuario instanceof Empleado) {
+                Empleado user = (Empleado) usuario;
+                if (user.getFicha().getDni().equals(tf_DNI.getText())) {
+                    OK = false;
+                    errores = errores.concat("El DNI ya se encuentra registrado <br/>");
+                    break;
+                }
+            } else {
+                Cliente user = (Cliente) usuario;
+                if (user.getFicha().getDni().equals(tf_DNI.getText())) {
+                    OK = false;
+                    errores = errores.concat("El DNI ya se encuentra registrado <br/>");
+                    break;
+                }
+            }
+
+        }
+
+        if (!OK) {
+            OperacionErronea window = new OperacionErronea(errores);
+            window.setVisible(true);
+        }
+
+        return OK;
+    }
+
+    private boolean comprobarDatosPaquete() {
+        boolean OK = true;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String errores = "<html> Tienes los siguientes errores: <br/>";
+
+        if (rb_PaquetePrehecho.isSelected()) {
+            if (cb_Hotel.getSelectedIndex() == 0) {
+                OK = false;
+                errores = errores.concat("Se ha de seleccionar un hotel <br/>");
+            }
+            if (cb_Tipo.getSelectedIndex() == 0) {
+                OK = false;
+                errores = errores.concat("Se ha de seleccionar un tipo de paquete <br/>");
+            }
+        } else {
+            if (cb_Hotel2.getSelectedIndex() == 0) {
+                OK = false;
+                errores = errores.concat("Se ha de seleccionar un hotel <br/>");
+            }
+            if (cb_Vuelo.getSelectedIndex() == 0) {
+                OK = false;
+                errores = errores.concat("Se ha de seleccionar un vuelo <br/>");
+            }
+        }
+        try {
+            //FECHA
+            if (ftf_FechaInicio.getText().length() == 10 && ftf_FechaFin.getText().length() == 10) {
+                Date fechaIDA = format.parse(ftf_FechaInicio.getText());
+                Date fechaVUELTA = format.parse(ftf_FechaFin.getText());
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            OK = false;
+            errores = errores.concat("Los campos de fecha tienen que tener el formato dd/mm/aaaa <br/>");
+        }
+
+        if (!OK) {
+            OperacionErronea window = new OperacionErronea(errores);
+            window.setVisible(true);
+        }
+
+        return OK;
+    }
 }
