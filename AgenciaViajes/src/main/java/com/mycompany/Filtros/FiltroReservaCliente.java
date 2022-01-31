@@ -1,4 +1,4 @@
-package Filtros;
+package com.mycompany.Filtros;
 
 
 /**

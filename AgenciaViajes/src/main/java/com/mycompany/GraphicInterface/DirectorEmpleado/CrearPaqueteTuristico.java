@@ -5,7 +5,7 @@
  */
 package com.mycompany.GraphicInterface.DirectorEmpleado;
 
-import Filtros.FiltroPersonaNIF;
+import com.mycompany.Filtros.FiltroPersonaNIF;
 import com.mycompany.Administracion.Cliente;
 import com.mycompany.Administracion.Empleado;
 import com.mycompany.Administracion.Persona;
@@ -561,6 +561,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
                 usuarios.add(c1);
             } else {
                 FiltroPersonaNIF filtro = new FiltroPersonaNIF(usuarios);
+                System.out.print(filtro.encontrarPersona(cb_Cliente.getSelectedItem().toString()));
                 c1 = (Cliente) filtro.encontrarPersona(cb_Cliente.getSelectedItem().toString()).get(0);
             }
             PaqueteVacacional p1 = null;
@@ -667,6 +668,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
             }
 
             Reserva r1 = new ReservaNormal(p1, new Date(), empleado, c1);
+            empleado.getFicha().añadirCliente(c1);
             ConfirmacionOperacion window = new ConfirmacionOperacion("Se ha realizado una reserva correctamente");
             window.setVisible(true);
             this.setVisible(false);
@@ -849,6 +851,12 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
     }
 
     private void switchPaquetePrehecho(boolean state) {
+        rb_PaquetePersonalizado.setEnabled(state);
+        rb_PaquetePrehecho.setEnabled(state);
+        ftf_FechaInicio.setEnabled(state);
+        ftf_FechaInicio.setText("");
+        ftf_FechaFin.setEnabled(state);
+        ftf_FechaFin.setText("");
         cb_Tipo.setEnabled(state);
         cb_Tipo.setSelectedIndex(0);
         cb_Hotel.setEnabled(state);
@@ -858,6 +866,7 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
 
     private void switchClienteRegistrado(boolean state) {
         cb_Cliente.setEnabled(state);
+        cb_Cliente.setSelectedIndex(0);
 
         tf_Nombre.setEnabled(!state);
         tf_Nombre.setText("");
@@ -876,15 +885,6 @@ public class CrearPaqueteTuristico extends javax.swing.JFrame {
         tf_Tarjeta.setEnabled(!state);
         tf_Tarjeta.setText("");
         btn_Comprobar.setEnabled(!state);
-
-        rb_PaquetePrehecho.setEnabled(state);
-        rb_PaquetePersonalizado.setEnabled(state);
-        ftf_FechaInicio.setEnabled(state);
-        ftf_FechaInicio.setText("");
-        ftf_FechaFin.setEnabled(state);
-        ftf_FechaFin.setText("");
-        rb_PaquetePrehecho.setSelected(true);
-        rb_PaquetePersonalizado.setSelected(false);
 
         switchPaquetePrehecho(state);
 

@@ -30,130 +30,128 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="lbl_Logo" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_Volver" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lbl_Instrucciones1" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbl_DNI1" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_Cliente" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_Tarjeta" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="tf_Tarjeta" min="-2" pref="267" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_Direccion" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="tf_Direccion" min="-2" pref="267" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lbl_Nombre" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="tf_Nombre" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="lbl_Instrucciones3" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="lbl_DNI2" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="lbl_Apellidos" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="tf_Apellidos" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="tf_DNI" min="-2" pref="267" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_Genero" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_Genero" min="-2" pref="267" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lbl_Instrucciones2" alignment="1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="rb_ClienteRegistrado" min="-2" pref="230" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                      <Component id="rb_ClienteNuevo" min="-2" pref="230" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="btn_Comprobar" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbl_Email" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="tf_Email" min="-2" pref="267" max="-2" attributes="0"/>
-                                  </Group>
+                  <Component id="btn_Volver" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lbl_Instrucciones1" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="lbl_DNI1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cb_Cliente" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_Tarjeta" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="tf_Tarjeta" min="-2" pref="267" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_Direccion" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="tf_Direccion" min="-2" pref="267" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lbl_Password" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lbl_Nombre" min="-2" pref="200" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tf_Password" min="-2" pref="267" max="-2" attributes="0"/>
+                                  <Component id="tf_Nombre" max="32767" attributes="0"/>
                               </Group>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="cb_Masaje" pref="230" max="32767" attributes="0"/>
-                                      <Component id="cb_Desayuno" max="32767" attributes="0"/>
+                              <Component id="lbl_Instrucciones3" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="lbl_DNI2" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lbl_Apellidos" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                          <Component id="cb_SPA" min="-2" pref="230" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="tf_Apellidos" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cb_TransporteVIP" min="-2" pref="230" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="tf_DNI" min="-2" pref="267" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="lbl_Instrucciones7" max="32767" attributes="0"/>
-                              <Component id="btn_Reservar" max="32767" attributes="0"/>
-                              <Component id="cb_Tipo" alignment="1" min="-2" pref="267" max="-2" attributes="0"/>
-                              <Component id="lbl_Instrucciones5" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="rb_PaquetePrehecho" min="-2" pref="230" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="rb_PaquetePersonalizado" min="-2" pref="230" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_Genero" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cb_Genero" min="-2" pref="267" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="lbl_Instrucciones4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbl_Instrucciones2" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="ftf_FechaInicio" min="-2" pref="230" max="-2" attributes="0"/>
+                                  <Component id="rb_ClienteRegistrado" min="-2" pref="230" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="ftf_FechaFin" min="-2" pref="230" max="-2" attributes="0"/>
+                                  <Component id="rb_ClienteNuevo" min="-2" pref="230" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="lbl_Instrucciones6" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_Tipo" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lbl_Hotel" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cb_Hotel" min="-2" pref="267" max="-2" attributes="0"/>
+                              <Component id="btn_Comprobar" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lbl_Email" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="tf_Email" min="-2" pref="267" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_Password" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="tf_Password" min="-2" pref="267" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cb_Masaje" pref="230" max="32767" attributes="0"/>
+                                  <Component id="cb_Desayuno" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="cb_SPA" min="-2" pref="230" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cb_TransporteVIP" min="-2" pref="230" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                          </Group>
+                          <Component id="lbl_Instrucciones7" max="32767" attributes="0"/>
+                          <Component id="btn_Reservar" max="32767" attributes="0"/>
+                          <Component id="cb_Tipo" alignment="1" min="-2" pref="267" max="-2" attributes="0"/>
+                          <Component id="lbl_Instrucciones5" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="rb_PaquetePrehecho" min="-2" pref="230" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="rb_PaquetePersonalizado" min="-2" pref="230" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lbl_Instrucciones4" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="ftf_FechaInicio" min="-2" pref="230" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="ftf_FechaFin" min="-2" pref="230" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lbl_Instrucciones6" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="lbl_Tipo" min="-2" pref="200" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lbl_FechaInicio" min="-2" pref="230" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="lbl_FechaFin" min="-2" pref="230" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lbl_Hotel2" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lbl_Hotel" min="-2" pref="200" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cb_Hotel2" min="-2" pref="267" max="-2" attributes="0"/>
+                                  <Component id="cb_Hotel" min="-2" pref="267" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lbl_Vuelo" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cb_Vuelo" min="-2" pref="267" max="-2" attributes="0"/>
-                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_FechaInicio" min="-2" pref="230" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="lbl_FechaFin" min="-2" pref="230" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_Hotel2" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cb_Hotel2" min="-2" pref="267" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl_Vuelo" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="cb_Vuelo" min="-2" pref="267" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
