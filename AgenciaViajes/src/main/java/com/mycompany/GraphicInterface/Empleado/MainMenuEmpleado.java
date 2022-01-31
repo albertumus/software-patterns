@@ -30,6 +30,7 @@ public class MainMenuEmpleado extends javax.swing.JFrame {
         lbl_Logo.setText("");
         MainMenuEmpleado.usuarios = usuarios;
         MainMenuEmpleado.usuario = usuarioActual;
+        lbl_Bienvenida.setText("!Bienvenido "+usuarioActual.getNombre()+"!");
     }
 
     /**

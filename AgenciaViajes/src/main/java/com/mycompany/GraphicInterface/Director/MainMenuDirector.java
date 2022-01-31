@@ -32,6 +32,7 @@ public class MainMenuDirector extends javax.swing.JFrame {
         lbl_Logo.setText("");
         MainMenuDirector.usuarios = usuarios;
         MainMenuDirector.usuario = usuarioActual;
+        lbl_Bienvenida.setText("!Bienvenido "+usuarioActual.getNombre()+"!");
     }
 
     /**

@@ -158,7 +158,7 @@ public class EditarEmpleado extends javax.swing.JFrame {
         });
 
         lbl_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lbl_Email.setText("Numero S. Social:");
+        lbl_Email.setText("Email:");
 
         tf_Email.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         tf_Email.setToolTipText("");

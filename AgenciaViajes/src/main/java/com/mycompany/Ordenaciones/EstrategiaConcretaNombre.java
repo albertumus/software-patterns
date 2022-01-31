@@ -39,7 +39,7 @@ public class EstrategiaConcretaNombre implements EstrategiaEmpleados {
                 e.printStackTrace();
                 break;
             }
-            if (i==usuarios.size()) i=0;
+            if (i==usuarios.size()-1) i=0;
             else i++;
         }
         
