@@ -14,6 +14,7 @@ import com.mycompany.Administracion.Persona;
 import com.mycompany.GraphicInterface.Cliente.MainMenuCliente;
 import com.mycompany.GraphicInterface.Director.MainMenuDirector;
 import com.mycompany.GraphicInterface.Empleado.MainMenuEmpleado;
+import com.mycompany.Session;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,6 +33,7 @@ public class Login extends javax.swing.JFrame {
     private final String RUTA_HISTORIALES = "./data/historiales";
     private final String RUTA_RESERVAS = "./data/reservas";
     public static ArrayList<Persona> usuarios;
+    public static Session sesion;
 
     /**
      * Creates new form Login
@@ -44,6 +46,7 @@ public class Login extends javax.swing.JFrame {
         usuarios = loadUsers();
         System.out.println(usuarios);
         lbl_registro.setVisible(false);
+        sesion = Session.getInstancia();
     }
 
     /**
@@ -161,11 +164,13 @@ public class Login extends javax.swing.JFrame {
                     MainMenuDirector window = new MainMenuDirector(usuarios, (Director) usuarioActual);
                     window.setVisible(true);
                     this.setVisible(false);
+                    sesion.login(tf_username.getText(), usuarioActual.getNombre(), 0);
                 } else if ( usuarioActual instanceof Gestor) {
                     if (((Gestor) usuarioActual).getEstado() instanceof Activo){
                         MainMenuEmpleado window = new MainMenuEmpleado(usuarios, (Gestor) usuarioActual);
                         window.setVisible(true);
                         this.setVisible(false);
+                        sesion.login(tf_username.getText(), usuarioActual.getNombre(), 0);
                     } else {
                         OperacionErronea window = new OperacionErronea("El empleado esta de baja o desactivado");
                         window.setVisible(true);
@@ -174,6 +179,7 @@ public class Login extends javax.swing.JFrame {
                     MainMenuCliente window = new MainMenuCliente((Cliente) usuarioActual);
                     window.setVisible(true);
                     this.setVisible(false);
+                    sesion.login(tf_username.getText(), usuarioActual.getNombre(), 0);
                 } else {
                     OperacionErronea window = new OperacionErronea("El usuario no se encuentra registrado");
                     window.setVisible(true);
